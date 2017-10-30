@@ -1,4 +1,5 @@
 <?php
+
 class EbayApiController extends Controller {
 
     /**
@@ -25,7 +26,7 @@ class EbayApiController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'main','setDataInPresta'),
+                'actions' => array('index', 'view', 'main', 'setDataInPresta'),
                 'users' => array('admin', 'expertpcx'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -33,7 +34,7 @@ class EbayApiController extends Controller {
                 'users' => array('admin', 'expertpcx'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete', 'main','setDataInPresta'),
+                'actions' => array('admin', 'delete', 'main', 'setDataInPresta'),
                 'users' => array('admin', 'expertpcx'),
             ),
             array('deny', // deny all users
@@ -309,7 +310,6 @@ class EbayApiController extends Controller {
             }
         }
         $this->saveBaySelling($data);
-
     }
 
     /**
@@ -317,6 +317,8 @@ class EbayApiController extends Controller {
      * @param type $data
      */
     public function saveBaySelling($data) {
+
+        $report_array = array();
 
         foreach ($data as $item) {
             $model = new MyEbaySelling();
@@ -346,12 +348,14 @@ class EbayApiController extends Controller {
 
             $rest = $model->save();
             if ($rest) {
-                d::d('saved');
+                $report_array['saved'][$model->itemID] = 'ok';
             } else {
-                d::d($model->errors);
-                d::d('unsaved');
+                $report_array['error'][$model->itemID] = $model->errors;
             }
         }
+        
+        d::d('saved ok ' . count($report_array['saved']));
+        d::d('saved error ' . count($report_array['error']));
     }
 
     public function processeItem($response) {
@@ -712,4 +716,5 @@ class EbayApiController extends Controller {
             }
         }
     }
+
 }
