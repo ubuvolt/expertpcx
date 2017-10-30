@@ -1,6 +1,19 @@
 <div class="moduleTile">
     <div style="margin:10px; width:60px; float:left">
-            <img width="40"  src='/images/api1.jpg'>
+        <img width="40"  src='/images/cms.png'>
+    </div>
+    <div class="moduleTileRight">
+        <div id="clickme1" class="row buttons" style="float: left; padding: 5px; width: 100%;">
+            <?php echo CHtml::submitButton('Ebay Prices', array('submit' => '/index.php?r=ebay/getInfo')); ?>
+        </div> 
+        <div id="clickme1" class="row buttons" style="float: left; padding: 5px; width: 100%;">
+            <?php echo CHtml::submitButton('Manage Ebay Price', array('submit' => '/index.php?r=ebayPriceMonitor/admin')); ?>
+        </div> 
+    </div>
+</div>
+<div class="moduleTile">
+    <div style="margin:10px; width:60px; float:left">
+        <img width="40"  src='/images/api1.jpg'>
     </div>
     <div class="moduleTileRight">
         <div id="clickme1" class="row buttons" style="float: left; padding: 5px; width: 100%;">
@@ -38,10 +51,10 @@
     </div>
 </div>
 <div style="width:100%;float:left; display: inline-block">
-<?php
-if ($development)
-    d::d($response);
-?>
+    <?php
+    if ($development)
+        d::d($response);
+    ?>
 </div>
 <style>
 

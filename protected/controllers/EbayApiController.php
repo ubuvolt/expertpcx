@@ -1,5 +1,4 @@
 <?php
-// test
 class EbayApiController extends Controller {
 
     /**
@@ -68,7 +67,7 @@ class EbayApiController extends Controller {
                 $development = true;
                 break;
         }
-        $this->render('test', array(
+        $this->render('api_view', array(
             'response' => $response,
             'development' => $development)
         );
