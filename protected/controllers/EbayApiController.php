@@ -58,15 +58,15 @@ class EbayApiController extends Controller {
                 sleep(1);
 
                 $response = $this->actionGetMyeBaySelling();
-                break;
+                return;
             case 'GetItem':
                 $response = $this->actionAllItems();
-                break;
+                return;
 
             case 'GetStore':
                 $response = $this->GetStore();
                 $development = true;
-                break;
+                return;
         }
         $this->render('api_view', array(
             'response' => $response,
@@ -309,7 +309,7 @@ class EbayApiController extends Controller {
                 $i++;
             }
         }
-        $this->saveBaySelling($data);
+        $this->saveBaySelling($data);        
     }
 
     /**
@@ -353,13 +353,21 @@ class EbayApiController extends Controller {
                 $report_array['error'][$model->itemID] = $model->errors;
             }
         }
-        
-        d::d('saved ok ' . count($report_array['saved']));
-        d::d('saved error ' . count($report_array['error']));
+        $count_saved =  count($report_array['saved']);
+        $count_error =  count($report_array['error']);
+       
+        $this->render('my_ebay_report', array(
+                  'count_saved' => $count_saved,
+                  'count_error' => $count_error,
+                  'message' => 'eBay Selling')
+              );
+      
     }
 
     public function processeItem($response) {
 
+        $report_array = array();
+        
         $sql = 'TRUNCATE ebay_item';
         Yii::app()->db->createCommand($sql)->query();
 
@@ -633,12 +641,21 @@ class EbayApiController extends Controller {
             $rest = $model->save();
 
             if ($rest) {
-                d::d('saved');
+                $report_array['saved'][$model->itemID] = 'ok';
             } else {
-                d::d($model->errors);
-                d::d('unsaved');
+                $report_array['error'][$model->itemID] = $model->errors;
             }
+            
+            
         }
+        $count_saved =  count($report_array['saved']);
+        $count_error =  count($report_array['error']);
+
+        $this->render('my_ebay_report', array(
+                  'count_saved' => $count_saved,
+                  'count_error' => $count_error,
+                  'message' => 'eBay Item'
+                ));
     }
 
     /**
@@ -678,6 +695,7 @@ class EbayApiController extends Controller {
 
     public function processeStoreInfo($xml) {
 
+        $report_array = array();
 //                file_put_contents("/var/www/engine/storeInfo.xhtml", "\n" . $xml, FILE_APPEND);
 
         $dom = new DOMDocument();
@@ -709,12 +727,20 @@ class EbayApiController extends Controller {
             $rest = $ebayStore->save();
 
             if ($rest) {
-                d::d('saved');
+                $report_array['saved'][$ebayStore->CategoryID] = 'ok';
             } else {
-                d::d($model->errors);
-                d::d('unsaved');
+                $report_array['error'][$ebayStore->CategoryID] = $ebayStore->errors;
             }
+
         }
+        $count_saved =  count($report_array['saved']);
+        $count_error =  count($report_array['error']);
+
+        $this->render('my_ebay_report', array(
+                  'count_saved' => $count_saved,
+                  'count_error' => $count_error,
+                  'message' => 'eBay Store'
+                ));
     }
 
 }

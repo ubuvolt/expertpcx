@@ -1,11 +1,9 @@
-<div id="clickme1" class="row buttons" >
+
+<h2><b>Monitored eBay Prices</b></h2>
+<div id="clickme1" style="padding-bottom: 30px" >
     <?php echo CHtml::submitButton('Refresh', array('submit' => '/index.php?r=ebay/getInfo')); ?>
-</div> 
-
-<div id="clickme1" class="row buttons" >
     <?php echo CHtml::submitButton('Reload Price', array('submit' => '/index.php?r=ebay/reloadEbayPrice')); ?>
-</div>
-
+</div> 
 <table>
     <tr>
         <th>ID</th>
@@ -16,8 +14,11 @@
     </tr>
     <?php
     foreach ($ebm as $item) {
+    if($item->id % 2==0? $event='odd':$event='even')
         ?>
-        <tr>
+    
+    
+        <tr class="<?php echo $event;?>">
             <th><?php echo $item->id; ?></th>
             <th title="<?php echo $item->product; ?>"><?php echo mb_strimwidth($item->product, 0, 30, "..."); ?></th>
             <th><?php echo $item->seller; ?></th>
@@ -34,4 +35,19 @@
         margin-right: 5px;
         float: left;
     }
+    
+    tr:nth-child(1){
+        background-color: #81B8D6;
+        color: white;
+    }
+    tr.even
+    {
+            background: #F8F8F8;
+            
+    }
+    tr.odd
+    {
+            background: #E5F1F4;
+    }
+    th {font-weight: normal; border:1px solid white;}
 </style>

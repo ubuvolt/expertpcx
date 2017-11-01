@@ -44,7 +44,8 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+            <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+            <?php echo CHtml::submitButton('Back', array('submit' => '/index.php?r=ebayApi/main')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

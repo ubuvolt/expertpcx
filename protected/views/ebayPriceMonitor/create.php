@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create EbayPriceMonitor</h1>
+<h2><b>Create EbayPriceMonitor</b></h2>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

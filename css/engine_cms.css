@@ -1,0 +1,32 @@
+
+.view_cms
+{
+    background-color: #f3f3e5;
+}
+.items, p, .view_cms
+{
+    font-size: 11px;
+}
+h2{color:orange;}
+
+.moduleImage
+{
+    margin:10px;
+    width:60px;
+    float:left
+}
+.moduleImage > img
+{
+    width:40px;
+}
+.title
+{
+    color:orange; 
+    font-weight: bold
+}
+.buttons
+{
+    float: left;
+    padding: 5px; 
+    width: 100%;
+}

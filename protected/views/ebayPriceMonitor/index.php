@@ -12,9 +12,13 @@ $this->menu=array(
 );
 ?>
 
-<h1>Ebay Price Monitors</h1>
+<h2><b>Ebay Price Monitors</b></h2>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 )); ?>
+
+<div class="row" style="margin-top:30px;" >
+    <?php echo CHtml::submitButton('Back', array('submit' => '/index.php?r=ebayApi/main')); ?>
+</div> 
