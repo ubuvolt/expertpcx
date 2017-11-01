@@ -48,7 +48,7 @@
         <div id="clickme1" class="row buttons" >
             <?php echo CHtml::submitButton('eBay Items', array('submit' => '/index.php?r=ebayItem/index')); ?>
         </div> 
-        <div id="clickme1" class="row buttons" style="float: left; padding: 5px 5px 15px 5px; width: 100%;">
+        <div id="clickme1" class="row buttons" >
             <?php echo CHtml::submitButton('eBay Store', array('submit' => '/index.php?r=ebayStore/index')); ?>
         </div> 
     </div>
@@ -58,8 +58,11 @@
         <img src="/images/page-icon.png"><div class="title">Shop</div>
     </div>
     <div class="moduleTileRight">
-        <div id="clickme1" class="row buttons" style="float: left; padding: 15px 5px 5px 5px; width: 96%;">
+        <div id="clickme1" class="row buttons">
             <?php echo CHtml::submitButton('Insert data to ShopPage', array('submit' => '/index.php?r=EbayInsetrs/setDataInPresta')); ?>
+        </div> 
+        <div id="clickme1" class="row buttons">
+            <?php echo CHtml::submitButton('Generate Images', array('submit' => '/index.php?r=EbayInsetrs/generateImages')); ?>
         </div> 
 
     </div>

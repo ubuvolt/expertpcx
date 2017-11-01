@@ -6516,3 +6516,23 @@ Stack trace:
 REQUEST_URI=/index.php?r=ebay/reloadEbayPrice
 in /var/www/engine/protected/controllers/EbayController.php (59)
 in /var/www/engine/index.php (13)
+2017/11/01 13:20:28 [error] [php] Invalid argument supplied for foreach() (/var/www/engine/protected/controllers/EbayApiController.php:374)
+Stack trace:
+#0 /var/www/engine/protected/controllers/EbayApiController.php(63): EbayApiController->actionAllItems()
+#1 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayApiController->actionMain()
+#2 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbayApiController->runAction()
+#4 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#6 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbayApiController->filterAccessControl()
+#7 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#8 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/yii/framework/web/CController.php(265): EbayApiController->runActionWithFilters()
+#10 /var/www/yii/framework/web/CWebApplication.php(282): EbayApiController->run()
+#11 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#13 /var/www/engine/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebayApi/main/&p=GetItem
+in /var/www/engine/protected/controllers/EbayApiController.php (374)
+in /var/www/engine/protected/controllers/EbayApiController.php (202)
+in /var/www/engine/protected/controllers/EbayApiController.php (170)

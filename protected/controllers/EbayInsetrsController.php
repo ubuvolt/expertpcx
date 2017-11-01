@@ -34,6 +34,7 @@ class EbayInsetrsController extends Controller {
 //                    'admin', 
 //                    'delete',
                     'setDataInPresta',
+                    'generateImages',
                     'pic',
                     'createImage'),
                 'users' => array('admin', 'expertpcx'),
@@ -49,10 +50,11 @@ class EbayInsetrsController extends Controller {
         $current_data_time = date('Y-m-d h:i:s', time());
         $current_data = date('Y-m-d', time());
 
-//        $ebayitems = EbayItem::model()->findAll();
-        $ebayitems = EbayItem::model()->findAllByAttributes(array('id' => '16'));
+        $ebayitems = EbayItem::model()->findAll();
+//        $ebayitems = EbayItem::model()->findAllByAttributes(array('id' => '16'));
 
         foreach ($ebayitems as $key => $value) {
+            d::d($value->id);
             $description = str_replace('"', "'", $value->description);
 
             $ps_product = Yii::app()->db1->createCommand('
@@ -101,7 +103,7 @@ class EbayInsetrsController extends Controller {
                     `additional_shipping_cost`, `customizable`, `uploadable_files`, `text_fields`, `active`, `redirect_type`,
                     `id_product_redirected`, `available_for_order`, `available_date`, `condition`, `show_price`, `indexed`,
                     `visibility`, `cache_default_attribute`, `advanced_stock_management`, `date_add`, `date_upd`, `pack_stock_type`)
-                VALUES ("' . $ps_id_product . '", "1", "2", "1", "0", "0", "0.000000", "1", "' . $value->sellingStatus_currentPrice . '", "1.000000", "", "0.000000", "0.00", "0", "0",
+                VALUES ("' . $ps_id_product . '", "1", "2", "0", "0", "0", "0.000000", "1", "' . $value->sellingStatus_currentPrice . '", "1.000000", "", "0.000000", "0.00", "0", "0",
                     "0","1", "404", "0", "1", "' . $current_data . '", "new", "1", "1", "both", "0", "0", "' . $current_data_time . '",
                     "' . $current_data_time . '", "3");'
                     )->execute();
@@ -200,13 +202,56 @@ class EbayInsetrsController extends Controller {
                 $this->Log($ps_image_lang ,'ps_image_lang', $ps_id_product);
                 $this->Log($ps_image_shop ,'ps_image_shop', $ps_id_product);
                 
-                $this->createImage($id_image, $picture);
+//                $this->createImage($id_image, $picture);
 //                
                 $position++;
             }
         }
     }
 
+    public function actionGenerateImages()
+    {
+        
+        
+        //get last id_product
+        $sql = 'SELECT ps_id_product, pictureURL  FROM ebay_item ';
+        $command = Yii::app()->db->createCommand($sql);
+        $results = $command->queryAll();
+        
+//        d::d($results);
+        
+
+//
+//        foreach ($results as $key=>$value)
+//        {
+//            
+//            d::d($value['ps_id_product']);
+//            
+//              //get last id_product
+//        $sql = 'SELECT id_image FROM ps_images WHERE id_product = '.$value['ps_id_product'].'';
+//        $command = Yii::app()->db->createCommand($sql);
+//        $results = $command->queryAll();
+//            
+//        }
+//                return;        
+//
+//        $picture_url_array = array();
+//        $picture_array = explode('[]', $value->pictureURL);
+//
+//
+//        foreach ($picture_array as $picture) {
+//
+//            $picture_array = explode('##', $picture);
+//            if (!empty($picture_array[1]))
+//                $picture_url_array[] = $picture_array[1];
+//        };
+//
+//        foreach ($picture_url_array as $key => $picture) {}
+
+//        $this->createImage($id_image, $picture);
+
+    }
+    
     public function createImage($id_image, $picture) {
 
 
@@ -246,6 +291,8 @@ class EbayInsetrsController extends Controller {
         $imagick->writeImage($img_path);
     }
 
+    
+    
 
     public function Log($table_name,$t_n, $ps_id_product, $itemId = null) {
         

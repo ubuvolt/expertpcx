@@ -17,7 +17,7 @@
     if($item->id % 2==0? $event='odd':$event='even')
         ?>
     
-    
+   
         <tr class="<?php echo $event;?>">
             <th><?php echo $item->id; ?></th>
             <th title="<?php echo $item->product; ?>"><?php echo mb_strimwidth($item->product, 0, 30, "..."); ?></th>
