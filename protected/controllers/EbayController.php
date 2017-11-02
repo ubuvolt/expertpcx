@@ -56,8 +56,13 @@ class EbayController extends Controller {
         $phrase = 'div[class="price"]';
 
         foreach ($ebm as $item) {
-            $item->price = number_format($ebay->getHTMLPrice($item->url, $phrase),2);
 
+            $substr = $ebay->getHTMLPrice($item->url, $phrase);
+            $price_array = explode('Approx', $substr);
+            $price_UK = $price_array[0];
+            $price = (float) str_replace('ound;', '', $price_UK);
+
+            $item->price = number_format($price, 2);
             $item->save();
         }
 
@@ -74,9 +79,13 @@ class EbayController extends Controller {
         $prod = 0;
 
         foreach ($ebm as $item) {
-            $ebay_price = number_format($ebay->getHTMLPrice($item->url, $phrase), 2);
-
-            if ($ebay_price != number_format($item->price, 2)) {
+            
+            $substr = $ebay->getHTMLPrice($item->url, $phrase);
+            $price_array = explode('Approx', $substr);
+            $price_UK = $price_array[0];
+            $price = (float) str_replace('ound;', '', $price_UK);
+            
+            if ($ebay_price != number_format($price, 2)) {
                 $prod = 1;
                 $msg .= 'product:' . $item->product . '<br>'
                         . 'url: ' . $item->url . ' <br> '

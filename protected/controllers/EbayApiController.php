@@ -645,13 +645,13 @@ class EbayApiController extends Controller {
             } else {
                 $report_array['error'][$model->itemID] = $model->errors;
             }
-            
-            
         }
+        
         $count_saved =  count($report_array['saved']);
         $count_error =  count($report_array['error']);
 
-        $this->render('my_ebay_report', array(
+        $this->render('my_ebay_report', 
+                array(
                   'count_saved' => $count_saved,
                   'count_error' => $count_error,
                   'message' => 'eBay Item'

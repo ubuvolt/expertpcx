@@ -16,6 +16,9 @@
         <div id="clickme1" class="row buttons">
             <?php echo CHtml::submitButton('Manage Ebay Price', array('submit' => '/index.php?r=ebayPriceMonitor/admin')); ?>
         </div> 
+        <div id="clickme1" class="row buttons">
+            <?php echo CHtml::submitButton('Ebay Price Email', array('submit' => '/index.php?r=ebay/ebayPriceEmail')); ?>
+        </div> 
     </div>
 </div>
 <div class="moduleTile">
@@ -65,6 +68,16 @@
             <?php echo CHtml::submitButton('Generate Images', array('submit' => '/index.php?r=EbayInsetrs/generateImages')); ?>
         </div> 
 
+    </div>
+</div>
+<div class="moduleTile">
+    <div class="moduleImage">
+        <img src="/images/mailing_list_icon.png"><div class="title">Mailing</div>
+    </div>
+    <div class="moduleTileRight">
+        <div id="clickme1" class="row buttons">
+           <a href="http://www.engine.dev/email.html"> <?php echo CHtml::submitButton('Email Templates'); ?></a>
+        </div> 
     </div>
 </div>
 

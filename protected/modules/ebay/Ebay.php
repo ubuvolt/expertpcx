@@ -93,13 +93,13 @@ class Ebay {
         $_curl->call();
 
         $xml = $_parser->str_get_html($_curl->setUrl($url)->call());
-
+        
         if (!$xml instanceof SimpleHTMLDOMParser) {
             return;
         }
 
         $part = $xml->find($phrase, 0);
-
+        
         return substr(strip_tags($part), 2);
     }
 }

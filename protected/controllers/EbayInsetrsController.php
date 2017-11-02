@@ -50,8 +50,12 @@ class EbayInsetrsController extends Controller {
         $current_data_time = date('Y-m-d h:i:s', time());
         $current_data = date('Y-m-d', time());
 
-        $ebayitems = EbayItem::model()->findAll();
-//        $ebayitems = EbayItem::model()->findAllByAttributes(array('id' => '16'));
+        $criteria = new CDbCriteria();
+        $criteria->condition = "sellingStatus_listingStatus = 'Active'";
+
+        $ebayitems = EbayItem::model()->findAll($criteria);
+
+
 
         foreach ($ebayitems as $key => $value) {
             d::d($value->id);
@@ -77,24 +81,24 @@ class EbayInsetrsController extends Controller {
             $results = $command->queryAll();
             $ps_id_product = $results[0]['id_product'];
 
-            
+
             $this->Log($ps_product, 'ps_product', $ps_id_product, null);
 
-            
+
             $update_ebay_item = Yii::app()->db->createCommand('
                 UPDATE `ebay_item` SET ps_id_product = ' . $ps_id_product . ' WHERE id = ' . $value->id . ';')->execute();
 
-            
-            $this->Log($update_ebay_item ,'update_ebay_item', $ps_id_product, $value->id);
 
-            
+            $this->Log($update_ebay_item, 'update_ebay_item', $ps_id_product, $value->id);
+
+
             $ps_product_lang = Yii::app()->db1->createCommand('
                 INSERT INTO `ps_product_lang` (`id_product`, `id_shop`, `id_lang`, `description`, `description_short`,
                     `link_rewrite`, `meta_description`, `meta_keywords`, `meta_title`, `name`, `available_now`, `available_later`)
                 VALUES ("' . $ps_id_product . '", "1", "1", "' . $description . '", "' . $description . '", "pen1", "", "", "", "' . $value->title . '", "", "");'
                     )->execute();
 
-            $this->Log($ps_product_lang ,'ps_product_lang', $ps_id_product);
+            $this->Log($ps_product_lang, 'ps_product_lang', $ps_id_product);
 
 
             $ps_product_shop = Yii::app()->db1->createCommand('
@@ -108,27 +112,27 @@ class EbayInsetrsController extends Controller {
                     "' . $current_data_time . '", "3");'
                     )->execute();
 
-            
-            $this->Log($ps_product_shop ,'ps_product_shop', $ps_id_product);
 
-            
+            $this->Log($ps_product_shop, 'ps_product_shop', $ps_id_product);
+
+
             $ps_stock_available = Yii::app()->db1->createCommand('
                 INSERT INTO `ps_stock_available` (`id_stock_available`, `id_product`, `id_product_attribute`,
                     `id_shop`, `id_shop_group`, `quantity`, `depends_on_stock`, `out_of_stock`)
                 VALUES (NULL, "' . $ps_id_product . '", "0", "1", "0", "' . $value->quantity . '", "0", "2");'
                     )->execute();
 
-            
-            $this->Log($ps_stock_available ,'ps_stock_available', $ps_id_product);
 
-            
+            $this->Log($ps_stock_available, 'ps_stock_available', $ps_id_product);
+
+
             $ps_cart_product = Yii::app()->db1->createCommand('
                 INSERT INTO `ps_cart_product` (`id_cart`, `id_product`, `id_address_delivery`, `id_shop`,
                     `id_product_attribute`, `quantity`, `date_add`)
                 VALUES ("7", "' . $ps_id_product . '", "0", "1", "0", "1", "' . $current_data_time . '");'
                     )->execute();
-                        
-            $this->Log($ps_cart_product ,'ps_cart_product', $ps_id_product);
+
+            $this->Log($ps_cart_product, 'ps_cart_product', $ps_id_product);
 
 
             $ps_category_product = '';
@@ -138,9 +142,9 @@ class EbayInsetrsController extends Controller {
                 VALUES (NULL, "' . $ps_id_product . '", "id_shop;id_currency;id_country;id_group");'
                     )->execute();
 
-            $this->Log($ps_specyfic_price_priority ,'ps_specyfic_price_priority', $ps_id_product);
+            $this->Log($ps_specyfic_price_priority, 'ps_specyfic_price_priority', $ps_id_product);
 
-            
+
             $picture_url_array = array();
 //            $picture_array = array();
             $picture_array = explode('[]', $value->pictureURL);
@@ -160,7 +164,7 @@ class EbayInsetrsController extends Controller {
                     $ps_image = Yii::app()->db1->createCommand('
                     INSERT INTO `ps_image` (`id_image`, `id_product`, `position`,`cover`) VALUES (NULL, "' . $ps_id_product . '", "' . $position . '","1");'
                             )->execute();
-                    
+
                     //get last id_image
                     $sql = 'SELECT id_image FROM ps_image ORDER BY id_image DESC LIMIT 1';
                     $command = Yii::app()->db1->createCommand($sql);
@@ -175,13 +179,12 @@ class EbayInsetrsController extends Controller {
                     $ps_image_shop = Yii::app()->db1->createCommand('
                         INSERT INTO `ps_image_shop` (`id_product`, `id_image`, `id_shop`,`cover`) VALUES ("' . $ps_id_product . '","' . $id_image . '", "1","1");'
                             )->execute();
-
                 } else {
 
                     $ps_image = Yii::app()->db1->createCommand('
                         INSERT INTO `ps_image` (`id_image`, `id_product`, `position`) VALUES (NULL, "' . $ps_id_product . '", "' . $position . '");'
                             )->execute();
-                    
+
                     //get last id_image
                     $sql = 'SELECT id_image FROM ps_image ORDER BY id_image DESC LIMIT 1';
                     $command = Yii::app()->db1->createCommand($sql);
@@ -197,11 +200,11 @@ class EbayInsetrsController extends Controller {
                         INSERT INTO `ps_image_shop` (`id_product`, `id_image`, `id_shop`) VALUES ("' . $ps_id_product . '","' . $id_image . '", "1");'
                             )->execute();
                 };
-                 
-                $this->Log($ps_image ,'ps_image', $ps_id_product);
-                $this->Log($ps_image_lang ,'ps_image_lang', $ps_id_product);
-                $this->Log($ps_image_shop ,'ps_image_shop', $ps_id_product);
-                
+
+                $this->Log($ps_image, 'ps_image', $ps_id_product);
+                $this->Log($ps_image_lang, 'ps_image_lang', $ps_id_product);
+                $this->Log($ps_image_shop, 'ps_image_shop', $ps_id_product);
+
 //                $this->createImage($id_image, $picture);
 //                
                 $position++;
@@ -209,51 +212,53 @@ class EbayInsetrsController extends Controller {
         }
     }
 
-    public function actionGenerateImages()
-    {
+    public function actionGenerateImages() {
+
+        ini_set('max_execution_time', 3000);
         
-        
-        //get last id_product
-        $sql = 'SELECT ps_id_product, pictureURL  FROM ebay_item ';
+        $sql = 'SELECT ps_id_product, pictureURL FROM ebay_item WHERE `ps_id_product` IS NOT NULL';
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
-        
-//        d::d($results);
-        
 
-//
-//        foreach ($results as $key=>$value)
-//        {
-//            
-//            d::d($value['ps_id_product']);
-//            
-//              //get last id_product
-//        $sql = 'SELECT id_image FROM ps_images WHERE id_product = '.$value['ps_id_product'].'';
-//        $command = Yii::app()->db->createCommand($sql);
-//        $results = $command->queryAll();
-//            
-//        }
-//                return;        
-//
-//        $picture_url_array = array();
-//        $picture_array = explode('[]', $value->pictureURL);
-//
-//
-//        foreach ($picture_array as $picture) {
-//
-//            $picture_array = explode('##', $picture);
-//            if (!empty($picture_array[1]))
-//                $picture_url_array[] = $picture_array[1];
-//        };
-//
-//        foreach ($picture_url_array as $key => $picture) {}
+        $image_url_array = array();
 
-//        $this->createImage($id_image, $picture);
+        foreach ($results as $ebay_item_details) {
 
+            $picture_url_array = array();
+            $picture_array = explode('[]', $ebay_item_details['pictureURL']);
+
+            foreach ($picture_array as $picture) {
+
+                $picture_array = explode('##', $picture);
+
+                if (!empty($picture_array[1]))
+                    $picture_url_array[] = $picture_array[1];
+            }
+
+            $image_url_array[$ebay_item_details['ps_id_product']]['ps_id_product'] = $ebay_item_details['ps_id_product'];
+
+            foreach ($picture_url_array as $key => $picture_url) {
+                $image_url_array[$ebay_item_details['ps_id_product']]['url'][] = $picture_url;
+            }
+
+            $sql = 'SELECT id_image FROM ps_image WHERE id_product = ' . $ebay_item_details['ps_id_product'] . ' ORDER BY position ASC;';
+
+            $command = Yii::app()->db1->createCommand($sql);
+            $results = $command->queryAll();
+
+            foreach ($results as $ps_image_details) {
+                $image_url_array[$ebay_item_details['ps_id_product']]['ps_image_details'][] = $ps_image_details['id_image'];
+            }
+
+            foreach ($image_url_array as $image_url_details) {
+                foreach ($image_url_details['url'] as $key => $url) {
+                    $this->createImage($image_url_details['ps_image_details'][$key], $url);
+                }
+            }
+        }
     }
-    
-    public function createImage($id_image, $picture) {
 
+    public function createImage($id_image, $picture_url) {
 
         $prestashop_img_home = '/var/www/prestashop/img/p/';
 
@@ -275,12 +280,10 @@ class EbayInsetrsController extends Controller {
 
         foreach ($image_value as $k => $image) {
             $img_path = $path . $id_image . '-' . $image['name'] . '.jpg';
-            file_put_contents($img_path, file_get_contents($picture));
-
+            file_put_contents($img_path, file_get_contents($picture_url));
 
             $this->imageSize($img_path, $image['width'], $image['height']);
         }
-        sleep(0.1);
     }
 
     function imageSize($img_path, $width, $height) {
@@ -291,27 +294,25 @@ class EbayInsetrsController extends Controller {
         $imagick->writeImage($img_path);
     }
 
-    
-    
+    public function Log($table_name, $t_n, $ps_id_product, $itemId = null) {
 
-    public function Log($table_name,$t_n, $ps_id_product, $itemId = null) {
-        
-        if($itemId){
-        
+        if ($itemId) {
+
             if ($table_name)
-                   $log['success'] = $t_n.' [' . $ps_id_product . '] set with eBay itemID [' . $itemId . ']';
-               else
-                   $log['error'] = $t_n.' set with eBay itemID error';
-           }else{
-               if ($table_name)
-                   $log['success'] = $t_n.' [' . $ps_id_product . '] created';
-               else
-                   $log['error'] = $t_n.' error';
-           }
+                $log['success'] = $t_n . ' [' . $ps_id_product . '] set with eBay itemID [' . $itemId . ']';
+            else
+                $log['error'] = $t_n . ' set with eBay itemID error';
+        }else {
+            if ($table_name)
+                $log['success'] = $t_n . ' [' . $ps_id_product . '] created';
+            else
+                $log['error'] = $t_n . ' error';
+        }
 
         d::d($log);
         return $log;
     }
+
     public function actionPic() {
 
         d::d(__LINE__);
