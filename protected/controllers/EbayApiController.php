@@ -26,17 +26,17 @@ class EbayApiController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'main', 'setDataInPresta'),
+                'actions' => array('index', 'view', 'main', 'setDataInPresta', 'ajaxOfficialTime'),
                 'users' => array('admin', 'expertpcx'),
             ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'main', 'setDataInPresta'),
-                'users' => array('admin', 'expertpcx'),
-            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete', 'main', 'setDataInPresta'),
-                'users' => array('admin', 'expertpcx'),
-            ),
+//            array('allow', // allow authenticated user to perform 'create' and 'update' actions
+//                'actions' => array('create', 'update', 'main', 'setDataInPresta'),
+//                'users' => array('admin', 'expertpcx'),
+//            ),
+//            array('allow', // allow admin user to perform 'admin' and 'delete' actions
+//                'actions' => array('admin', 'delete', 'main', 'setDataInPresta'),
+//                'users' => array('admin', 'expertpcx'),
+//            ),
             array('deny', // deny all users
                 'users' => array('*'),
             ),
@@ -309,7 +309,7 @@ class EbayApiController extends Controller {
                 $i++;
             }
         }
-        $this->saveBaySelling($data);        
+        $this->saveBaySelling($data);
     }
 
     /**
@@ -353,21 +353,20 @@ class EbayApiController extends Controller {
                 $report_array['error'][$model->itemID] = $model->errors;
             }
         }
-        $count_saved =  count($report_array['saved']);
-        $count_error =  count($report_array['error']);
-       
+        $count_saved = count($report_array['saved']);
+        $count_error = count($report_array['error']);
+
         $this->render('my_ebay_report', array(
-                  'count_saved' => $count_saved,
-                  'count_error' => $count_error,
-                  'message' => 'eBay Selling')
-              );
-      
+            'count_saved' => $count_saved,
+            'count_error' => $count_error,
+            'message' => 'eBay Selling')
+        );
     }
 
     public function processeItem($response) {
 
         $report_array = array();
-        
+
         $sql = 'TRUNCATE ebay_item';
         Yii::app()->db->createCommand($sql)->query();
 
@@ -646,16 +645,15 @@ class EbayApiController extends Controller {
                 $report_array['error'][$model->itemID] = $model->errors;
             }
         }
-        
-        $count_saved =  count($report_array['saved']);
-        $count_error =  count($report_array['error']);
 
-        $this->render('my_ebay_report', 
-                array(
-                  'count_saved' => $count_saved,
-                  'count_error' => $count_error,
-                  'message' => 'eBay Item'
-                ));
+        $count_saved = count($report_array['saved']);
+        $count_error = count($report_array['error']);
+
+        $this->render('my_ebay_report', array(
+            'count_saved' => $count_saved,
+            'count_error' => $count_error,
+            'message' => 'eBay Item'
+        ));
     }
 
     /**
@@ -731,16 +729,36 @@ class EbayApiController extends Controller {
             } else {
                 $report_array['error'][$ebayStore->CategoryID] = $ebayStore->errors;
             }
-
         }
-        $count_saved =  count($report_array['saved']);
-        $count_error =  count($report_array['error']);
+        $count_saved = count($report_array['saved']);
+        $count_error = count($report_array['error']);
 
         $this->render('my_ebay_report', array(
-                  'count_saved' => $count_saved,
-                  'count_error' => $count_error,
-                  'message' => 'eBay Store'
-                ));
+            'count_saved' => $count_saved,
+            'count_error' => $count_error,
+            'message' => 'eBay Store'
+        ));
+    }
+
+    public function actionAjaxOfficialTime() {
+
+        $eBayOfficialTime = $this->actionGeteBayOfficialTime();
+
+        $dom = new DOMDocument();
+        $dom->loadXML($eBayOfficialTime);
+
+        $Timestamp = $dom->getElementsByTagName('Timestamp')->item(0)->nodeValue;
+        $Ack = $dom->getElementsByTagName('Ack')->item(0)->nodeValue;
+        $Version = $dom->getElementsByTagName('Version')->item(0)->nodeValue;
+        $Build = $dom->getElementsByTagName('Build')->item(0)->nodeValue;
+
+        echo CJSON::encode(array(
+            'status' => 'success',
+            'timestamp' => $Timestamp,
+            'ack' => $Ack,
+            'version' => $Version,
+            'build' => $Build
+        ));
     }
 
 }

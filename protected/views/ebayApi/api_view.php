@@ -1,3 +1,10 @@
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
 
 <div style="width:100%;float:left; display: inline-block">
     <?php
@@ -27,7 +34,8 @@
     </div>
     <div class="moduleTileRight">
         <div id="clickme1" class="row buttons" >
-            <?php echo CHtml::submitButton('Time', array('submit' => '/index.php?r=ebayApi/main/&p=OfficialTime')); ?>
+            <?php // echo CHtml::Button('Time', array('submit' => '/index.php?r=ebayApi/main/&p=OfficialTime')); ?>
+            <button id="official_time">Time</button>
         </div> 
         <div id="clickme1" class="row buttons" >
             <?php echo CHtml::submitButton('eBay Selling', array('submit' => '/index.php?r=ebayApi/main/&p=MyeBaySelling')); ?>
@@ -68,7 +76,7 @@
             <?php echo CHtml::submitButton('Generate Images', array('submit' => '/index.php?r=EbayInsetrs/generateImages')); ?>
         </div> 
 
-    </div>
+    </div> 
 </div>
 <div class="moduleTile">
     <div class="moduleImage">
@@ -76,12 +84,56 @@
     </div>
     <div class="moduleTileRight">
         <div id="clickme1" class="row buttons">
-           <a href="http://www.engine.dev/email.html"> <?php echo CHtml::submitButton('Email Templates'); ?></a>
+            <a href="http://www.engine.dev/email.html"> <?php echo CHtml::submitButton('Email Templates'); ?></a>
         </div> 
     </div>
 </div>
 
+<div id="dialog" title="">
+    <div id="ebay_timestamp" class="ebay_timestamp"></div>
+    <div id="ebay_ack" class="ebay_timestamp"></div>
+    <div id="ebay_version" class="ebay_timestamp"></div>
+    <div id="ebay_build" class="ebay_timestamp"></div>
+</div>
+
+
+
+<script>
+    $(function () {
+        $("#official_time").click(function () {
+
+            $.post("/index.php?r=ebayApi/ajaxOfficialTime", {
+//                key: 'allocator_leads_status_set_buttons'
+            }, function (response) {
+
+                var parsed = JSON.parse(response);
+
+                if (parsed.status === 'success') {
+
+                    $('#ebay_timestamp').html('Timestamp [' + parsed.timestamp+']');
+                    $('#ebay_ack').html('Ack [' + parsed.ack+']');
+                    $('#ebay_version').html('Version [' + parsed.version+']');
+                    $('#ebay_build').html('Build [' + parsed.build+']');
+
+                    $("#dialog").dialog();
+                    $("#dialog").dialog('option', 'title', 'Ebay Official Time');
+                } else {
+                    alert('Something went wrong, contact support...')
+                }
+
+            });
+        });
+    });
+</script>
+
 <style>
+
+    .ebay_timestamp{
+        float: left;
+        margin: 5px;
+        font-size: 14px;
+        clear: both;
+    }
 
     .moduleTile {
         width: 300px;

@@ -6899,3 +6899,42 @@ Stack trace:
 REQUEST_URI=/index.php?r=ebay/ebayPriceEmail
 in /var/www/engine/protected/controllers/EbayController.php (82)
 in /var/www/engine/index.php (13)
+2017/11/04 07:04:31 [error] [exception.CHttpException.403] CHttpException: You are not authorized to perform this action. in /var/www/yii/framework/web/auth/CAccessControlFilter.php:183
+Stack trace:
+#0 /var/www/yii/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/yii/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('generateImagesS...')
+#8 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayInsetrs/gen...')
+#9 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/engine/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/index.php?r=EbayInsetrs/generateImagesSteps
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main/&p=OfficialTime
+---
+2017/11/04 07:06:53 [error] [exception.CException] CException: EbayApiController contains improperly nested widget tags in its view "/var/www/engine/protected/views/ebayApi/api_view.php". A CJuiDialog widget does not have an endWidget() call. in /var/www/yii/framework/web/CBaseController.php:101
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(872): CBaseController->renderFile('/var/www/engine...', Array, true)
+#1 /var/www/yii/framework/web/CController.php(785): CController->renderPartial('api_view', Array, true)
+#2 /var/www/engine/protected/controllers/EbayApiController.php(73): CController->render('api_view', Array)
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayApiController->actionMain()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('main')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayApi/main')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=ebayApi/main
+HTTP_REFERER=http://www.engine.dev/
+---
