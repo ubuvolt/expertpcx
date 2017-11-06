@@ -5,26 +5,19 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
-
-<div style="width:100%;float:left; display: inline-block">
-    <?php
-    if ($development)
-        d::d($response);
-    ?>
-</div>
 <div class="moduleTile">
     <div class="moduleImage">
         <img src='/images/money.png'><div class="title">Price control</div>
     </div>
     <div class="moduleTileRight">
-        <div id="clickme1" class="row buttons">
-            <?php echo CHtml::submitButton('Ebay Prices', array('submit' => '/index.php?r=ebay/getInfo')); ?>
+        <div class="row buttons">
+            <button><?php echo CHtml::link('Ebay Prices', array('ebay/getInfo')); ?></button>
         </div> 
-        <div id="clickme1" class="row buttons">
-            <?php echo CHtml::submitButton('Manage Ebay Price', array('submit' => '/index.php?r=ebayPriceMonitor/admin')); ?>
+        <div class="row buttons">
+            <button><?php echo CHtml::link('Manage Ebay Price', array('ebayPriceMonitor/admin')); ?></button>
         </div> 
-        <div id="clickme1" class="row buttons">
-            <?php echo CHtml::submitButton('Ebay Price Email', array('submit' => '/index.php?r=ebay/ebayPriceEmail')); ?>
+        <div class="row buttons">
+            <button><?php echo CHtml::link('Ebay Price Email', array('ebay/ebayPriceEmail')); ?></button>
         </div> 
     </div>
 </div>
@@ -33,18 +26,17 @@
         <img src='/images/API.png'><div class="title">API</div>
     </div>
     <div class="moduleTileRight">
-        <div id="clickme1" class="row buttons" >
-            <?php // echo CHtml::Button('Time', array('submit' => '/index.php?r=ebayApi/main/&p=OfficialTime')); ?>
+        <div class="row buttons" >
             <button id="official_time">Time</button>
         </div> 
-        <div id="clickme1" class="row buttons" >
-            <?php echo CHtml::submitButton('eBay Selling', array('submit' => '/index.php?r=ebayApi/main/&p=MyeBaySelling')); ?>
+        <div class="row buttons" >
+            <button><?php echo CHtml::link('eBay Selling', array('ebayApi/main/&attribute=MyeBaySelling')); ?></button>
         </div> 
-        <div id="clickme1" class="row buttons" >
-            <?php echo CHtml::submitButton('eBay GetItem', array('submit' => '/index.php?r=ebayApi/main/&p=GetItem')); ?>
+        <div class="row buttons" >
+            <button><?php echo CHtml::link('eBay GetItem', array('ebayApi/main/&attribute=GetItem')); ?></button>
         </div> 
-        <div id="clickme1" class="row buttons" >
-            <?php echo CHtml::submitButton('eBay GetStore', array('submit' => '/index.php?r=ebayApi/main/&p=GetStore')); ?>
+        <div class="row buttons" >
+            <button><?php echo CHtml::link('eBay GetStore', array('ebayApi/main/&attribute=GetStore')); ?></button>
         </div> 
     </div>
 </div>
@@ -53,14 +45,14 @@
         <img src="/images/admin.ico"><div class="title">Admin</div>
     </div>
     <div class="moduleTileRight">
-        <div id="clickme1" class="row buttons" >
-            <?php echo CHtml::submitButton('eBay Selling', array('submit' => '/index.php?r=myEbaySelling/index')); ?>
+        <div  class="row buttons" >
+            <button><?php echo CHtml::link('eBay Selling', array('myEbaySelling/index')); ?></button>
         </div> 
-        <div id="clickme1" class="row buttons" >
-            <?php echo CHtml::submitButton('eBay Items', array('submit' => '/index.php?r=ebayItem/index')); ?>
+        <div  class="row buttons" >
+            <button><?php echo CHtml::link('eBay Items', array('ebayItem/index')); ?></button>
         </div> 
-        <div id="clickme1" class="row buttons" >
-            <?php echo CHtml::submitButton('eBay Store', array('submit' => '/index.php?r=ebayStore/index')); ?>
+        <div  class="row buttons" >
+            <button><?php echo CHtml::link('eBay Store', array('ebayStore/index')); ?></button>
         </div> 
     </div>
 </div>
@@ -69,11 +61,17 @@
         <img src="/images/page-icon.png"><div class="title">Shop</div>
     </div>
     <div class="moduleTileRight">
-        <div id="clickme1" class="row buttons">
-            <?php echo CHtml::submitButton('Insert data to ShopPage', array('submit' => '/index.php?r=EbayInsetrs/setDataInPresta')); ?>
+        <div  class="row buttons">
+            <button><?php echo CHtml::link('Insert data to ShopPage', array('ebayInsetrs/setDataInPresta')); ?></button>
         </div> 
-        <div id="clickme1" class="row buttons">
-            <?php echo CHtml::submitButton('Generate Images', array('submit' => '/index.php?r=EbayInsetrs/generateImages')); ?>
+        <div class="row buttons">
+            <button><?php echo CHtml::link('Generate Images', array('ebayInsetrs/generateImages')); ?></button>
+        </div> 
+        <div class="row buttons">
+            <button><?php echo CHtml::link('Set Home Categ', array('ebayInsetrs/setHomeCateg')); ?></button>
+        </div> 
+        <div class="row buttons">
+            <button><?php echo CHtml::link('Set Categ', array('ebayInsetrs/setCateg')); ?></button>
         </div> 
 
     </div> 
@@ -83,7 +81,7 @@
         <img src="/images/mailing_list_icon.png"><div class="title">Mailing</div>
     </div>
     <div class="moduleTileRight">
-        <div id="clickme1" class="row buttons">
+        <div  class="row buttons">
             <a href="http://www.engine.dev/email.html"> <?php echo CHtml::submitButton('Email Templates'); ?></a>
         </div> 
     </div>
@@ -101,7 +99,7 @@
 <script>
     $(function () {
         $("#official_time").click(function () {
-
+if (confirm("Are you sure you want to Official Time ?")) {
             $.post("/index.php?r=ebayApi/ajaxOfficialTime", {
 //                key: 'allocator_leads_status_set_buttons'
             }, function (response) {
@@ -110,10 +108,10 @@
 
                 if (parsed.status === 'success') {
 
-                    $('#ebay_timestamp').html('Timestamp [' + parsed.timestamp+']');
-                    $('#ebay_ack').html('Ack [' + parsed.ack+']');
-                    $('#ebay_version').html('Version [' + parsed.version+']');
-                    $('#ebay_build').html('Build [' + parsed.build+']');
+                    $('#ebay_timestamp').html('Timestamp [' + parsed.timestamp + ']');
+                    $('#ebay_ack').html('Ack [' + parsed.ack + ']');
+                    $('#ebay_version').html('Version [' + parsed.version + ']');
+                    $('#ebay_build').html('Build [' + parsed.build + ']');
 
                     $("#dialog").dialog();
                     $("#dialog").dialog('option', 'title', 'Ebay Official Time');
@@ -122,7 +120,9 @@
                 }
 
             });
+            }
         });
+    
     });
 </script>
 
@@ -156,4 +156,12 @@
         padding:10px;
     }
 
+    .buttons{
+        text-decoration: none;
+    }
+
+    .buttons a {
+        color: #000000;
+        text-decoration: none;
+    }
 </style>

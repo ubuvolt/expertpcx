@@ -27,12 +27,8 @@ class EbayInsetrsController extends Controller {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array(
-//                    'index',
-//                    'view',
-//                    'create',
-//                    'update',
-//                    'admin', 
-//                    'delete',
+                    'setCateg',
+                    'setHomeCateg',
                     'setDataInPresta',
                     'generateImages',
                     'pic',
@@ -210,12 +206,17 @@ class EbayInsetrsController extends Controller {
                 $position++;
             }
         }
+
+        $this->render('/ebayApi/api_view', array(
+            'response' => $response,
+            'development' => $development)
+        );
     }
 
     public function actionGenerateImages() {
 
         ini_set('max_execution_time', 3000);
-        
+
         $sql = 'SELECT ps_id_product, pictureURL FROM ebay_item WHERE `ps_id_product` IS NOT NULL';
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
@@ -249,13 +250,18 @@ class EbayInsetrsController extends Controller {
             foreach ($results as $ps_image_details) {
                 $image_url_array[$ebay_item_details['ps_id_product']]['ps_image_details'][] = $ps_image_details['id_image'];
             }
+        }
 
-            foreach ($image_url_array as $image_url_details) {
-                foreach ($image_url_details['url'] as $key => $url) {
-                    $this->createImage($image_url_details['ps_image_details'][$key], $url);
-                }
+        foreach ($image_url_array as $image_url_details) {
+            foreach ($image_url_details['url'] as $key => $url) {
+                $this->createImage($image_url_details['ps_image_details'][$key], $url);
             }
         }
+
+        $this->render('/ebayApi/api_view', array(
+            'response' => $response,
+            'development' => $development)
+        );
     }
 
     public function createImage($id_image, $picture_url) {
@@ -323,6 +329,54 @@ class EbayInsetrsController extends Controller {
         $imagick->scaleImage(150, 150, true);
 //        header("Content-Type: image/jpg");
         $imagick->writeImage($homea);
+    }
+
+    public function actionSetHomeCateg() {
+
+        $sql = 'SELECT * FROM `ps_product` ORDER BY `id_product` DESC LIMIT 60';
+        $command = Yii::app()->db1->createCommand($sql);
+        $ps_product = $command->queryAll();
+
+        foreach ($ps_product as $key => $item)
+            $values .= '(2, ' . $item['id_product'] . ', ' . $key . '),';
+
+        $values = substr($values, 0, -1);
+
+        $ps_product = Yii::app()->db1->createCommand('
+                INSERT INTO `ps_category_product` (`id_category`, `id_product`, `position`) VALUES ' . $values)->execute();
+    }
+
+    public function actionSetCateg() {
+
+
+        $store_category_array = array(
+            22171978012 => 'Hair Bands',
+            22171999012 => 'Hair Pins',
+            22172000012 => 'Hair Claws',
+            22172055012 => 'Hair Clips'
+        );
+
+        $ps_category_array = array(
+            'Hair Bands' => 12,
+            'Hair Pins' => 13,
+            'Hair Claws' => 14,
+            'Hair Clips' => 15
+        );
+
+        $sql = 'SELECT * FROM `ebay_item`';
+        $command = Yii::app()->db->createCommand($sql);
+        $ebay_item = $command->queryAll();
+
+        foreach ($ebay_item as $item) {
+            if ($store_category_array[$item['storeCategoryID']] == NULL) {
+                continue;
+            }
+
+            $values = '(' . $ps_category_array[$store_category_array[$item['storeCategoryID']]] . ' ,' . $item['ps_id_product'] . ', 1)';
+
+            $ps_product = Yii::app()->db1->createCommand('
+                INSERT INTO `ps_category_product` (`id_category`, `id_product`, `position`) VALUES ' . $values)->execute();
+        }
     }
 
 }

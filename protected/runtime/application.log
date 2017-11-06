@@ -6938,3 +6938,265 @@ Stack trace:
 REQUEST_URI=/index.php?r=ebayApi/main
 HTTP_REFERER=http://www.engine.dev/
 ---
+2017/11/05 18:00:19 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "index.php?r=EbayInsetrs/generateImages". in /var/www/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('index.php?r=Eba...')
+#1 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/engine/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=index.php?r=EbayInsetrs/generateImages
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---
+2017/11/05 18:00:34 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "index.php?r=EbayInsetrs/generateImages". in /var/www/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('index.php?r=Eba...')
+#1 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/engine/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=index.php?r=EbayInsetrs/generateImages
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---
+2017/11/05 18:00:36 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "index.php?r=EbayInsetrs/generateImages". in /var/www/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('index.php?r=Eba...')
+#1 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/engine/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=index.php?r=EbayInsetrs/generateImages
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---
+2017/11/05 18:00:37 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "index.php?r=EbayInsetrs/generateImages". in /var/www/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('index.php?r=Eba...')
+#1 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/engine/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=index.php?r=EbayInsetrs/generateImages
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---
+2017/11/05 18:46:02 [error] [php] include(EbayApiController.php): failed to open stream: No such file or directory (/var/www/yii/framework/YiiBase.php:432)
+Stack trace:
+#0 /var/www/engine/protected/controllers/EbayInsetrsController.php(258): spl_autoload_call()
+#1 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayInsetrsController->actionGenerateImages()
+#2 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbayInsetrsController->runAction()
+#4 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#6 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbayInsetrsController->filterAccessControl()
+#7 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#8 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/yii/framework/web/CController.php(265): EbayInsetrsController->runActionWithFilters()
+#10 /var/www/yii/framework/web/CWebApplication.php(282): EbayInsetrsController->run()
+#11 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#12 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#13 /var/www/engine/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebayInsetrs/generateImages
+in /var/www/engine/protected/controllers/EbayInsetrsController.php (258)
+in /var/www/engine/index.php (13)
+2017/11/05 18:47:02 [error] [php] Missing argument 1 for CController::__construct(), called in /var/www/engine/protected/controllers/EbayInsetrsController.php on line 258 and defined (/var/www/yii/framework/web/CController.php:110)
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbayInsetrsController->runAction()
+#2 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#3 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#4 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbayInsetrsController->filterAccessControl()
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#6 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(265): EbayInsetrsController->runActionWithFilters()
+#8 /var/www/yii/framework/web/CWebApplication.php(282): EbayInsetrsController->run()
+#9 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#10 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#11 /var/www/engine/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebayInsetrs/generateImages
+in /var/www/engine/protected/controllers/EbayInsetrsController.php (258)
+in /var/www/engine/index.php (13)
+2017/11/05 18:48:48 [error] [exception.CException] CException: EbayInsetrsController cannot find the requested view "ebayApiController/api_view". in /var/www/yii/framework/web/CController.php:881
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(785): CController->renderPartial('ebayApiControll...', Array, true)
+#1 /var/www/engine/protected/controllers/EbayInsetrsController.php(260): CController->render('ebayApiControll...', Array)
+#2 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayInsetrsController->actionGenerateImages()
+#3 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#7 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('generateImages')
+#12 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayInsetrs/gen...')
+#13 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/engine/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/index.php?r=ebayInsetrs/generateImages
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---
+2017/11/05 18:49:07 [error] [exception.CException] CException: EbayInsetrsController cannot find the requested view "ebayApi/api_view". in /var/www/yii/framework/web/CController.php:881
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(785): CController->renderPartial('ebayApi/api_vie...', Array, true)
+#1 /var/www/engine/protected/controllers/EbayInsetrsController.php(260): CController->render('ebayApi/api_vie...', Array)
+#2 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayInsetrsController->actionGenerateImages()
+#3 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#7 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('generateImages')
+#12 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayInsetrs/gen...')
+#13 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/engine/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/index.php?r=ebayInsetrs/generateImages
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---
+2017/11/05 20:42:58 [error] [exception.CHttpException.403] CHttpException: You are not authorized to perform this action. in /var/www/yii/framework/web/auth/CAccessControlFilter.php:183
+Stack trace:
+#0 /var/www/yii/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/yii/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('setHomeCateg')
+#8 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayInsetrs/set...')
+#9 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/engine/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/index.php?r=ebayInsetrs/setHomeCateg
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---
+2017/11/05 20:43:06 [error] [exception.CHttpException.403] CHttpException: You are not authorized to perform this action. in /var/www/yii/framework/web/auth/CAccessControlFilter.php:183
+Stack trace:
+#0 /var/www/yii/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/yii/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('setHomeCateg')
+#8 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayInsetrs/set...')
+#9 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/engine/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/index.php?r=ebayInsetrs/setHomeCateg
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---
+2017/11/05 20:50:57 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSERT INTO `ps_category_product` (`id_category`, `id_product`, `position`) VALU' at line 2. The SQL statement executed was: 
+                INSERT INTO `ps_category_product` (`id_category`, `id_product`, `position`) VALUES (2, 12, 1),
+                INSERT INTO `ps_category_product` (`id_category`, `id_product`, `position`) VALUES (2, 13, 2).
+in /var/www/engine/protected/controllers/EbayInsetrsController.php (345)
+in /var/www/engine/index.php (13)
+2017/11/05 20:50:57 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSERT INTO `ps_category_product` (`id_category`, `id_product`, `position`) VALU' at line 2. The SQL statement executed was: 
+                INSERT INTO `ps_category_product` (`id_category`, `id_product`, `position`) VALUES (2, 12, 1),
+                INSERT INTO `ps_category_product` (`id_category`, `id_product`, `position`) VALUES (2, 13, 2) in /var/www/yii/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/engine/protected/controllers/EbayInsetrsController.php(345): CDbCommand->execute()
+#1 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayInsetrsController->actionSetHomeCateg()
+#2 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#6 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('setHomeCateg')
+#11 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayInsetrs/set...')
+#12 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#13 /var/www/engine/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=ebayInsetrs/setHomeCateg
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---
+2017/11/05 20:51:36 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VALUES (2, 13, 2)' at line 2. The SQL statement executed was: 
+                INSERT INTO `ps_category_product` (`id_category`, `id_product`, `position`) VALUES (2, 12, 1),
+                 (`id_category`, `id_product`, `position`) VALUES (2, 13, 2).
+in /var/www/engine/protected/controllers/EbayInsetrsController.php (345)
+in /var/www/engine/index.php (13)
+2017/11/05 20:51:36 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VALUES (2, 13, 2)' at line 2. The SQL statement executed was: 
+                INSERT INTO `ps_category_product` (`id_category`, `id_product`, `position`) VALUES (2, 12, 1),
+                 (`id_category`, `id_product`, `position`) VALUES (2, 13, 2) in /var/www/yii/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/engine/protected/controllers/EbayInsetrsController.php(345): CDbCommand->execute()
+#1 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayInsetrsController->actionSetHomeCateg()
+#2 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#6 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('setHomeCateg')
+#11 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayInsetrs/set...')
+#12 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#13 /var/www/engine/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=ebayInsetrs/setHomeCateg
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---
+2017/11/05 20:56:32 [error] [exception.Error] Error: Call to undefined function p() in /var/www/engine/protected/controllers/EbayInsetrsController.php:342
+Stack trace:
+#0 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayInsetrsController->actionSetHomeCateg()
+#1 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#3 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#4 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#5 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#7 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#8 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('setHomeCateg')
+#10 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayInsetrs/set...')
+#11 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#12 /var/www/engine/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/index.php?r=ebayInsetrs/setHomeCateg
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---
+2017/11/06 20:48:47 [error] [php] Invalid argument supplied for foreach() (/var/www/engine/protected/controllers/EbayInsetrsController.php:355)
+Stack trace:
+#0 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbayInsetrsController->runAction()
+#1 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#3 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbayInsetrsController->filterAccessControl()
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#5 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(265): EbayInsetrsController->runActionWithFilters()
+#7 /var/www/yii/framework/web/CWebApplication.php(282): EbayInsetrsController->run()
+#8 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /var/www/engine/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebayInsetrs/setCateg
+in /var/www/engine/protected/controllers/EbayInsetrsController.php (355)
+in /var/www/engine/index.php (13)
+2017/11/06 21:09:23 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '14 ,1155 1' at line 1. The SQL statement executed was: 
+                INSERT INTO `ps_category_product` (`id_category`, `id_product`, `position`) VALUES 14 ,1155 1.
+in /var/www/engine/protected/controllers/EbayInsetrsController.php (383)
+in /var/www/engine/index.php (13)
+2017/11/06 21:09:23 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '14 ,1155 1' at line 1. The SQL statement executed was: 
+                INSERT INTO `ps_category_product` (`id_category`, `id_product`, `position`) VALUES 14 ,1155 1 in /var/www/yii/framework/db/CDbCommand.php:358
+Stack trace:
+#0 /var/www/engine/protected/controllers/EbayInsetrsController.php(383): CDbCommand->execute()
+#1 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayInsetrsController->actionSetCateg()
+#2 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#4 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#5 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#6 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#7 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#9 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('setCateg')
+#11 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayInsetrs/set...')
+#12 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#13 /var/www/engine/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/index.php?r=ebayInsetrs/setCateg
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---

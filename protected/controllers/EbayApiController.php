@@ -26,17 +26,9 @@ class EbayApiController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'main', 'setDataInPresta', 'ajaxOfficialTime'),
+                'actions' => array('index', 'view', 'main', 'ajaxOfficialTime'),
                 'users' => array('admin', 'expertpcx'),
             ),
-//            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-//                'actions' => array('create', 'update', 'main', 'setDataInPresta'),
-//                'users' => array('admin', 'expertpcx'),
-//            ),
-//            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-//                'actions' => array('admin', 'delete', 'main', 'setDataInPresta'),
-//                'users' => array('admin', 'expertpcx'),
-//            ),
             array('deny', // deny all users
                 'users' => array('*'),
             ),
@@ -45,16 +37,15 @@ class EbayApiController extends Controller {
 
     public function actionMain() {
 
-        switch ($_GET['p']) {
+        switch ($_GET['attribute']) {
+
             case 'OfficialTime':
                 $response = $this->actionGeteBayOfficialTime();
                 $development = true;
                 break;
             case 'MyeBaySelling':
-
                 $sql = 'TRUNCATE my_ebay_selling';
                 Yii::app()->db->createCommand($sql)->query();
-
                 sleep(1);
 
                 $response = $this->actionGetMyeBaySelling();
@@ -68,6 +59,7 @@ class EbayApiController extends Controller {
                 $development = true;
                 return;
         }
+        
         $this->render('api_view', array(
             'response' => $response,
             'development' => $development)
