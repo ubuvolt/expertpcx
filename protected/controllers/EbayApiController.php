@@ -26,7 +26,13 @@ class EbayApiController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'main', 'ajaxOfficialTime'),
+                'actions' => array(
+                    'index',
+                    'view',
+                    'main',
+                    'ajaxOfficialTime',
+                    'reStartBaySelling'
+                ),
                 'users' => array('admin', 'expertpcx'),
             ),
             array('deny', // deny all users
@@ -44,10 +50,6 @@ class EbayApiController extends Controller {
                 $development = true;
                 break;
             case 'MyeBaySelling':
-                $sql = 'TRUNCATE my_ebay_selling';
-                Yii::app()->db->createCommand($sql)->query();
-                sleep(1);
-
                 $response = $this->actionGetMyeBaySelling();
                 return;
             case 'GetItem':
@@ -59,7 +61,7 @@ class EbayApiController extends Controller {
                 $development = true;
                 return;
         }
-        
+
         $this->render('api_view', array(
             'response' => $response,
             'development' => $development)
@@ -155,45 +157,6 @@ class EbayApiController extends Controller {
         return $xml_request;
     }
 
-    public function actionAllItems() {
-
-        $item_id_array = $this->getAllItemID();
-
-        $this->actionGetItem($item_id_array);
-    }
-
-    private function getAllItemID() {
-
-        $item_id_array = array();
-
-        $sql = 'SELECT itemID FROM my_ebay_selling';
-        $command = Yii::app()->db->createCommand($sql);
-        $results = $command->queryAll();
-
-        foreach ($results as $item_no) {
-            $item_id_array [] = $item_no['itemID'];
-        }
-        return $item_id_array;
-    }
-
-    public function actionGetItem($item_id) {
-        Yii::import('application.components.Ebay');
-
-        $ebay = new Ebay();
-        $apiKey = $ebay->getApiKey();
-
-        $call_name = 'GetItem';
-
-        $headers = $this->apiHeaders($apiKey, $call_name);
-
-        foreach ($item_id as $item) {
-            $xml_request = $this->getItem($apiKey['appToken'], $item);
-            $response [$item] = $this->ebayApiCall($headers, $xml_request, $apiKey['serverUrl']);
-        }
-
-        $this->processeItem($response);
-    }
-
     // $call_name = 'GetItem';
     public function getItem($auth_token, $itemID) {
         // Generate XML request
@@ -240,6 +203,9 @@ class EbayApiController extends Controller {
      * @return string
      */
     public function getMyeBaySelling($apiKey) {
+
+        $var = EbayApiController::get_central_setting(1, 'get_my_eBay_selling');
+
         // Generate XML request
         $requestXmlBody = '<?xml version="1.0" encoding="utf-8"?>
 			<GetMyeBaySellingRequest xmlns="urn:ebay:apis:eBLBaseComponents">
@@ -253,20 +219,27 @@ class EbayApiController extends Controller {
 				<DetailLevel>ReturnAll</DetailLevel>
 				<IncludeNotes>true</IncludeNotes>
 				<Pagination>
-	  			<DurationInDays>14</DurationInDays>
-      						<EntriesPerPage>80</EntriesPerPage>
-                        	<PageNumber>1</PageNumber>
+                        	<PageNumber>' . $var . '</PageNumber>
                                 </Pagination>
 				
                 		</ActiveList>
                         	</GetMyeBaySellingRequest>';
+
+        EbayApiController::set_central_setting(1, 'get_my_eBay_selling', ++$var);
 
         return $requestXmlBody;
     }
 
     public function processeBaySelling($xml) {
 
-//        file_put_contents("/var/www/engine/shop.xhtml", "\n" . $xml, FILE_APPEND);
+//        $file = "/var/www/engine/processeBaySelling.xhtml";
+//
+//        $f = @fopen($file, "r+");
+//        if ($f !== false) {
+//            ftruncate($f, 0);
+//            fclose($f);
+//        }
+//        file_put_contents($file, "\n" . $xml, FILE_APPEND);
 
         $dom = new DOMDocument();
         $dom->loadXML($xml);
@@ -359,8 +332,8 @@ class EbayApiController extends Controller {
 
         $report_array = array();
 
-        $sql = 'TRUNCATE ebay_item';
-        Yii::app()->db->createCommand($sql)->query();
+//        $sql = 'TRUNCATE ebay_item';
+//        Yii::app()->db->createCommand($sql)->query();
 
         foreach ($response as $item_id => $xml) {
 //                    file_put_contents("/var/www/engine/newxhtml.xhtml", "\n" . $xml, FILE_APPEND);
@@ -751,6 +724,110 @@ class EbayApiController extends Controller {
             'version' => $Version,
             'build' => $Build
         ));
+    }
+
+    public function actionReStartBaySelling() {
+
+        $sql = 'TRUNCATE my_ebay_selling';
+        Yii::app()->db->createCommand($sql)->query();
+        sleep(1);
+
+        EbayApiController::set_central_setting(1, 'get_my_eBay_selling', 1);
+        $this->actionMain();
+    }
+
+    public static function get_central_setting($user_id = 1, $key = '') {
+
+        $sql = "
+            SELECT
+            Value
+            FROM admin_central_storage
+            WHERE User_ID = 1
+            AND Name = '" . $key . "'
+            LIMIT 0, 1;
+        ";
+
+        $command = Yii::app()->db->createCommand($sql);
+        $results = $command->queryAll();
+
+        $value = unserialize($results[0]['Value']);
+
+        return $value;
+    }
+
+    public static function set_central_setting($user_id, $key, $value) {
+
+        $sql = "
+            DELETE FROM admin_central_storage
+            WHERE User_ID = " . $user_id . "
+            AND Name = '" . $key . "'
+            LIMIT 1;
+        ";
+        Yii::app()->db->createCommand($sql)->query();
+
+        $sql = "
+            INSERT INTO admin_central_storage
+            (
+                User_ID,
+                Name,
+                Value
+            ) VALUES (
+                " . $user_id . " , '" . $key . "' , '" . serialize($value) . "'
+            )
+        ";
+        Yii::app()->db->createCommand($sql)->query();
+    }
+
+    //    
+    //    
+    //    
+    //    
+    //    eBay GetItem
+    //
+    //
+    //
+    //
+    //
+    public function actionAllItems() {
+
+        $item_id_array = $this->getAllItemID();
+
+        $this->actionGetItem($item_id_array);
+    }
+
+    private function getAllItemID() {
+
+        $item_id_array = array();
+
+        $sql = 'SELECT itemID FROM my_ebay_selling';
+        $command = Yii::app()->db->createCommand($sql);
+        $results = $command->queryAll();
+
+        foreach ($results as $item_no) {
+            $item_id_array [] = $item_no['itemID'];
+        }
+        return $item_id_array;
+    }
+
+    public function actionGetItem($item_id) {
+        Yii::import('application.components.Ebay');
+
+        $ebay = new Ebay();
+        $apiKey = $ebay->getApiKey();
+
+        $call_name = 'GetItem';
+
+        $headers = $this->apiHeaders($apiKey, $call_name);
+
+        foreach ($item_id as $item) {
+            $xml_request = $this->getItem($apiKey['appToken'], $item);
+            $response [$item] = $this->ebayApiCall($headers, $xml_request, $apiKey['serverUrl']);
+
+            $this->processeItem($response);
+            sleep(2);
+
+            $response = array();
+        }
     }
 
 }

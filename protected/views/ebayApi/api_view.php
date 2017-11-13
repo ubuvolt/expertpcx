@@ -30,7 +30,15 @@
             <button id="official_time">Time</button>
         </div> 
         <div class="row buttons" >
-            <button><?php echo CHtml::link('eBay Selling', array('ebayApi/main/&attribute=MyeBaySelling')); ?></button>
+            <button>
+                <?php echo CHtml::link('eBay Selling', array('ebayApi/main/&attribute=MyeBaySelling')); ?>
+            </button>
+            <?php
+            d::d(EbayApiController::get_central_setting(1, 'get_my_eBay_selling'));
+            ?>
+            <button>
+                <?php echo CHtml::link('Re-Start', array('ebayApi/ReStartBaySelling')); ?>
+            </button>
         </div> 
         <div class="row buttons" >
             <button><?php echo CHtml::link('eBay GetItem', array('ebayApi/main/&attribute=GetItem')); ?></button>
@@ -99,30 +107,30 @@
 <script>
     $(function () {
         $("#official_time").click(function () {
-if (confirm("Are you sure you want to Official Time ?")) {
-            $.post("/index.php?r=ebayApi/ajaxOfficialTime", {
+            if (confirm("Are you sure you want to Official Time ?")) {
+                $.post("/index.php?r=ebayApi/ajaxOfficialTime", {
 //                key: 'allocator_leads_status_set_buttons'
-            }, function (response) {
+                }, function (response) {
 
-                var parsed = JSON.parse(response);
+                    var parsed = JSON.parse(response);
 
-                if (parsed.status === 'success') {
+                    if (parsed.status === 'success') {
 
-                    $('#ebay_timestamp').html('Timestamp [' + parsed.timestamp + ']');
-                    $('#ebay_ack').html('Ack [' + parsed.ack + ']');
-                    $('#ebay_version').html('Version [' + parsed.version + ']');
-                    $('#ebay_build').html('Build [' + parsed.build + ']');
+                        $('#ebay_timestamp').html('Timestamp [' + parsed.timestamp + ']');
+                        $('#ebay_ack').html('Ack [' + parsed.ack + ']');
+                        $('#ebay_version').html('Version [' + parsed.version + ']');
+                        $('#ebay_build').html('Build [' + parsed.build + ']');
 
-                    $("#dialog").dialog();
-                    $("#dialog").dialog('option', 'title', 'Ebay Official Time');
-                } else {
-                    alert('Something went wrong, contact support...')
-                }
+                        $("#dialog").dialog();
+                        $("#dialog").dialog('option', 'title', 'Ebay Official Time');
+                    } else {
+                        alert('Something went wrong, contact support...')
+                    }
 
-            });
+                });
             }
         });
-    
+
     });
 </script>
 

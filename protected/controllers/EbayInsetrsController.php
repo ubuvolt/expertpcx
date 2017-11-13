@@ -48,14 +48,15 @@ class EbayInsetrsController extends Controller {
 
         $criteria = new CDbCriteria();
         $criteria->condition = "sellingStatus_listingStatus = 'Active'";
+        $criteria->condition = "currency = 'GBP'";
 
         $ebayitems = EbayItem::model()->findAll($criteria);
 
 
 
         foreach ($ebayitems as $key => $value) {
-            d::d($value->id);
-            $description = str_replace('"', "'", $value->description);
+//            d::d($value->id);
+            $description = str_replace('"', "&#34;", $value->description);
 
             $ps_product = Yii::app()->db1->createCommand('
                 INSERT INTO `ps_product` (`id_product`, `id_supplier`, `id_manufacturer`, `id_category_default`,
@@ -87,12 +88,10 @@ class EbayInsetrsController extends Controller {
 
             $this->Log($update_ebay_item, 'update_ebay_item', $ps_id_product, $value->id);
 
-
             $ps_product_lang = Yii::app()->db1->createCommand('
                 INSERT INTO `ps_product_lang` (`id_product`, `id_shop`, `id_lang`, `description`, `description_short`,
                     `link_rewrite`, `meta_description`, `meta_keywords`, `meta_title`, `name`, `available_now`, `available_later`)
-                VALUES ("' . $ps_id_product . '", "1", "1", "' . $description . '", "' . $description . '", "pen1", "", "", "", "' . $value->title . '", "", "");'
-                    )->execute();
+                VALUES (' . $ps_id_product . ', "1", "1", "' . $this->processEbayItemDescription($description) . '", "' . $this->processEbayItemDescription($description) . '", "pen1", "", "", "", "' . addslashes($value->title) . '", "", "");')->execute();
 
             $this->Log($ps_product_lang, 'ps_product_lang', $ps_id_product);
 
@@ -300,6 +299,16 @@ class EbayInsetrsController extends Controller {
         $imagick->writeImage($img_path);
     }
 
+    public function processEbayItemDescription($description){
+        
+        $description_array = explode('border=&#34;0&#34;></a></noscript></div>', $description);
+        $description_array = explode('<font size=&#34;5&#34;><span style=&#34;',$description_array[1]);
+        
+        $description = $description_array[0];
+        
+        return $description;
+    }
+    
     public function Log($table_name, $t_n, $ps_id_product, $itemId = null) {
 
         if ($itemId) {
