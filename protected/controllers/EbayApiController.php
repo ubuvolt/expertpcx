@@ -327,7 +327,7 @@ class EbayApiController extends Controller {
             'message' => 'eBay Selling')
         );
     }
-
+//4
     public function processeItem($response) {
 
         $report_array = array();
@@ -787,28 +787,34 @@ class EbayApiController extends Controller {
     //
     //
     //
-    //
+    //1
     public function actionAllItems() {
 
         $item_id_array = $this->getAllItemID();
 
         $this->actionGetItem($item_id_array);
     }
-
+    //2
     private function getAllItemID() {
 
+        $increment = 50;
+        $var = EbayApiController::get_central_setting(1, 'get_all_item_id');
         $item_id_array = array();
 
-        $sql = 'SELECT itemID FROM my_ebay_selling';
+        $sql = 'SELECT itemID FROM my_ebay_selling LIMIT ' . $var . ', ' . ($increment + $var);
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
 
         foreach ($results as $item_no) {
             $item_id_array [] = $item_no['itemID'];
         }
+
+        $var += $increment;
+        EbayApiController::set_central_setting(1, 'get_all_item_id', $var);
+
         return $item_id_array;
     }
-
+//3
     public function actionGetItem($item_id) {
         Yii::import('application.components.Ebay');
 
@@ -824,8 +830,6 @@ class EbayApiController extends Controller {
             $response [$item] = $this->ebayApiCall($headers, $xml_request, $apiKey['serverUrl']);
 
             $this->processeItem($response);
-            sleep(2);
-
             $response = array();
         }
     }

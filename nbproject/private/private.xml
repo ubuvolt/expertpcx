@@ -5,7 +5,14 @@
         <group>
             <file>file:/var/www/engine/protected/controllers/EbayApiController.php</file>
             <file>file:/var/www/engine/protected/components/Ebay.php</file>
+            <file>file:/var/www/engine/protected/models/EbayItem.php</file>
+            <file>file:/var/www/engine/protected/views/ebayApi/my_ebay_report.php</file>
+            <file>file:/var/www/engine/processeBaySelling.xhtml</file>
             <file>file:/var/www/engine/protected/controllers/EbayInsetrsController.php</file>
+            <file>file:/var/www/engine/protected/views/ebayApi/api_view.php</file>
+            <file>file:/var/www/engine/email.html</file>
+            <file>file:/var/www/engine/protected/sql/admin_central_storage.sql</file>
+            <file>file:/var/www/engine/protected/sql/ebay_price_monitor.sql</file>
         </group>
     </open-files>
 </project-private>

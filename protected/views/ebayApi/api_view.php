@@ -42,6 +42,9 @@
         </div> 
         <div class="row buttons" >
             <button><?php echo CHtml::link('eBay GetItem', array('ebayApi/main/&attribute=GetItem')); ?></button>
+            <?php
+            d::d(EbayApiController::get_central_setting(1, 'get_all_item_id'));
+            ?>
         </div> 
         <div class="row buttons" >
             <button><?php echo CHtml::link('eBay GetStore', array('ebayApi/main/&attribute=GetStore')); ?></button>

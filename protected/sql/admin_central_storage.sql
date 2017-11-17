@@ -11,7 +11,9 @@ DROP TABLE IF EXISTS `admin_central_storage`;
 
 CREATE TABLE `admin_central_storage` 
 (
+    `id`            INT NOT NULL AUTO_INCREMENT,
     `User_ID`       INT(11),
     `Name`          VARCHAR(512),
     `Value`         TEXT,
+    primary key (`id`)
 ) engine=InnoDB DEFAULT CHARSET=utf8;

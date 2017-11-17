@@ -13,7 +13,7 @@ CREATE TABLE `ebay_item`
 `buyIstNowPrice`                                FLOAT(7,2),
 `country`                                       VARCHAR(32),
 `currency`                                      VARCHAR(32),
-`description`                                   TEXT,
+`description`                                   LONGTEXT,
 `giftIcon`                                      VARCHAR(32),
 `hitCounter`                                    VARCHAR(128),
 `itemID`                                        VARCHAR(128),
