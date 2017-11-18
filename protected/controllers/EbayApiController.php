@@ -50,6 +50,7 @@ class EbayApiController extends Controller {
                 $development = true;
                 break;
             case 'MyeBaySelling':
+//                eBay Selling
                 $response = $this->actionGetMyeBaySelling();
                 return;
             case 'GetItem':
@@ -69,7 +70,6 @@ class EbayApiController extends Controller {
     }
 
     /**
-     * 
      * @param type $headers
      * @param type $xml_request
      * @param type $serverUrl
@@ -97,7 +97,6 @@ class EbayApiController extends Controller {
     }
 
     /**
-     * 
      * @param type $apiKey
      * @param type $call_name
      * @return string
@@ -116,13 +115,12 @@ class EbayApiController extends Controller {
     }
 
     /**
-     * 
      * @return type
      */
     public function actionGeteBayOfficialTime() {
         Yii::import('application.components.Ebay');
 
-        $ebay = new Ebay();
+        $ebay = new Ebay_hairacc();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GeteBayOfficialTime';
@@ -157,7 +155,6 @@ class EbayApiController extends Controller {
         return $xml_request;
     }
 
-    // $call_name = 'GetItem';
     public function getItem($auth_token, $itemID) {
         // Generate XML request
         $xml_request = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>
@@ -174,13 +171,13 @@ class EbayApiController extends Controller {
         return $xml_request;
     }
 
-    /**
-     * 
-     */
+    //                form actionMain
+    //                eBay Selling
+    //                1
     public function actionGetMyeBaySelling() {
         Yii::import('application.components.Ebay');
 
-        $ebay = new Ebay();
+        $ebay = new Ebay_hairacc();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GetMyeBaySelling';
@@ -196,12 +193,10 @@ class EbayApiController extends Controller {
         return $response;
     }
 
-    /**
-     * GetMyeBaySelling
-     * 
-     * @param type $apiKey
-     * @return string
-     */
+    //
+    //                form actionMain
+    //                eBay Selling
+    //                2
     public function getMyeBaySelling($apiKey) {
 
         $var = EbayApiController::get_central_setting(1, 'get_my_eBay_selling');
@@ -230,16 +225,20 @@ class EbayApiController extends Controller {
         return $requestXmlBody;
     }
 
+    //
+    //                form actionMain
+    //                eBay Selling
+    //                3
     public function processeBaySelling($xml) {
 
-//        $file = "/var/www/engine/processeBaySelling.xhtml";
-//
-//        $f = @fopen($file, "r+");
-//        if ($f !== false) {
-//            ftruncate($f, 0);
-//            fclose($f);
-//        }
-//        file_put_contents($file, "\n" . $xml, FILE_APPEND);
+        $file = "/var/www/engine/processeBaySelling.xhtml";
+
+        $f = @fopen($file, "r+");
+        if ($f !== false) {
+            ftruncate($f, 0);
+            fclose($f);
+        }
+        file_put_contents($file, "\n" . $xml, FILE_APPEND);
 
         $dom = new DOMDocument();
         $dom->loadXML($xml);
@@ -249,6 +248,11 @@ class EbayApiController extends Controller {
         $Version = $dom->getElementsByTagName('Version')->item(0)->nodeValue;
         $Build = $dom->getElementsByTagName('Build')->item(0)->nodeValue;
         $ActiveList = $dom->getElementsByTagName('ActiveList')->item(0)->nodeValue;
+
+        $TotalNumberOfPages = $dom->getElementsByTagName('TotalNumberOfPages')->item(0)->nodeValue;
+        EbayApiController::set_central_setting(1, 'total_number_of_pages', $TotalNumberOfPages);
+        $TotalNumberOfEntries = $dom->getElementsByTagName('TotalNumberOfEntries')->item(0)->nodeValue;
+        EbayApiController::set_central_setting(1, 'total_number_of_entries', $TotalNumberOfEntries);
 
         $elements = $dom->getElementsByTagName('ItemArray');
         $data = array();
@@ -277,10 +281,9 @@ class EbayApiController extends Controller {
         $this->saveBaySelling($data);
     }
 
-    /**
-     * 
-     * @param type $data
-     */
+    //                form actionMain
+    //                eBay Selling
+    //                3
     public function saveBaySelling($data) {
 
         $report_array = array();
@@ -311,15 +314,72 @@ class EbayApiController extends Controller {
             $model->paymentProfileID = $item['Item']['SellerProfiles']['SellerPaymentProfile']['PaymentProfileID']['PaymentProfileID'];
             $model->paymentProfileName = $item['Item']['SellerProfiles']['SellerPaymentProfile']['PaymentProfileName']['PaymentProfileName'];
 
-            $rest = $model->save();
-            if ($rest) {
-                $report_array['saved'][$model->itemID] = 'ok';
+            // cheack if ebay product exist in my_ebay_selling
+            $sql = "
+                SELECT
+                        buyItNowPrice, 
+                        itemID, 
+                        quantity, 
+                        currentPrice
+                        
+                FROM my_ebay_selling
+                WHERE itemID = '" . $item['Item']['ItemID']['ItemID'] . "';";
+
+            $command = Yii::app()->db->createCommand($sql);
+
+            //if itemID exist
+            $results = $command->queryAll();
+            if ($results[0]['itemID']) {
+                // update
+                $my_ebay_selling = Yii::app()->db->createCommand('
+                        UPDATE 
+                            my_ebay_selling 
+                        SET 
+                            buyItNowPrice = ' . $model->buyItNowPrice . ',
+                            startTime = "' . $model->startTime . '",
+                            viewItemURL = "' . $model->viewItemURL . '",
+                            viewItemURLForNaturalSearch = "' . $model->viewItemURLForNaturalSearch . '",
+                            listingDuration = "' . $model->listingDuration . '",
+                            listingType = "' . $model->listingType . '",
+                            quantity = ' . $model->quantity . ',
+                            currentPrice = ' . $model->currentPrice . ',
+                            shippingServiceCost = ' . $model->shippingServiceCost . ',
+                            shippingType = "' . $model->shippingType . '",
+                            timeLeft = "' . $model->timeLeft . '",
+                            title = "' . $model->title . '",
+                            watchCount = ' . (empty($model->watchCount) ? 0 : $model->watchCount) . ',
+                            quantityAvailable = ' . $model->quantityAvailable . ',
+                            galleryURL = "' . $model->galleryURL . '",
+                            classifiedAdPayPerLeadFee = ' . $model->classifiedAdPayPerLeadFee . ',
+                            shippingProfileID = "' . $model->shippingProfileID . '",
+                            shippingProfileName = "' . $model->shippingProfileName . '",
+                            returnProfileID = "' . $model->returnProfileID . '",
+                            returnProfileName = "' . $model->returnProfileName . '",
+                            paymentProfileID = "' . $model->paymentProfileID . '",
+                            paymentProfileName = "' . $model->paymentProfileName . '"
+
+                        WHERE itemID=' . $model->itemID . '
+                        LIMIT 1')->execute();
+
+                if ($my_ebay_selling)
+                    $report_array['updated'][$model->itemID] = 'ok';
+
+                $count_saved = count($report_array['updated']);
+                $count_error = count($report_array['error']);
             } else {
-                $report_array['error'][$model->itemID] = $model->errors;
+                // insert
+
+                $rest = $model->save();
+                if ($rest) {
+                    $report_array['saved'][$model->itemID] = 'ok';
+                } else {
+                    $report_array['error'][$model->itemID] = $model->errors;
+                }
+                $count_saved = count($report_array['saved']);
+                $count_error = count($report_array['error']);
             }
         }
-        $count_saved = count($report_array['saved']);
-        $count_error = count($report_array['error']);
+
 
         $this->render('my_ebay_report', array(
             'count_saved' => $count_saved,
@@ -327,6 +387,10 @@ class EbayApiController extends Controller {
             'message' => 'eBay Selling')
         );
     }
+
+    //                form actionMain
+    //                eBay Selling
+    //                END
 //4
     public function processeItem($response) {
 
@@ -627,7 +691,7 @@ class EbayApiController extends Controller {
     public function getStore() {
         Yii::import('application.components.Ebay');
 
-        $ebay = new Ebay();
+        $ebay = new Ebay_hairacc();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GetStore';
@@ -794,6 +858,7 @@ class EbayApiController extends Controller {
 
         $this->actionGetItem($item_id_array);
     }
+
     //2
     private function getAllItemID() {
 
@@ -814,11 +879,12 @@ class EbayApiController extends Controller {
 
         return $item_id_array;
     }
+
 //3
     public function actionGetItem($item_id) {
         Yii::import('application.components.Ebay');
 
-        $ebay = new Ebay();
+        $ebay = new Ebay_hairacc();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GetItem';

@@ -30,8 +30,8 @@
             <button id="official_time">Time</button>
         </div> 
         <div class="row buttons" >
-            <button>
-                <?php echo CHtml::link('eBay Selling', array('ebayApi/main/&attribute=MyeBaySelling')); ?>
+            <button class="my_ebay_selling">
+                <a class="my_ebay_selling" href="index.php?r=ebayApi/main/&attribute=MyeBaySelling">eBay Selling</a>
             </button>
             <?php
             d::d(EbayApiController::get_central_setting(1, 'get_my_eBay_selling'));
@@ -133,6 +133,12 @@
                 });
             }
         });
+        var total_number_of_pages = "<?php echo EbayApiController::get_central_setting(1, 'total_number_of_pages'); ?>";
+        var get_my_eBay_selling = "<?php echo EbayApiController::get_central_setting(1, 'get_my_eBay_selling'); ?>";
+        if (get_my_eBay_selling > total_number_of_pages) {
+            $('.my_ebay_selling').removeAttr('href');
+            $('.my_ebay_selling').attr("disabled", "disabled");
+        }
 
     });
 </script>
