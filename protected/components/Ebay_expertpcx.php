@@ -2,7 +2,7 @@
 
 /**
  */
-class Ebay extends CComponent {
+class Ebay_expertpcx extends CComponent {
 
     public $production = true;   // toggle to true if going against production
     public $debug = false;   // toggle to provide debugging info

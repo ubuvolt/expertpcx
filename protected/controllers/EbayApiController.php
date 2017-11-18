@@ -120,7 +120,8 @@ class EbayApiController extends Controller {
     public function actionGeteBayOfficialTime() {
         Yii::import('application.components.Ebay');
 
-        $ebay = new Ebay_hairacc();
+        $ebay = new Ebay_expertpcx();
+//        $ebay = new Ebay_hairacc();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GeteBayOfficialTime';
@@ -177,7 +178,8 @@ class EbayApiController extends Controller {
     public function actionGetMyeBaySelling() {
         Yii::import('application.components.Ebay');
 
-        $ebay = new Ebay_hairacc();
+//        $ebay = new Ebay_hairacc();
+        $ebay = new Ebay_expertpcx();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GetMyeBaySelling';
@@ -231,14 +233,14 @@ class EbayApiController extends Controller {
     //                3
     public function processeBaySelling($xml) {
 
-        $file = "/var/www/engine/processeBaySelling.xhtml";
-
-        $f = @fopen($file, "r+");
-        if ($f !== false) {
-            ftruncate($f, 0);
-            fclose($f);
-        }
-        file_put_contents($file, "\n" . $xml, FILE_APPEND);
+//        $file = "/var/www/engine/processeBaySelling.xhtml";
+//
+//        $f = @fopen($file, "r+");
+//        if ($f !== false) {
+//            ftruncate($f, 0);
+//            fclose($f);
+//        }
+//        file_put_contents($file, "\n" . $xml, FILE_APPEND);
 
         $dom = new DOMDocument();
         $dom->loadXML($xml);
@@ -691,7 +693,8 @@ class EbayApiController extends Controller {
     public function getStore() {
         Yii::import('application.components.Ebay');
 
-        $ebay = new Ebay_hairacc();
+//        $ebay = new Ebay_hairacc();
+        $ebay = new Ebay_expertpcx();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GetStore';
@@ -884,7 +887,8 @@ class EbayApiController extends Controller {
     public function actionGetItem($item_id) {
         Yii::import('application.components.Ebay');
 
-        $ebay = new Ebay_hairacc();
+//        $ebay = new Ebay_hairacc();
+        $ebay = new Ebay_expertpcx();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GetItem';
