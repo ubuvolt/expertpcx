@@ -26,7 +26,7 @@ class TestController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'test'),
+                'actions' => array('index', 'view', 'test', 'huk'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -163,16 +163,16 @@ class TestController extends Controller {
      */
     public function actionTest() {
 
-Yii::import('application.components.Ebay');
-        
+        Yii::import('application.components.Ebay');
+
         $var = new Ebay;
 
 //        $dataProvider = new CActiveDataProvider('Test');
         $this->render('test', 
                 array( 'var', $var->coco
 //            'dataProvider' => $dataProvider,
-        )
-                );
+                )
+        );
     }
 
-}
+    }

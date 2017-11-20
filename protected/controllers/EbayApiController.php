@@ -5,6 +5,16 @@ class EbayApiController extends Controller {
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
+     * 
+     * UPDATE `admin_central_storage` SET `Value` = 'i:10;' where `Name` = 'item_counter_for_ebay_item';
+     * SELECT * FROM `ebay_item` WHERE `itemID` IN (172939136717,182682336434,172939176870,172939176891,182846948774);
+     * 
+     * DELETE FROM `ebay_item` WHERE `itemID` IN (172939136717,182682336434,172939176870,172939176891,182846948774);
+     * 
+     * UPDATE `ebay_item` SET `currency` = 'XXX' WHERE `itemID` IN (172939136717,182682336434,172939176870,172939176891,182846948774);
+     * 
+     * 
+     * 
      */
     public $layout = '//layouts/column2';
 
@@ -31,7 +41,8 @@ class EbayApiController extends Controller {
                     'view',
                     'main',
                     'ajaxOfficialTime',
-                    'reStartBaySelling'
+                    'reStartBaySelling',
+                    'loadAllItems'
                 ),
                 'users' => array('admin', 'expertpcx'),
             ),
@@ -252,9 +263,14 @@ class EbayApiController extends Controller {
         $ActiveList = $dom->getElementsByTagName('ActiveList')->item(0)->nodeValue;
 
         $TotalNumberOfPages = $dom->getElementsByTagName('TotalNumberOfPages')->item(0)->nodeValue;
-        EbayApiController::set_central_setting(1, 'total_number_of_pages', $TotalNumberOfPages);
+
         $TotalNumberOfEntries = $dom->getElementsByTagName('TotalNumberOfEntries')->item(0)->nodeValue;
-        EbayApiController::set_central_setting(1, 'total_number_of_entries', $TotalNumberOfEntries);
+
+        $get_my_eBay_selling = (int) EbayApiController::get_central_setting(1, 'get_my_eBay_selling');
+        if ($get_my_eBay_selling < 5) {
+            EbayApiController::set_central_setting(1, 'total_number_of_pages', $TotalNumberOfPages);
+            EbayApiController::set_central_setting(1, 'total_number_of_entries', $TotalNumberOfEntries);
+        }
 
         $elements = $dom->getElementsByTagName('ItemArray');
         $data = array();
@@ -343,12 +359,12 @@ class EbayApiController extends Controller {
                             viewItemURLForNaturalSearch = "' . $model->viewItemURLForNaturalSearch . '",
                             listingDuration = "' . $model->listingDuration . '",
                             listingType = "' . $model->listingType . '",
-                            quantity = ' . $model->quantity . ',
+                            quantity = ' . (empty($model->quantity) ? 0 : $model->quantity) . ',
                             currentPrice = ' . $model->currentPrice . ',
                             shippingServiceCost = ' . $model->shippingServiceCost . ',
                             shippingType = "' . $model->shippingType . '",
                             timeLeft = "' . $model->timeLeft . '",
-                            title = "' . $model->title . '",
+                            title = "' . addslashes($model->title) . '",
                             watchCount = ' . (empty($model->watchCount) ? 0 : $model->watchCount) . ',
                             quantityAvailable = ' . $model->quantityAvailable . ',
                             galleryURL = "' . $model->galleryURL . '",
@@ -363,37 +379,25 @@ class EbayApiController extends Controller {
                         WHERE itemID=' . $model->itemID . '
                         LIMIT 1')->execute();
 
-                if ($my_ebay_selling)
-                    $report_array['updated'][$model->itemID] = 'ok';
-
-                $count_saved = count($report_array['updated']);
-                $count_error = count($report_array['error']);
+                // compare
+//                ($results[0]['buyItNowPrice']) {
+//                ($results[0]['quantity']) {
+//                ($results[0]['currentPrice']) {
+//                        $model->buyItNowPrice 
+//            $model->quantity 
+//            $model->currentPrice
             } else {
-                // insert
 
+                // insert
                 $rest = $model->save();
-                if ($rest) {
-                    $report_array['saved'][$model->itemID] = 'ok';
-                } else {
-                    $report_array['error'][$model->itemID] = $model->errors;
-                }
-                $count_saved = count($report_array['saved']);
-                $count_error = count($report_array['error']);
             }
         }
-
-
-        $this->render('my_ebay_report', array(
-            'count_saved' => $count_saved,
-            'count_error' => $count_error,
-            'message' => 'eBay Selling')
-        );
     }
 
     //                form actionMain
     //                eBay Selling
     //                END
-//4
+    //
     public function processeItem($response) {
 
         $report_array = array();
@@ -668,23 +672,206 @@ class EbayApiController extends Controller {
 
             $model->itemSpecifics = $itemSpecific;
 
-            $rest = $model->save();
+            $ebay_item = EbayItem::model()->findByAttributes(array('itemID' => $dom->getElementsByTagName('ItemID')->item(0)->nodeValue));
 
-            if ($rest) {
-                $report_array['saved'][$model->itemID] = 'ok';
+            if ($ebay_item instanceof EbayItem) {
+
+                $ebay_item->timestamp = $model->timestamp;
+                $ebay_item->ack = $model->ack;
+                $ebay_item->version = $model->version;
+                $ebay_item->build = $model->build;
+
+                $ebay_item->autoPay = $model->autoPay;
+                $ebay_item->buyerProtection = $model->buyerProtection;
+                $ebay_item->buyIstNowPrice = $model->buyIstNowPrice;
+                $ebay_item->country = $model->country;
+                $ebay_item->currency = $model->currency;
+                $ebay_item->description = $model->description;
+                $ebay_item->giftIcon = $model->giftIcon;
+                $ebay_item->hitCounter = $model->hitCounter;
+
+                //ListingDetails            
+                $ebay_item->adult = $model->adult;
+                $ebay_item->bindingAuction = $model->bindingAuction;
+                $ebay_item->checkoutEnabled = $model->checkoutEnabled;
+                $ebay_item->convertedBuyItNowPrice = $model->convertedBuyItNowPrice;
+                $ebay_item->convertedStartPrice = $model->convertedStartPrice;
+                $ebay_item->convertedReservePrice = $model->convertedReservePrice;
+                $ebay_item->hasReservePrice = $model->hasReservePrice;
+                $ebay_item->startTime = $model->startTime;
+                $ebay_item->endTime = $model->endTime;
+                $ebay_item->viewItemURL = $model->viewItemURL;
+                $ebay_item->hasUnansweredQuestions = $model->hasUnansweredQuestions;
+                $ebay_item->hasPublicMessages = $model->hasPublicMessages;
+                $ebay_item->viewItemURLForNaturalSearch = $model->viewItemURLForNaturalSearch;
+
+                //ListingDesigner
+                $ebay_item->layoutID = $model->layoutID;
+                $ebay_item->themeID = $model->themeID;
+
+                $ebay_item->listingDuration = $model->listingDuration;
+                $ebay_item->listingType = $model->listingType;
+                $ebay_item->location = $model->location;
+                $ebay_item->paymentMethods = $model->paymentMethods;
+
+                $ebay_item->paymentMethods = $model->paymentMethods;
+
+                $ebay_item->payPalEmailAddress = $model->payPalEmailAddress;
+
+                //PrimaryCategory
+                $ebay_item->categoryID = $model->categoryID;
+                $ebay_item->categoryName = $model->categoryName;
+                $ebay_item->privateListing = $model->privateListing;
+
+                //ProductListingDetails
+                $ebay_item->EAN = $model->EAN;
+                $ebay_item->brandMPN = $model->brandMPN;
+                $ebay_item->includeeBayProductDetails = $model->includeeBayProductDetails;
+                $ebay_item->quantity = $model->quantity;
+                $ebay_item->reservePrice = $model->reservePrice;
+                $ebay_item->itemRevised = $model->itemRevised;
+
+                //Seller
+                $ebay_item->seller_aboutMePage = $model->seller_aboutMePage;
+                $ebay_item->seller_email = $model->seller_email;
+                $ebay_item->seller_feedbackScore = $model->seller_feedbackScore;
+                $ebay_item->seller_positiveFeedbackPercent = $model->seller_positiveFeedbackPercent;
+                $ebay_item->seller_feedbackPrivate = $model->seller_feedbackPrivate;
+                $ebay_item->seller_feedbackRatingStar = $model->seller_feedbackRatingStar;
+                $ebay_item->seller_IDVerified = $model->seller_IDVerified;
+                $ebay_item->seller_eBayGoodStanding = $model->seller_eBayGoodStanding;
+                $ebay_item->seller_newUser = $model->seller_newUser;
+                $ebay_item->seller_registrationDate = $model->seller_registrationDate;
+                $ebay_item->seller_site = $model->seller_site;
+                $ebay_item->seller_status = $model->seller_status;
+                $ebay_item->seller_userID = $model->seller_userID;
+                $ebay_item->seller_userIDChanged = $model->seller_userIDChanged;
+                $ebay_item->seller_userIDLastChanged = $model->seller_userIDLastChanged;
+                $ebay_item->seller_VATStatus = $model->seller_VATStatus;
+                $ebay_item->seller_allowPaymentEdit = $model->seller_allowPaymentEdit;
+                $ebay_item->seller_checkoutEnabled = $model->seller_checkoutEnabled;
+                $ebay_item->seller_CIPBankAccountStored = $model->seller_CIPBankAccountStored;
+                $ebay_item->seller_goodStanding = $model->seller_goodStanding;
+                $ebay_item->seller_liveAuctionAuthorized = $model->seller_liveAuctionAuthorized;
+                $ebay_item->seller_merchandizingPref = $model->seller_merchandizingPref;
+                $ebay_item->seller_qualifiesForB2BVAT = $model->seller_qualifiesForB2BVAT;
+                $ebay_item->seller_storeOwner = $model->seller_storeOwner;
+                $ebay_item->seller_storeURL = $model->seller_storeURL;
+                $ebay_item->seller_sellerBusinessType = $model->seller_sellerBusinessType;
+                $ebay_item->seller_safePaymentExempt = $model->seller_safePaymentExempt;
+                $ebay_item->seller_motorsDealer = $model->seller_motorsDealer;
+
+                //SellingStatus
+                $ebay_item->sellingStatus_bidCount = $model->sellingStatus_bidCount;
+                $ebay_item->sellingStatus_bidIncrement = $model->sellingStatus_bidIncrement;
+                $ebay_item->sellingStatus_convertedCurrentPrice = $model->sellingStatus_convertedCurrentPrice;
+                $ebay_item->sellingStatus_currentPrice = $model->sellingStatus_currentPrice;
+                $ebay_item->sellingStatus_leadCount = $model->sellingStatus_leadCount;
+                $ebay_item->sellingStatus_minimumToBid = $model->sellingStatus_minimumToBid;
+                $ebay_item->sellingStatus_quantitySold = $model->sellingStatus_quantitySold;
+                $ebay_item->sellingStatus_reserveMet = $model->sellingStatus_reserveMet;
+
+                $ebay_item->sellingStatus_secondChanceEligible = $model->sellingStatus_secondChanceEligible;
+                $ebay_item->sellingStatus_listingStatus = $model->sellingStatus_listingStatus;
+                $ebay_item->sellingStatus_quantitySoldByPickupInStore = $model->sellingStatus_quantitySoldByPickupInStore;
+
+                //ShippingDetails            
+                $ebay_item->shippDet_applyShippingDiscount = $model->shippDet_applyShippingDiscount;
+                $ebay_item->shippDet_weightMajor = $model->shippDet_weightMajor;
+                $ebay_item->shippDet_weightMinor = $model->shippDet_weightMinor;
+                $ebay_item->shippDet_salesTaxPercent = $model->shippDet_salesTaxPercent;
+                $ebay_item->shippDet_shippingIncludedInTax = $model->shippDet_shippingIncludedInTax;
+                $ebay_item->shippDet_shippingService = $model->shippDet_shippingService;
+                $ebay_item->shippDet_shippingServiceCost = $model->shippDet_shippingServiceCost;
+                $ebay_item->shippDet_shippingServiceAdditionalCost = $model->shippDet_shippingServiceAdditionalCost;
+                $ebay_item->shippDet_shippingServicePriority = $model->shippDet_shippingServicePriority;
+                $ebay_item->shippDet_expeditedService = $model->shippDet_expeditedService;
+                $ebay_item->shippDet_shippingTimeMin = $model->shippDet_shippingTimeMin;
+                $ebay_item->shippDet_shippingTimeMax = $model->shippDet_shippingTimeMax;
+                $ebay_item->shippDet_freeShipping = $model->shippDet_freeShipping;
+                $ebay_item->shippDet_shippingType = $model->shippDet_shippingType;
+                $ebay_item->shippDet_thirdPartyCheckout = $model->shippDet_thirdPartyCheckout;
+                $ebay_item->shippDet_shippingDiscountProfileID = $model->shippDet_shippingDiscountProfileID;
+                $ebay_item->shippDet_internationalShippingDiscountProfileID = $model->shippDet_internationalShippingDiscountProfileID;
+                $ebay_item->shippDet_sellerExcludeShipToLocationsPreference = $model->shippDet_sellerExcludeShipToLocationsPreference;
+
+                $ebay_item->shipToLocations = $model->shipToLocations;
+                $ebay_item->site = $model->site;
+                $ebay_item->startPrice = $model->startPrice;
+                $ebay_item->storeCategoryID = $model->storeCategoryID;
+                $ebay_item->storeCategory2ID = $model->storeCategory2ID;
+                $ebay_item->storeURL = $model->storeURL;
+                $ebay_item->timeLeft = $model->timeLeft;
+                $ebay_item->title = $model->title;
+                $ebay_item->watchCount = $model->watchCount;
+                $ebay_item->hitCount = $model->hitCount;
+                $ebay_item->locationDefaulted = $model->locationDefaulted;
+                $ebay_item->getItFast = $model->getItFast;
+                $ebay_item->postalCode = $model->postalCode;
+
+                //PictureDetails
+                $ebay_item->galleryType = $model->galleryType;
+                $ebay_item->galleryURL = $model->galleryURL;
+
+                $ebay_item->pictureURL = $model->pictureURL;
+
+                $ebay_item->photoDisplay = $model->photoDisplay;
+                $ebay_item->pictureSource = $model->pictureSource;
+                $ebay_item->dispatchTimeMax = $model->dispatchTimeMax;
+                $ebay_item->proxyItem = $model->proxyItem;
+
+                //BusinessSellerDetails
+                $ebay_item->bSellerD_street1 = $model->bSellerD_street1;
+                $ebay_item->bSellerD_cityName = $model->bSellerD_cityName;
+                $ebay_item->bSellerD_stateOrProvince = $model->bSellerD_stateOrProvince;
+                $ebay_item->bSellerD_countryName = $model->bSellerD_countryName;
+                $ebay_item->bSellerD_phone = $model->bSellerD_phone;
+                $ebay_item->bSellerD_postalCode = $model->bSellerD_postalCode;
+                $ebay_item->bSellerD_companyName = $model->bSellerD_companyName;
+                $ebay_item->bSellerD_firstName = $model->bSellerD_firstName;
+                $ebay_item->bSellerD_lastName = $model->bSellerD_lastName;
+                $ebay_item->bSellerD_email = $model->bSellerD_email;
+                $ebay_item->bSellerD_legalInvoice = $model->bSellerD_legalInvoice;
+                $ebay_item->buyerGuaranteePrice = $model->buyerGuaranteePrice;
+
+                //ReturnPolicy
+                $ebay_item->returnP_returnsWithinOption = $model->returnP_returnsWithinOption;
+                $ebay_item->returnP_returnsWithin = $model->returnP_returnsWithin;
+                $ebay_item->returnP_returnsAcceptedOption = $model->returnP_returnsAcceptedOption;
+                $ebay_item->returnP_returnsAccepted = $model->returnP_returnsAccepted;
+                $ebay_item->returnP_shippingCostPaidByOption = $model->returnP_shippingCostPaidByOption;
+                $ebay_item->returnP_shippingCostPaidBy = $model->returnP_shippingCostPaidBy;
+
+                $ebay_item->conditionID = $model->conditionID;
+                $ebay_item->conditionDisplayName = $model->conditionDisplayName;
+                $ebay_item->postCheckoutExperienceEnabled = $model->postCheckoutExperienceEnabled;
+
+                //SellerProfiles
+                $ebay_item->sp_shippingProfileID = $model->sp_shippingProfileID;
+                $ebay_item->sp_shippingProfileName = $model->sp_shippingProfileName;
+                $ebay_item->sp_returnProfileID = $model->sp_returnProfileID;
+                $ebay_item->sp_returnProfileName = $model->sp_returnProfileName;
+                $ebay_item->sp_paymentProfileID = $model->sp_paymentProfileID;
+                $ebay_item->sp_paymentProfileName = $model->sp_paymentProfileName;
+
+                //ShippingPackageDetails
+                $ebay_item->spd_shippingIrregular = $model->spd_shippingIrregular;
+                $ebay_item->spd_shippingPackage = $model->spd_shippingPackage;
+                $ebay_item->spd_weightMajor = $model->spd_weightMajor;
+                $ebay_item->spd_weightMinor = $model->spd_weightMinor;
+
+                $ebay_item->hideFromSearch = $model->hideFromSearch;
+                $ebay_item->eBayPlus = $model->eBayPlus;
+                $ebay_item->eBayPlusEligible = $model->eBayPlusEligible;
+
+                //ItemSpecifics
+                $ebay_item->itemSpecifics = $model->itemSpecifics;
+
+                $ebay_item->save();
             } else {
-                $report_array['error'][$model->itemID] = $model->errors;
+                $model->save();
             }
         }
-
-        $count_saved = count($report_array['saved']);
-        $count_error = count($report_array['error']);
-
-        $this->render('my_ebay_report', array(
-            'count_saved' => $count_saved,
-            'count_error' => $count_error,
-            'message' => 'eBay Item'
-        ));
     }
 
     /**
@@ -865,11 +1052,15 @@ class EbayApiController extends Controller {
     //2
     private function getAllItemID() {
 
-        $increment = 50;
-        $var = EbayApiController::get_central_setting(1, 'get_all_item_id');
+        $increment = 10;
+        $var = EbayApiController::get_central_setting(1, 'item_counter_for_ebay_item');
+        if (!$var)
+            $var = 1;
+
         $item_id_array = array();
 
-        $sql = 'SELECT itemID FROM my_ebay_selling LIMIT ' . $var . ', ' . ($increment + $var);
+//        $sql = 'SELECT itemID FROM my_ebay_selling LIMIT ' . $var . ', ' . ($increment + $var);
+        $sql = 'SELECT itemID FROM my_ebay_selling LIMIT  0 , 5';
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
 
@@ -878,7 +1069,7 @@ class EbayApiController extends Controller {
         }
 
         $var += $increment;
-        EbayApiController::set_central_setting(1, 'get_all_item_id', $var);
+        EbayApiController::set_central_setting(1, 'item_counter_for_ebay_item', $var);
 
         return $item_id_array;
     }
@@ -902,6 +1093,17 @@ class EbayApiController extends Controller {
             $this->processeItem($response);
             $response = array();
         }
+    }
+
+    public function actionLoadAllItems() {
+
+        $total_number_of_pages = (int) EbayApiController::get_central_setting(1, 'total_number_of_pages');
+        $get_my_eBay_selling = (int) EbayApiController::get_central_setting(1, 'get_my_eBay_selling');
+
+        do {
+            $this->actionGetMyeBaySelling();
+            sleep(0.5);
+        } while ($get_my_eBay_selling <= $total_number_of_pages);
     }
 
 }

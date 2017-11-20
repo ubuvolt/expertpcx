@@ -1,8 +1,8 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <div class="moduleTile">
@@ -21,14 +21,42 @@
         </div> 
     </div>
 </div>
+
+<!--
+    API
+        -->
 <div class="moduleTile">
     <div class="moduleImage">
         <img src='/images/API.png'><div class="title">API</div>
     </div>
     <div class="moduleTileRight">
+        <!--
+            /index.php?r=ebayApi/ajaxOfficialTime"
+                                                    -->
         <div class="row buttons" >
             <button id="official_time">Time</button>
         </div> 
+
+        <!--
+            /index.php?r=ebayApi/LoadAllItems
+                                                    -->
+        <div class="row buttons" >
+            <button>
+                <a title="ebayApi/LoadAllItems" href="index.php?r=ebayApi/LoadAllItems">Load All Items</a>
+            </button>
+        </div>
+                                                    
+        <div class="row buttons" >
+            <button>
+                <a title="ebayApi/main/&attribute=GetItem" href="index.php?r=ebayApi/main/&attribute=GetItem">eBay GetItem</a>
+            </button>
+            <?php
+            d::d(EbayApiController::get_central_setting(1, 'item_counter_for_ebay_item'));
+            ?>
+        </div> 
+
+        <div class="row buttons" style="border: solid 1px red; width: 150px; padding: 0;"></div>
+
         <div class="row buttons" >
             <button class="my_ebay_selling">
                 <a class="my_ebay_selling" href="index.php?r=ebayApi/main/&attribute=MyeBaySelling">eBay Selling</a>
@@ -40,12 +68,7 @@
                 <?php echo CHtml::link('Re-Start', array('ebayApi/ReStartBaySelling')); ?>
             </button>
         </div> 
-        <div class="row buttons" >
-            <button><?php echo CHtml::link('eBay GetItem', array('ebayApi/main/&attribute=GetItem')); ?></button>
-            <?php
-            d::d(EbayApiController::get_central_setting(1, 'get_all_item_id'));
-            ?>
-        </div> 
+
         <div class="row buttons" >
             <button><?php echo CHtml::link('eBay GetStore', array('ebayApi/main/&attribute=GetStore')); ?></button>
         </div> 
