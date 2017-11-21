@@ -7,6 +7,7 @@ class EbayApiController extends Controller {
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      * 
      * UPDATE `admin_central_storage` SET `Value` = 'i:10;' where `Name` = 'item_counter_for_ebay_item';
+     * 
      * SELECT * FROM `ebay_item` WHERE `itemID` IN (172939136717,182682336434,172939176870,172939176891,182846948774);
      * 
      * DELETE FROM `ebay_item` WHERE `itemID` IN (172939136717,182682336434,172939176870,172939176891,182846948774);
@@ -131,8 +132,8 @@ class EbayApiController extends Controller {
     public function actionGeteBayOfficialTime() {
         Yii::import('application.components.Ebay');
 
-        $ebay = new Ebay_expertpcx();
-//        $ebay = new Ebay_hairacc();
+//        $ebay = new Ebay_expertpcx();
+        $ebay = new Ebay_hairacc();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GeteBayOfficialTime';
@@ -189,8 +190,8 @@ class EbayApiController extends Controller {
     public function actionGetMyeBaySelling() {
         Yii::import('application.components.Ebay');
 
-//        $ebay = new Ebay_hairacc();
-        $ebay = new Ebay_expertpcx();
+        $ebay = new Ebay_hairacc();
+//        $ebay = new Ebay_expertpcx();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GetMyeBaySelling';
@@ -347,8 +348,9 @@ class EbayApiController extends Controller {
 
             //if itemID exist
             $results = $command->queryAll();
+
             if ($results[0]['itemID']) {
-                // update
+                // update my_ebay_selling 
                 $my_ebay_selling = Yii::app()->db->createCommand('
                         UPDATE 
                             my_ebay_selling 
@@ -379,16 +381,29 @@ class EbayApiController extends Controller {
                         WHERE itemID=' . $model->itemID . '
                         LIMIT 1')->execute();
 
-                // compare
-//                ($results[0]['buyItNowPrice']) {
-//                ($results[0]['quantity']) {
-//                ($results[0]['currentPrice']) {
-//                        $model->buyItNowPrice 
-//            $model->quantity 
-//            $model->currentPrice
-            } else {
+                /////////////////////
+                //                  //
+                //   Log Ebay Item  //
+                //   log_ebay_item  //        
+                //                  //        
+                //////////////////////
+                $new_buyItNowPrice = Helper::NumberFormat($model->buyItNowPrice);
+                $old_buyItNowPrice = Helper::NumberFormat($results[0]['buyItNowPrice']);
+                if ($new_buyItNowPrice != $old_buyItNowPrice)
+                    Helper::LogEbayItem($model->itemID, 'buyItNowPrice', $old_buyItNowPrice, $new_buyItNowPrice);
+                
+                $new_quantity = (int)$model->quantity;
+                $old_quantity = (int)$results[0]['quantity'];
+                if ($new_quantity != $old_quantity)
+                    Helper::LogEbayItem($model->itemID, 'quantity', $old_quantity, $new_quantity);
+                
+                $new_currentPrice = Helper::NumberFormat($model->currentPrice,'no_decimals');
+                $old_currentPrice = Helper::NumberFormat($results[0]['currentPrice'],'no_decimals');
+                if ($new_currentPrice != $old_currentPrice)
+                    Helper::LogEbayItem($model->itemID, 'currentPrice', $old_currentPrice, $new_currentPrice);
 
-                // insert
+            } else {
+                // insert my_ebay_selling 
                 $rest = $model->save();
             }
         }
@@ -880,8 +895,8 @@ class EbayApiController extends Controller {
     public function getStore() {
         Yii::import('application.components.Ebay');
 
-//        $ebay = new Ebay_hairacc();
-        $ebay = new Ebay_expertpcx();
+        $ebay = new Ebay_hairacc();
+//        $ebay = new Ebay_expertpcx();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GetStore';
@@ -1052,15 +1067,14 @@ class EbayApiController extends Controller {
     //2
     private function getAllItemID() {
 
-        $increment = 10;
+        $increment = 50;
         $var = EbayApiController::get_central_setting(1, 'item_counter_for_ebay_item');
         if (!$var)
             $var = 1;
 
         $item_id_array = array();
 
-//        $sql = 'SELECT itemID FROM my_ebay_selling LIMIT ' . $var . ', ' . ($increment + $var);
-        $sql = 'SELECT itemID FROM my_ebay_selling LIMIT  0 , 5';
+        $sql = 'SELECT itemID FROM my_ebay_selling LIMIT ' . $var . ', ' . ($increment + $var);
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
 
@@ -1078,8 +1092,8 @@ class EbayApiController extends Controller {
     public function actionGetItem($item_id) {
         Yii::import('application.components.Ebay');
 
-//        $ebay = new Ebay_hairacc();
-        $ebay = new Ebay_expertpcx();
+        $ebay = new Ebay_hairacc();
+//        $ebay = new Ebay_expertpcx();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GetItem';
@@ -1097,13 +1111,15 @@ class EbayApiController extends Controller {
 
     public function actionLoadAllItems() {
 
+        //UPDATE `admin_central_storage` SET `Value` = 'i:0;' where `Name` = 'get_my_eBay_selling';
+
+
         $total_number_of_pages = (int) EbayApiController::get_central_setting(1, 'total_number_of_pages');
         $get_my_eBay_selling = (int) EbayApiController::get_central_setting(1, 'get_my_eBay_selling');
 
-        do {
+        if ($get_my_eBay_selling >= $total_number_of_pages) {
             $this->actionGetMyeBaySelling();
-            sleep(0.5);
-        } while ($get_my_eBay_selling <= $total_number_of_pages);
+        }
     }
 
 }

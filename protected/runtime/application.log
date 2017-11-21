@@ -1396,3 +1396,78 @@ REQUEST_URI=/index.php?r=ebayApi/main/&attribute=GetItem
 in /var/www/engine/protected/controllers/EbayApiController.php (768)
 in /var/www/engine/protected/controllers/EbayApiController.php (1090)
 in /var/www/engine/protected/controllers/EbayApiController.php (1046)
+2017/11/21 14:48:36 [error] [php] include(Helper.php): failed to open stream: No such file or directory (/var/www/yii/framework/YiiBase.php:432)
+Stack trace:
+#0 /var/www/engine/protected/controllers/EbayApiController.php(388): spl_autoload_call()
+#1 /var/www/engine/protected/controllers/EbayApiController.php(300): EbayApiController->saveBaySelling()
+#2 /var/www/engine/protected/controllers/EbayApiController.php(205): EbayApiController->processeBaySelling()
+#3 /var/www/engine/protected/controllers/EbayApiController.php(66): EbayApiController->actionGetMyeBaySelling()
+#4 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayApiController->actionMain()
+#5 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbayApiController->runAction()
+#7 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#9 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbayApiController->filterAccessControl()
+#10 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#11 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#12 /var/www/yii/framework/web/CController.php(265): EbayApiController->runActionWithFilters()
+#13 /var/www/yii/framework/web/CWebApplication.php(282): EbayApiController->run()
+#14 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#15 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#16 /var/www/engine/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebayApi/main/&attribute=MyeBaySelling
+in /var/www/engine/protected/controllers/EbayApiController.php (388)
+in /var/www/engine/protected/controllers/EbayApiController.php (300)
+in /var/www/engine/protected/controllers/EbayApiController.php (205)
+2017/11/21 19:55:47 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "index". in /var/www/yii/framework/web/CController.php:486
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(270): CController->missingAction('')
+#1 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('')
+#2 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayApi/')
+#3 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#4 /var/www/engine/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=ebayApi/
+---
+2017/11/21 20:07:50 [error] [exception.ParseError] ParseError: syntax error, unexpected 'else' (T_ELSE) in /var/www/engine/protected/controllers/EbayApiController.php:405
+Stack trace:
+#0 /var/www/yii/framework/web/CWebApplication.php(276): CWebApplication->createController('LoadAllItems/')
+#1 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayApi/LoadAll...')
+#2 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#3 /var/www/engine/index.php(13): CApplication->run()
+#4 {main}
+REQUEST_URI=/index.php?r=ebayApi/LoadAllItems
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---
+2017/11/21 20:07:58 [error] [exception.ParseError] ParseError: syntax error, unexpected 'else' (T_ELSE) in /var/www/engine/protected/controllers/EbayApiController.php:405
+Stack trace:
+#0 /var/www/yii/framework/web/CWebApplication.php(276): CWebApplication->createController('LoadAllItems/')
+#1 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayApi/LoadAll...')
+#2 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#3 /var/www/engine/index.php(13): CApplication->run()
+#4 {main}
+REQUEST_URI=/index.php?r=ebayApi/LoadAllItems
+HTTP_REFERER=http://www.engine.dev/index.php?r=ebayApi/main
+---
+2017/11/21 20:19:32 [error] [php] Wrong parameter count for number_format() (/var/www/engine/protected/components/Helper.php:47)
+Stack trace:
+#0 /var/www/engine/protected/controllers/EbayApiController.php(300): EbayApiController->saveBaySelling()
+#1 /var/www/engine/protected/controllers/EbayApiController.php(205): EbayApiController->processeBaySelling()
+#2 /var/www/engine/protected/controllers/EbayApiController.php(1122): EbayApiController->actionGetMyeBaySelling()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayApiController->actionLoadAllItems()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbayApiController->runAction()
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbayApiController->filterAccessControl()
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): EbayApiController->runActionWithFilters()
+#12 /var/www/yii/framework/web/CWebApplication.php(282): EbayApiController->run()
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebayApi/LoadAllItems
+in /var/www/engine/protected/components/Helper.php (47)
+in /var/www/engine/protected/controllers/EbayApiController.php (386)
+in /var/www/engine/protected/controllers/EbayApiController.php (300)
