@@ -18,6 +18,7 @@ class EbayApiController extends Controller {
      * 
      */
     public $layout = '//layouts/column2';
+    public $shopName = 'hairacc4youcom';
 
     /**
      * @return array action filters
@@ -54,7 +55,7 @@ class EbayApiController extends Controller {
     }
 
     public function actionMain() {
-
+        
         switch ($_GET['attribute']) {
 
             case 'OfficialTime':
@@ -311,7 +312,8 @@ class EbayApiController extends Controller {
             $model = new MyEbaySelling();
             $model->buyItNowPrice = $item['Item']['BuyItNowPrice']['BuyItNowPrice'];
             $model->itemID = $item['Item']['ItemID']['ItemID'];
-            $model->convertStartTime($item['Item']['ListingDetails']['StartTime']['StartTime']);
+            $model->shopName = $this->shopName;
+            $model->startTime = Helper::convertStartTime($item['Item']['ListingDetails']['StartTime']['StartTime']);
             $model->viewItemURL = $item['Item']['ListingDetails']['ViewItemURL']['ViewItemURL'];
             $model->viewItemURLForNaturalSearch = $item['Item']['ListingDetails']['ViewItemURLForNaturalSearch']['ViewItemURLForNaturalSearch'];
             $model->listingDuration = $item['Item']['ListingDuration']['ListingDuration'];
@@ -356,6 +358,7 @@ class EbayApiController extends Controller {
                             my_ebay_selling 
                         SET 
                             buyItNowPrice = ' . $model->buyItNowPrice . ',
+                            shopName = "' . $this->shopName . '",
                             startTime = "' . $model->startTime . '",
                             viewItemURL = "' . $model->viewItemURL . '",
                             viewItemURLForNaturalSearch = "' . $model->viewItemURLForNaturalSearch . '",
@@ -391,17 +394,16 @@ class EbayApiController extends Controller {
                 $old_buyItNowPrice = Helper::NumberFormat($results[0]['buyItNowPrice']);
                 if ($new_buyItNowPrice != $old_buyItNowPrice)
                     Helper::LogEbayItem($model->itemID, 'buyItNowPrice', $old_buyItNowPrice, $new_buyItNowPrice);
-                
-                $new_quantity = (int)$model->quantity;
-                $old_quantity = (int)$results[0]['quantity'];
+
+                $new_quantity = (int) $model->quantity;
+                $old_quantity = (int) $results[0]['quantity'];
                 if ($new_quantity != $old_quantity)
                     Helper::LogEbayItem($model->itemID, 'quantity', $old_quantity, $new_quantity);
-                
-                $new_currentPrice = Helper::NumberFormat($model->currentPrice,'no_decimals');
-                $old_currentPrice = Helper::NumberFormat($results[0]['currentPrice'],'no_decimals');
+
+                $new_currentPrice = Helper::NumberFormat($model->currentPrice, 'no_decimals');
+                $old_currentPrice = Helper::NumberFormat($results[0]['currentPrice'], 'no_decimals');
                 if ($new_currentPrice != $old_currentPrice)
                     Helper::LogEbayItem($model->itemID, 'currentPrice', $old_currentPrice, $new_currentPrice);
-
             } else {
                 // insert my_ebay_selling 
                 $rest = $model->save();

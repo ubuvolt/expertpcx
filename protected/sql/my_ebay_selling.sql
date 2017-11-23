@@ -5,6 +5,7 @@ CREATE TABLE `my_ebay_selling`
     `id`                                    INT NOT NULL AUTO_INCREMENT,
     `buyItNowPrice`                         FLOAT(7,2) NULL,
     `itemID`                                VARCHAR(128),
+    `shopName`                                VARCHAR(128),
     `startTime`                             VARCHAR(128),
     `viewItemURL`                           VARCHAR(2048),
     `viewItemURLForNaturalSearch`           VARCHAR(2048),

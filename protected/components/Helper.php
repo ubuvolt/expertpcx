@@ -27,15 +27,15 @@ class Helper extends CComponent {
      * @param type $new_value
      */
     static function LogEbayItem($itemID, $field_name, $old_value, $new_value) {
-        
+
         $log = new LogEbayItem();
-        
+
         $log->data_time = self::TimeStamp('formatted');
         $log->itemID = $itemID;
         $log->field_name = $field_name;
         $log->old_value = $old_value;
         $log->new_value = $new_value;
-        
+
         $log->save();
     }
 
@@ -64,6 +64,15 @@ class Helper extends CComponent {
                 break;
         }
         return $formatted_value;
+    }
+
+    /**
+     * From: ISO yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+     * To: Y-m-d H:i:s
+     * @param type $time
+     */
+    public function convertStartTime($time) {
+        return date("Y-m-d H:i:s", strtotime($time));
     }
 
 }
