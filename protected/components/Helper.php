@@ -35,6 +35,7 @@ class Helper extends CComponent {
         $log->field_name = $field_name;
         $log->old_value = $old_value;
         $log->new_value = $new_value;
+        $log->status = LogEbayItem::Ready_For_Update;
 
         $log->save();
     }
