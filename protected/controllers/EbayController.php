@@ -1,5 +1,14 @@
 <?php
 
+// Price control
+// Price control
+// Price control
+// Price control
+// Price control
+// Price control
+// Price control
+// Price control
+// Price control
 class EbayController extends Controller {
 
     /**
@@ -42,31 +51,44 @@ class EbayController extends Controller {
         );
     }
 
+    ///////////////////////////
+    // 1 - monitoring price (refresh button)
+    ///////////////////////////
+
     public function actionGetInfo() {
-        $ebm = EbayPriceMonitor::model()->findAll();
-        $this->render('getInfo', array('ebm' => $ebm));
+        $ebay_price_monitor = EbayPriceMonitor::model()->findAll();
+        $this->render('getInfo', array('ebay_price_monitor' => $ebay_price_monitor));
     }
 
+    ///////////////////////////
+    // 2 - monitoring price (reload button) API CALL
+    ///////////////////////////
     public function actionReloadEbayPrice() {
 
-        $ebm = EbayPriceMonitor::model()->findAll();
+        $ebay_price_monitor = EbayPriceMonitor::model()->findAll();
 
         Yii::import('application.modules.ebay.Ebay');
         $ebay = new Ebay();
         $phrase = 'div[class="price"]';
 
-        foreach ($ebm as $item) {
+        foreach ($ebay_price_monitor as $item) {
 
-            $substr = $ebay->getHTMLPrice($item->url, $phrase);
-            $price_array = explode('Approx', $substr);
+            $substr = $ebay->getHTML($item->url, $phrase);
+            $price_array = explode('Approx', $substr['price']);
             $price_UK = $price_array[0];
             $price = (float) str_replace('ound;', '', $price_UK);
 
+//            
+//            
+//            okdomentowac jak ok
+//            $item->product = $substr['product'];
+            
+            $item->seller = $substr['seller'];
             $item->price = number_format($price, 2);
             $item->save();
         }
 
-        $this->render('getInfo', array('ebm' => $ebm));
+        $this->render('getInfo', array('ebay_price_monitor' => $ebay_price_monitor));
     }
 
     public function actionEbayPriceEmail() {
@@ -79,13 +101,17 @@ class EbayController extends Controller {
         $prod = 0;
 
         foreach ($ebm as $item) {
-            
-            $substr = $ebay->getHTMLPrice($item->url, $phrase);
+
+            $substr = $ebay->getHTML($item->url, $phrase);
             $price_array = explode('Approx', $substr);
             $price_UK = $price_array[0];
             $price = (float) str_replace('ound;', '', $price_UK);
-            
-            if ($ebay_price != number_format($price, 2)) {
+
+
+            // add flout precysion
+            // if
+            // 2.3 ?? 2.30
+            if (number_format($ebay_price, 2) != number_format($price, 2)) {
                 $prod = 1;
                 $msg .= 'product:' . $item->product . '<br>'
                         . 'url: ' . $item->url . ' <br> '

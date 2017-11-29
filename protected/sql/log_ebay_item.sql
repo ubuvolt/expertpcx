@@ -8,5 +8,6 @@ CREATE TABLE `log_ebay_item`
     `field_name`                                    VARCHAR(128),
     `old_value`                                     VARCHAR(128),
     `new_value`                                     VARCHAR(128),
+    `status`                                        INT(1),
     primary key (`id`)
 ) engine=InnoDB DEFAULT CHARSET= utf8;

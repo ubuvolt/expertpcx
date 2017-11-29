@@ -28,7 +28,7 @@ class EbayPriceMonitor extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('product, seller, url', 'required'),
+			array('url', 'required'),
 			array('price', 'numerical'),
 			array('product, seller', 'length', 'max'=>128),
 			array('url', 'length', 'max'=>2048),

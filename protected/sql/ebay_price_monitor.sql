@@ -8,12 +8,15 @@
  * Created: 20-Aug-2017
  */
 
+
+DROP TABLE IF EXISTS `ebay_price_monitor`;
+
 CREATE TABLE `ebay_price_monitor` 
 (
     `id`            INT NOT NULL AUTO_INCREMENT,
-    `product`       VARCHAR(128) NOT NULL,
-    `seller`        VARCHAR(128) NOT NULL,
+    `product`       VARCHAR(128,
+    `seller`        VARCHAR(128),
     `url`           VARCHAR(2048) NOT NULL,
-    `price`         FLOAT(7,3) NULL,
+    `price`         FLOAT(7,3),
     primary key (`id`)
 ) engine=InnoDB DEFAULT CHARSET=utf8;

@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update EbayPriceMonitor <?php echo $model->id; ?></h1>
+<h2><b>Update EbayPriceMonitor</h2></b>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

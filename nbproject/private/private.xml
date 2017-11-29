@@ -4,9 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/var/www/engine/protected/controllers/EbayApiController.php</file>
+            <file>file:/var/www/engine/protected/models/MyEbaySelling.php</file>
             <file>file:/var/www/engine/protected/models/LogEbayItem.php</file>
+            <file>file:/var/www/engine/protected/config/database.php</file>
+            <file>file:/var/www/engine/protected/config/database1.php</file>
             <file>file:/var/www/engine/protected/components/Helper.php</file>
             <file>file:/var/www/engine/protected/sql/log_ebay_item.sql</file>
+            <file>file:/var/www/engine/protected/controllers/EbayInsetrsController.php</file>
+            <file>file:/var/www/engine/protected/sql/my_ebay_selling.sql</file>
         </group>
     </open-files>
 </project-private>

@@ -16,7 +16,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>View EbayPriceMonitor #<?php echo $model->id; ?></h1>
+<h2><b>View EbayPriceMonitor </h2></b>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

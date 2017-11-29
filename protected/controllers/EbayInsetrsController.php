@@ -205,18 +205,24 @@ class EbayInsetrsController extends Controller {
                 $position++;
             }
         }
-
-        $this->render('/ebayApi/api_view', array(
-            'response' => $response,
-            'development' => $development)
-        );
     }
 
+    //
+    // zeby sie serwer nie wysypoał trzeba limitowasc iloisc zdjec
+    //
     public function actionGenerateImages() {
 
-        ini_set('max_execution_time', 3000);
+        $sql = '
+                SELECT 
+                    ps_id_product, 
+                    pictureURL 
+                    
+                FROM ebay_item 
+                
+                WHERE `ps_id_product` IS NOT NULL 
+                ORDER BY `id` ASC
+                LIMIT 60, 20';
 
-        $sql = 'SELECT ps_id_product, pictureURL FROM ebay_item WHERE `ps_id_product` IS NOT NULL';
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
 
@@ -256,16 +262,14 @@ class EbayInsetrsController extends Controller {
                 $this->createImage($image_url_details['ps_image_details'][$key], $url);
             }
         }
-
-        $this->render('/ebayApi/api_view', array(
-            'response' => $response,
-            'development' => $development)
-        );
     }
 
     public function createImage($id_image, $picture_url) {
 
-        $prestashop_img_home = '/var/www/prestashop/img/p/';
+        // local
+//        $prestashop_img_home = '/var/www/prestashop/img/p/';
+        // live
+        $prestashop_img_home = '/home/wolscy/public_html/hairacc4you/img/p/';
 
         $path_chunks = str_split($id_image);
 
@@ -276,7 +280,7 @@ class EbayInsetrsController extends Controller {
         $path = $prestashop_img_home . $path_sufix;
 
         if (!file_exists($path)) {
-            mkdir($path, 0777, true);
+            mkdir($path, 0775, true);
         }
 
         $sql = 'SELECT name, width, height FROM ps_image_type';
@@ -299,16 +303,17 @@ class EbayInsetrsController extends Controller {
         $imagick->writeImage($img_path);
     }
 
-    public function processEbayItemDescription($description){
-        
-        $description_array = explode('border=&#34;0&#34;></a></noscript></div>', $description);
-        $description_array = explode('<font size=&#34;5&#34;><span style=&#34;',$description_array[1]);
-        
-        $description = $description_array[0];
-        
+    // This method is designed only for expertpcx
+    public function processEbayItemDescription($description) {
+
+//        $description_array = explode('border=&#34;0&#34;></a></noscript></div>', $description);
+//        $description_array = explode('<font size=&#34;5&#34;><span style=&#34;', $description_array[1]);
+//
+//        $description = $description_array[0];
+
         return $description;
     }
-    
+
     public function Log($table_name, $t_n, $ps_id_product, $itemId = null) {
 
         if ($itemId) {
@@ -324,13 +329,11 @@ class EbayInsetrsController extends Controller {
                 $log['error'] = $t_n . ' error';
         }
 
-        d::d($log);
         return $log;
     }
 
     public function actionPic() {
 
-        d::d(__LINE__);
         $home = '/var/www/prestashop/download.jpg';
         $homea = '/var/www/prestashop/a-download.jpg';
 
@@ -357,6 +360,14 @@ class EbayInsetrsController extends Controller {
 
     public function actionSetCateg() {
 
+        // copy existing categ form ps_category
+        // set parent ID 2
+        
+        // add bellow categores to  ps_category_lang
+        
+        //INSERT INTO `ps_category_group` (`id_category`, `id_group`) VALUES ('13', '0'), ('13', '1')
+        
+        //INSERT INTO `ps_category_shop` (`id_category`, `id_shop`, `position`) VALUES ('12', '1', '0'), ('13', '1', '0');
 
         $store_category_array = array(
             22171978012 => 'Hair Bands',
