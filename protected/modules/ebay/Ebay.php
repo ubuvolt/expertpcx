@@ -127,7 +127,8 @@ class Ebay {
 //        $return_array['product'] = $product_xml->{'_'};
 
 
-        d::d($return_array['product']);
+//        d::d($return_array['product']);
+         
 
         return $return_array;
     }
