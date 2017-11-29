@@ -20,14 +20,6 @@
         </div> 
         <div class="row buttons">
             <div class="description_button">
-                <?php echo "Modifing the list of the monitored prices"; ?>
-            </div>
-            <button>
-                <a title="ebayPriceMonitor/admin" href="index.php?r=ebayPriceMonitor/admin">Manage Ebay Price</a>
-            </button>
-        </div> 
-        <div class="row buttons">
-            <div class="description_button">
                 <?php echo "Adding the new URL to monitor price"; ?>
             </div>
             <button>
@@ -36,9 +28,21 @@
         </div> 
         <div class="row buttons">
             <div class="description_button">
+                <?php echo "Modifing the list of the monitored prices"; ?>
+            </div>
+            <button>
+                <a title="ebayPriceMonitor/admin" href="index.php?r=ebayPriceMonitor/admin">Manage Ebay Price</a>
+            </button>
+        </div> 
+        
+        <div class="row buttons">
+            <div class="description_button">
                 <?php echo "Generate  report about changes prices"; ?>
             </div>
             <button>
+                <!--///////////////////////////
+                // 3 - raport aboute prices - (ebayPriceEmail button) API CALL
+                ///////////////////////////-->
                 <a title="ebay/ebayPriceEmail" href="index.php?r=ebay/ebayPriceEmail">Ebay Price Email</a>
             </button>
         </div> 
@@ -130,12 +134,10 @@
         <img src="/images/page-icon.png"><div class="title">Shop</div>
     </div>
     <div class="moduleTileRight">
-        <div class="row buttons" style="background-color: #f3f3e5;border:4px solid white; padding: 5px; margin-bottom: 10px; width: 160px; overflow: hidden; font-size:11px;line-height: 13px;text-overflow: ellipsis; color:#840b00;">
-            Do it once, <br>
-            the system duplicates <br>
-            the product
-            <br>
-            <br>
+        <div class="row buttons">
+            <div class="description_button">
+                <?php echo "Do it once, the system duplicates <br>the product"; ?>
+            </div>
             <button>
                 <a title="ebayInsetrs/setDataInPresta" href="index.php?r=ebayInsetrs/setDataInPresta">Insert data to ShopPage</a>
                 <?php // echo CHtml::link('Insert data to ShopPage', array('ebayInsetrs/setDataInPresta')); ?>
