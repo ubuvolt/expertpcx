@@ -259,11 +259,11 @@
         display: inline-block;
         float: left;
         background-color: #f3f3e5;
-        border:4px solid white;
+        border:2px solid white;
         line-height: 13px;
         width: 90%;
         font-size: 10px;
-        /*padding: 1px;*/
+        padding: 2px;
         color:#840b00;
         margin-bottom: 3px;
         margin-top: 3px;
