@@ -11,26 +11,33 @@
     </div>
     <div class="moduleTileRight">
         <div class="row buttons">
-            <div style=" display: inline-block; float: left; background-color: #f3f3e5;border:4px solid white; line-height: 13px; width: 90%;font-size: 11px; padding: 2px; color:#840b00 ">
-                <?php echo "To go to the view and refresh<br> monitored prices"; ?>
+            <div class="description_button">
+                <?php echo "The view and refresh monitored prices"; ?>
             </div>
-        </div>
-        <div class="row buttons">
-            <button>
+            <button style="clear:both">
                 <a title="ebay/getInfo" href="index.php?r=ebay/getInfo">eBay GetItem</a>    
             </button>
         </div> 
         <div class="row buttons">
+            <div class="description_button">
+                <?php echo "Modifing the list of the monitored prices"; ?>
+            </div>
             <button>
                 <a title="ebayPriceMonitor/admin" href="index.php?r=ebayPriceMonitor/admin">Manage Ebay Price</a>
             </button>
         </div> 
         <div class="row buttons">
+            <div class="description_button">
+                <?php echo "Adding the new URL to monitor price"; ?>
+            </div>
             <button>
-                <a title="ebayPriceMonitor/admin" href="index.php?r=ebayPriceMonitor/admin">Add New URL</a>
+                <a title="ebayPriceMonitor/admin" href="index.php?r=ebayPriceMonitor/create">Add New URL</a>
             </button>
         </div> 
         <div class="row buttons">
+            <div class="description_button">
+                <?php echo "Generate  report about changes prices"; ?>
+            </div>
             <button>
                 <a title="ebay/ebayPriceEmail" href="index.php?r=ebay/ebayPriceEmail">Ebay Price Email</a>
             </button>
@@ -218,16 +225,17 @@
     }
 
     .moduleTile {
-        width: 300px;
+        width: 330px;
         border: 1px solid #CCCCCC;
         background-color: #f3f3e5;
         line-height: 20px;
-        margin: 20px;
+        margin-left: 20px;
+        margin-bottom: 20px;
         float: left;
     }
     .moduleTileRight {
         width: 60%;
-        height: 200px;
+        height: 230px;
         display: inline-block;
         background-color: #e5e4d4;
         vertical-align: top;
@@ -245,5 +253,24 @@
     .buttons a {
         color: #000000;
         text-decoration: none;
+    }
+    .description_button
+    {
+        display: inline-block;
+        float: left;
+        background-color: #f3f3e5;
+        border:4px solid white;
+        line-height: 13px;
+        width: 90%;
+        font-size: 10px;
+        /*padding: 1px;*/
+        color:#840b00;
+        margin-bottom: 3px;
+        margin-top: 3px;
+    }
+    button
+    {
+        display: inline-block;
+        float: left; 
     }
 </style>
