@@ -28,3 +28,8 @@ $this->menu=array(
 		'price',
 	),
 )); ?>
+
+<br>
+<div class="row">
+    <?php echo CHtml::submitButton('Back', array('submit' => '/index.php?r=ebayApi/main')); ?>
+</div>
