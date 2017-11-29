@@ -80,9 +80,11 @@ class EbayController extends Controller {
 
 //            
 //            
-//            okdomentowac jak ok
-//            $item->product = $substr['product'];
-            
+            $product_title = explode('<title>', $substr['product']);
+            $product_title = explode('">', $product_title[0]);
+            $product_title = explode('</', $product_title[1]);
+
+            $item->product = $product_title[0];
             $item->seller = $substr['seller'];
             $item->price = number_format($price, 2);
             $item->save();
@@ -91,6 +93,10 @@ class EbayController extends Controller {
         $this->render('getInfo', array('ebay_price_monitor' => $ebay_price_monitor));
     }
 
+    
+    ///////////////////////////
+    // 3 - raport aboute prices - (ebayPriceEmail button) API CALL
+    ///////////////////////////
     public function actionEbayPriceEmail() {
         $ebm = EbayPriceMonitor::model()->findAll();
 
