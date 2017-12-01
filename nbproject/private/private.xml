@@ -5,6 +5,7 @@
         <group>
             <file>file:/var/www/engine/protected/controllers/EbayApiController.php</file>
             <file>file:/var/www/engine/protected/models/MyEbaySelling.php</file>
+            <file>file:/var/www/engine/index.php</file>
             <file>file:/var/www/engine/protected/models/LogEbayItem.php</file>
             <file>file:/var/www/engine/protected/config/database.php</file>
             <file>file:/var/www/engine/protected/config/database1.php</file>

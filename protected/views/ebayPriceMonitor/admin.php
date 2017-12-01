@@ -48,7 +48,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'id',
 		'product',
 		'seller',
-		'url',
+                'url',
 		'price',
 		array(
 			'class'=>'CButtonColumn',
@@ -59,3 +59,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 <div class="row">
     <?php echo CHtml::submitButton('Back', array('submit' => '/index.php?r=ebayApi/main')); ?>
 </div> 
+
+<style>
+    td
+    {
+        max-width: 400px !important;
+        overflow: hidden;
+    }
+</style>

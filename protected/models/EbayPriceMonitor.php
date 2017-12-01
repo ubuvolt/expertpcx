@@ -30,7 +30,8 @@ class EbayPriceMonitor extends CActiveRecord
 		return array(
 			array('url', 'required'),
 			array('price', 'numerical'),
-			array('product, seller', 'length', 'max'=>128),
+			array('product', 'length', 'max'=>600),
+			array('seller', 'length', 'max'=>128),
 			array('url', 'length', 'max'=>2048),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

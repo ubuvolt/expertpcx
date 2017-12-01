@@ -102,6 +102,7 @@ class EbayController extends Controller {
 
         Yii::import('application.modules.ebay.Ebay');
         $ebay = new Ebay();
+//        $phrase = 'div[class="price"]';
         $phrase = 'div[class="price"]';
         $msg = '<html><body>';
         $prod = 0;

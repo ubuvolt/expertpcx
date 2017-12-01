@@ -1,12 +1,12 @@
 
 <h2><b>Monitored eBay Prices</b></h2>
 <div id="clickme1" style="padding-bottom: 30px" >
-<!--    ///////////////////////////
+    <!--///////////////////////////
     // 1 - monitoring price (refresh button)
     ///////////////////////////-->
     <?php echo CHtml::submitButton('Refresh', array('submit' => '/index.php?r=ebay/getInfo')); ?>
 
-<!--    ///////////////////////////
+    <!--///////////////////////////
     // 2 - monitoring price (reload button) API CALL
     ///////////////////////////-->
     <?php echo CHtml::submitButton('Reload Price', array('submit' => '/index.php?r=ebay/reloadEbayPrice')); ?>
@@ -30,7 +30,7 @@
             <th><?php echo $item->id; ?></th>
             <th title="<?php echo $item->product; ?>"><?php echo mb_strimwidth($item->product, 0, 30, "..."); ?></th>
             <th><?php echo $item->seller; ?></th>
-            <th title="<?php echo $item->url; ?>"><?php echo mb_strimwidth($item->url, 0, 30, "..."); ?></th>
+            <th title="<?php echo $item->url; ?>"><?php echo mb_strimwidth($item->url, 0, 60, "..."); ?></th>
             <th><?php echo number_format($item->price, 2); ?></th>
         </tr>
         <?php
