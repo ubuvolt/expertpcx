@@ -63,77 +63,91 @@ class EbayController extends Controller {
     ///////////////////////////
     // 2 - monitoring price (reload button) API CALL
     ///////////////////////////
-    public function actionReloadEbayPrice() {
+    public function actionReloadEbayPrice($view = true) {
 
         $ebay_price_monitor = EbayPriceMonitor::model()->findAll();
 
         Yii::import('application.modules.ebay.Ebay');
         $ebay = new Ebay();
         $phrase = 'div[class="price"]';
+        if (is_array($ebay_price_monitor)) {
+            foreach ($ebay_price_monitor as $item) {
 
-        foreach ($ebay_price_monitor as $item) {
-
-            $substr = $ebay->getHTML($item->url, $phrase);
-            $price_array = explode('Approx', $substr['price']);
-            $price_UK = $price_array[0];
-            $price = (float) str_replace('ound;', '', $price_UK);
+                $substr = $ebay->getHTML($item->url, $phrase);
+                $price_array = explode('Approx', $substr['price']);
+                $price_UK = $price_array[0];
+                $price = (float) str_replace('ound;', '', $price_UK);
 
 //            
 //            
-            $product_title = explode('<title>', $substr['product']);
-            $product_title = explode('">', $product_title[0]);
-            $product_title = explode('</', $product_title[1]);
+                $product_title = explode('<title>', $substr['product']);
+                $product_title = explode('">', $product_title[0]);
+                $product_title = explode('</', $product_title[1]);
 
-            $item->product = $product_title[0];
-            $item->seller = $substr['seller'];
-            $item->price = number_format($price, 2);
-            $item->save();
+                $item->product = $product_title[0];
+                $item->seller = $substr['seller'];
+                $item->price = number_format($price, 2);
+                $item->save();
+            }
+            if ($view) {
+                $this->render('getInfo', array('ebay_price_monitor' => $ebay_price_monitor));
+            }
         }
-
-        $this->render('getInfo', array('ebay_price_monitor' => $ebay_price_monitor));
     }
 
-    
     ///////////////////////////
     // 3 - raport aboute prices - (ebayPriceEmail button) API CALL
     ///////////////////////////
     public function actionEbayPriceEmail() {
-        $ebm = EbayPriceMonitor::model()->findAll();
+        $ebay_price_monitor = EbayPriceMonitor::model()->findAll();
 
         Yii::import('application.modules.ebay.Ebay');
         $ebay = new Ebay();
 //        $phrase = 'div[class="price"]';
         $phrase = 'div[class="price"]';
         $msg = '<html><body>';
-        $prod = 0;
+        $prod = 1;
+        if (is_array($ebay_price_monitor)) {
+            foreach ($ebay_price_monitor as $ebay_item) {
 
-        foreach ($ebm as $item) {
+                $substr = $ebay->getHTML($ebay_item->url, $phrase);
+                $price_array = explode('Approx', $substr['price']);
+                $price_UK = $price_array[0];
+                $current_ebay_price = (float) str_replace('ound;', '', $price_UK);
 
-            $substr = $ebay->getHTML($item->url, $phrase);
-            $price_array = explode('Approx', $substr);
-            $price_UK = $price_array[0];
-            $price = (float) str_replace('ound;', '', $price_UK);
+                $current_price = number_format($current_ebay_price, 2);
+                $db_price = number_format((float) $ebay_item->price, 2);
 
-
-            // add flout precysion
-            // if
-            // 2.3 ?? 2.30
-            if (number_format($ebay_price, 2) != number_format($price, 2)) {
-                $prod = 1;
-                $msg .= 'product:' . $item->product . '<br>'
-                        . 'url: ' . $item->url . ' <br> '
-                        . 'old price:' . number_format($item->price, 2) . ' <br> '
-                        . 'new price:' . $ebay_price . ' <br><br> ';
+                // price compare
+                // price compare
+                // price compare
+                if ($current_price != $db_price) {
+                    $msg .= 'product:' . $ebay_item->product . '<br>'
+                            . 'url: ' . $ebay_item->url . ' <br> '
+                            . 'old price:' . $db_price . ' <br> '
+                            . 'new price:' . $current_price . ' <br><br> ';
+                }
             }
+
+            $msg .= '</body></html>';
+
+            if ($prod) {
+                if ($msg != '<html><body></body></html>') {
+
+                    $msg .= '<br>';
+                    $msg .= '<br>';
+                    $msg .= 'Ebay Price Update: ' . date('D M Y H:i:s');
+
+                    $this->sendEmail($msg);
+                }
+            }
+
+            $this->actionReloadEbayPrice(false);
         }
-
-        $msg .= '</body></html>';
-
-        if ($prod)
-            $this->sendEmail($msg);
     }
 
     public function sendEmail($msg) {
+
         $subject = 'Ebay Price Update';
         // To send HTML mail, the Content-type header must be set
         $headers = 'MIME-Version: 1.0' . "\r\n";
@@ -144,6 +158,7 @@ class EbayController extends Controller {
         $msg = wordwrap($msg, 70);
 
         mail("bart.wolski@expertpcx.com", $subject, $msg, $headers);
+        mail("ubuvolt@gmail.com", $subject, $msg, $headers);
 //        mail("peter.dusza@expertpcx.com", $subject, $msg, $headers);
     }
 
