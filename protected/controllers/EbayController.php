@@ -35,7 +35,7 @@ class EbayController extends Controller {
                     'create',
                     'update'
                 ),
-                'users' => array('admin', 'expertpcx'),
+                'users' => array('admin', 'piotr','hairacc'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('ebayPriceEmail'),
@@ -43,7 +43,7 @@ class EbayController extends Controller {
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
                 'actions' => array('admin', 'delete'),
-                'users' => array('admin', 'expertpcx'),
+                'users' => array('admin', 'piotr','hairacc'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
@@ -122,7 +122,7 @@ class EbayController extends Controller {
                 // price compare
                 // price compare
                 if ($current_price != $db_price) {
-                    $msg .= 'product:' . $ebay_item->product . '<br>'
+                    $msg .= 'product:' . ($ebay_item->product == '' ? 'just added, first check' : $ebay_item->product) . '<br>'
                             . 'url: ' . $ebay_item->url . ' <br> '
                             . 'old price:' . $db_price . ' <br> '
                             . 'new price:' . $current_price . ' <br><br> ';
@@ -158,8 +158,8 @@ class EbayController extends Controller {
         $msg = wordwrap($msg, 70);
 
         mail("bart.wolski@expertpcx.com", $subject, $msg, $headers);
-        mail("ubuvolt@gmail.com", $subject, $msg, $headers);
+        mail("expertpc@o2.pl", $subject, $msg, $headers);
 //        mail("peter.dusza@expertpcx.com", $subject, $msg, $headers);
     }
-
+    
 }

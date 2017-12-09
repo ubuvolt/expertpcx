@@ -33,7 +33,7 @@ class EbayInsetrsController extends Controller {
                     'generateImages',
                     'pic',
                     'createImage'),
-                'users' => array('admin', 'expertpcx'),
+                'users' => array('admin', 'piotr','hairacc'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
@@ -55,7 +55,6 @@ class EbayInsetrsController extends Controller {
 
 
         foreach ($ebayitems as $key => $value) {
-//            d::d($value->id);
             $description = str_replace('"', "&#34;", $value->description);
 
             $ps_product = Yii::app()->db1->createCommand('
@@ -82,7 +81,7 @@ class EbayInsetrsController extends Controller {
             $this->Log($ps_product, 'ps_product', $ps_id_product, null);
 
 
-            $update_ebay_item = Yii::app()->db->createCommand('
+            $update_ebay_item = Yii::app()->db1->createCommand('
                 UPDATE `ebay_item` SET ps_id_product = ' . $ps_id_product . ' WHERE id = ' . $value->id . ';')->execute();
 
 

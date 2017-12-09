@@ -1,3 +1,6 @@
+<?php
+$curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
+?>
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -5,174 +8,195 @@
     <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
-<div class="moduleTile">
-    <div class="moduleImage">
-        <img src='/images/money.png'><div class="title">Price control</div>
+<?php
+if ($curent_company == 'expertpcx' || $curent_company == 'hairacc4you') {
+    ?>
+    <div class= <?php echo Yii::app()->user->name == 'admin' ? "separate_line" : ""; ?>>
     </div>
-    <div class="moduleTileRight">
-        <div class="row buttons">
-            <div class="description_button">
-                <?php echo "The view and refresh monitored prices"; ?>
-            </div>
-            <button style="clear:both">
-                <a title="ebay/getInfo" href="index.php?r=ebay/getInfo">eBay GetItem</a>    
-            </button>
-        </div> 
-        <div class="row buttons">
-            <div class="description_button">
-                <?php echo "Adding the new URL to monitor price"; ?>
-            </div>
-            <button>
-                <a title="ebayPriceMonitor/admin" href="index.php?r=ebayPriceMonitor/create">Add New URL</a>
-            </button>
-        </div> 
-        <div class="row buttons">
-            <div class="description_button">
-                <?php echo "Modifing the list of the monitored prices"; ?>
-            </div>
-            <button>
-                <a title="ebayPriceMonitor/admin" href="index.php?r=ebayPriceMonitor/admin">Manage Ebay Price</a>
-            </button>
-        </div> 
-        
-        <div class="row buttons">
-            <div class="description_button">
-                <?php echo "Generate  report about changes prices"; ?>
-            </div>
-            <button>
-                <!--///////////////////////////
-                // 3 - raport aboute prices - (ebayPriceEmail button) API CALL
-                ///////////////////////////-->
-                <a title="ebay/ebayPriceEmail" href="index.php?r=ebay/ebayPriceEmail">Ebay Price Email</a>
-            </button>
-        </div> 
-    </div>
-</div>
+    <div class="moduleTile">
+        <div class="moduleImage">
+            <img src='/images/money.png'><div class="title">Price control</div>
+        </div>
+        <div class="moduleTileRight">
+            <div class="row buttons">
+                <div class="description_button">
+                    <?php echo "The view and refresh monitored prices"; ?>
+                </div>
+                <button style="clear:both">
+                    <a title="ebay/getInfo" href="index.php?r=ebay/getInfo">eBay GetItem</a>    
+                </button>
+            </div> 
+            <div class="row buttons">
+                <div class="description_button">
+                    <?php echo "Adding the new URL to monitor price"; ?>
+                </div>
+                <button>
+                    <a title="ebayPriceMonitor/admin" href="index.php?r=ebayPriceMonitor/create">Add New URL</a>
+                </button>
+            </div> 
+            <div class="row buttons">
+                <div class="description_button">
+                    <?php echo "Modifing the list of the monitored prices"; ?>
+                </div>
+                <button>
+                    <a title="ebayPriceMonitor/admin" href="index.php?r=ebayPriceMonitor/admin">Manage Ebay Price</a>
+                </button>
+            </div> 
 
-<!--
-    API
--->
+            <div class="row buttons">
+                <div class="description_button">
+                    <?php echo "Generate  report about changes prices"; ?>
+                </div>
+                <button>
+                    <!--///////////////////////////
+                    // 3 - raport aboute prices - (ebayPriceEmail button) API CALL
+                    ///////////////////////////-->
+                    <a title="ebay/ebayPriceEmail" href="index.php?r=ebay/ebayPriceEmail">Ebay Price Email</a>
+                </button>
+            </div> 
+        </div>
+    </div>
+    <?php
+}
+
+//<!--
+//    API
+//-->
+?>
 <div class="moduleTile">
     <div class="moduleImage">
         <img src='/images/API.png'><div class="title">API</div>
     </div>
     <div class="moduleTileRight">
-        <!--
-            /index.php?r=ebayApi/ajaxOfficialTime"
-        -->
-        <div class="row buttons" >
-            <button id="official_time">Time</button>
-        </div> 
-
-        <!--
-            /index.php?r=ebayApi/LoadAllItems
-        -->
-        <div class="row buttons" >
-            <button>
-                <a title="ebayApi/LoadAllItems" href="index.php?r=ebayApi/LoadAllItems">Load All Items</a>
-            </button>
-        </div>
-
-        <div class="row buttons" >
-            <button>
-                <a title="ebayApi/main/&attribute=GetItem" href="index.php?r=ebayApi/main/&attribute=GetItem">eBay GetItem</a>
-            </button>
-            <?php
-//            d::d(EbayApiController::get_central_setting(1, 'item_counter_for_ebay_item'));
-            ?>
-        </div> 
-
-        <div class="row buttons" style="border: solid 1px white; width: 90%; margin: 10px 0; padding:0"></div>
-
-        <div class="row buttons" >
-            <button class="my_ebay_selling">
-                <a title="ebayApi/main/&attribute=MyeBaySelling" href="index.php?r=ebayApi/main/&attribute=MyeBaySelling">eBay Selling</a>
-            </button>
-            <?php
-//            d::d(EbayApiController::get_central_setting(1, 'get_my_eBay_selling'));
-            ?>
-            <button>
-                <a title="ebayApi/ReStartBaySelling" href="index.php?r=ebayApi/ReStartBaySelling">Re-Start</a>
-                <?php // echo CHtml::link('Re-Start', array('ebayApi/ReStartBaySelling')); ?>
-            </button>
-        </div> 
-
-        <div class="row buttons" >
-            <button>
-                <a title="ebayApi/main/&attribute=GetStore" href="index.php?r=ebayApi/main/&attribute=GetStore">eBay GetStore</a>
-                <?php // echo CHtml::link('eBay GetStore', array('ebayApi/main/&attribute=GetStore')); ?></button>
-        </div> 
-    </div>
-</div>
-<div class="moduleTile">
-    <div class="moduleImage">
-        <img src="/images/admin.ico"><div class="title">Admin</div>
-    </div>
-    <div class="moduleTileRight">
-        <div  class="row buttons" >
-            <button>
-                <a title="myEbaySelling/index" href="index.php?r=myEbaySelling/index">eBay Selling</a>
-                <?php // echo CHtml::link('eBay Selling', array('myEbaySelling/index')); ?>
-            </button>
-        </div> 
-        <div  class="row buttons" >
-            <button>
-                <a title="ebayItem/index" href="index.php?r=ebayItem/index">eBay Items</a>
-                <?php // echo CHtml::link('eBay Items', array('ebayItem/index')); ?>
-            </button>
-        </div> 
-        <div  class="row buttons" >
-            <button>
-                <a title="ebayStore/index" href="index.php?r=ebayStore/index">eBay Store</a>
-                <?php // echo CHtml::link('eBay Store', array('ebayStore/index')); ?>
-            </button>
-        </div> 
-    </div>
-</div>
-<div class="moduleTile">
-    <div class="moduleImage">
-        <img src="/images/page-icon.png"><div class="title">Shop</div>
-    </div>
-    <div class="moduleTileRight">
-        <div class="row buttons">
-            <div class="description_button">
-                <?php echo "Do it once, the system duplicates <br>the product"; ?>
+        <?php if ($curent_company == 'hairacc4you' || $curent_company == 'expertpcx') { ?>
+            <!--
+                /index.php?r=ebayApi/ajaxOfficialTime"
+            -->
+            <div class="row buttons" >
+                <button id="official_time" current_company="<?php echo $curent_company; ?>">
+                    Time
+                </button>
+            </div> 
+            <!--
+                /index.php?r=ebayApi/LoadAllItems
+            -->
+            <div class="row buttons" >
+                <button>
+                    <a title="ebayApi/LoadAllItems" href="index.php?r=ebayApi/LoadAllItems/">Load All Items</a>
+                </button>
             </div>
-            <button>
-                <a title="ebayInsetrs/setDataInPresta" href="index.php?r=ebayInsetrs/setDataInPresta">Insert data to ShopPage</a>
-                <?php // echo CHtml::link('Insert data to ShopPage', array('ebayInsetrs/setDataInPresta')); ?>
-            </button>
-        </div> 
-        <div class="row buttons">
-            <button>
-                <a title="ebayInsetrs/generateImages" href="index.php?r=ebayInsetrs/generateImages">Generate Images</a>
-                <?php // echo CHtml::link('Generate Images', array('ebayInsetrs/generateImages')); ?>
-            </button>
-        </div> 
-        <div class="row buttons">
-            <button>
-                <a title="ebayInsetrs/setHomeCateg" href="index.php?r=ebayInsetrs/setHomeCateg">Set Home Categ</a>
-                <?php // echo CHtml::link('Set Home Categ', array('ebayInsetrs/setHomeCateg')); ?>
-            </button>
-        </div> 
-        <div class="row buttons">
-            <button>
-                <a title="ebayInsetrs/setCateg" href="index.php?r=ebayInsetrs/setCateg">Set Categ</a>
-            </button>    
-        </div> 
-    </div> 
-</div>
-<div class="moduleTile">
-    <div class="moduleImage">
-        <img src="/images/mailing_list_icon.png"><div class="title">Mailing</div>
-    </div>
-    <div class="moduleTileRight">
-        <div  class="row buttons">
-            <a href="http://www.engine.dev/emasil.html"> <?php echo CHtml::submitButton('Email Templates'); ?></a>
-        </div> 
-    </div>
-</div>
+            <?php
+        }
+        if ($curent_company == 'hairacc4you') {
+            ?>
+            <div class="row buttons" >
+                <button>
+                    <a title="ebayApi/main/&attribute=GetItem" href="index.php?r=ebayApi/main/&attribute=GetItem">eBay GetItem</a>
+                </button>
+                <?php ?>
+            </div> 
 
+            <div class="row buttons" style="border: solid 1px white; width: 90%; margin: 10px 0; padding:0"></div>
+
+            <div class="row buttons" >
+                <button class="my_ebay_selling">
+                    <a title="ebayApi/main/&attribute=MyeBaySelling" href="index.php?r=ebayApi/main/&attribute=MyeBaySelling">eBay Selling</a>
+                </button>
+                <?php ?>
+                <button>
+                    <a title="ebayApi/ReStartBaySelling" href="index.php?r=ebayApi/ReStartBaySelling">Re-Start</a>
+                </button>
+            </div> 
+
+            <div class="row buttons" >
+                <button>
+                    <a title="ebayApi/main/&attribute=GetStore" href="index.php?r=ebayApi/main/&attribute=GetStore">eBay GetStore</a>
+            </div> 
+            <?php
+        }
+        ?>
+    </div>
+
+</div>
+<?php
+if ($curent_company == 'hairacc4you') {
+    ?>
+    <div class="moduleTile">
+        <div class="moduleImage">
+            <img src="/images/admin.ico"><div class="title">Admin</div>
+        </div>
+        <div class="moduleTileRight">
+            <div  class="row buttons" >
+                <button>
+                    <a title="myEbaySelling/index" href="index.php?r=myEbaySelling/index">eBay Selling</a>
+                    <?php // echo CHtml::link('eBay Selling', array('myEbaySelling/index'));        ?>
+                </button>
+            </div> 
+            <div  class="row buttons" >
+                <button>
+                    <a title="ebayItem/index" href="index.php?r=ebayItem/index">eBay Items</a>
+                    <?php // echo CHtml::link('eBay Items', array('ebayItem/index'));        ?>
+                </button>
+            </div> 
+            <div  class="row buttons" >
+                <button>
+                    <a title="ebayStore/index" href="index.php?r=ebayStore/index">eBay Store</a>
+                    <?php // echo CHtml::link('eBay Store', array('ebayStore/index'));        ?>
+                </button>
+            </div> 
+        </div>
+    </div>
+    <?php
+}
+if ($curent_company == 'hairacc4you') {
+    ?>
+    <div class="moduleTile">
+        <div class="moduleImage">
+            <img src="/images/page-icon.png"><div class="title">Shop</div>
+        </div>
+        <div class="moduleTileRight">
+            <div class="row buttons">
+                <div class="description_button">
+                    <?php echo "Do it once, the system duplicates <br>the product"; ?>
+                </div>
+                <button>
+                    <a title="ebayInsetrs/setDataInPresta" href="index.php?r=ebayInsetrs/setDataInPresta">Insert data to ShopPage</a>
+                    <?php // echo CHtml::link('Insert data to ShopPage', array('ebayInsetrs/setDataInPresta'));       ?>
+                </button>
+            </div> 
+            <div class="row buttons">
+                <button>
+                    <a title="ebayInsetrs/generateImages" href="index.php?r=ebayInsetrs/generateImages">Generate Images</a>
+                    <?php // echo CHtml::link('Generate Images', array('ebayInsetrs/generateImages'));        ?>
+                </button>
+            </div> 
+            <div class="row buttons">
+                <button>
+                    <a title="ebayInsetrs/setHomeCateg" href="index.php?r=ebayInsetrs/setHomeCateg">Set Home Categ</a>
+                    <?php // echo CHtml::link('Set Home Categ', array('ebayInsetrs/setHomeCateg'));        ?>
+                </button>
+            </div> 
+            <div class="row buttons">
+                <button>
+                    <a title="ebayInsetrs/setCateg" href="index.php?r=ebayInsetrs/setCateg">Set Categ</a>
+                </button>    
+            </div> 
+        </div> 
+    </div>
+    <div class="moduleTile">
+        <div class="moduleImage">
+            <img src="/images/mailing_list_icon.png"><div class="title">Mailing</div>
+        </div>
+        <div class="moduleTileRight">
+            <div  class="row buttons">
+                <a href="http://www.engine.dev/emasil.html"> <?php echo CHtml::submitButton('Email Templates'); ?></a>
+            </div> 
+        </div>
+    </div>
+
+    <?php
+}
+?>
 <div id="dialog" title="">
     <div id="ebay_timestamp" class="ebay_timestamp"></div>
     <div id="ebay_ack" class="ebay_timestamp"></div>
@@ -181,13 +205,13 @@
 </div>
 
 
-
 <script>
     $(function () {
         $("#official_time").click(function () {
+            var current_company = $(this).attr('current_company');
             if (confirm("Are you sure you want to Official Time ?")) {
                 $.post("/index.php?r=ebayApi/ajaxOfficialTime", {
-//                key: 'allocator_leads_status_set_buttons'
+                    current_company: current_company
                 }, function (response) {
 
                     var parsed = JSON.parse(response);
@@ -200,7 +224,7 @@
                         $('#ebay_build').html('Build [' + parsed.build + ']');
 
                         $("#dialog").dialog();
-                        $("#dialog").dialog('option', 'title', 'Ebay Official Time');
+                        $("#dialog").dialog('option', 'title', 'Ebay Official Time ' + current_company);
                     } else {
                         alert('Something went wrong, contact support...')
                     }
@@ -208,8 +232,8 @@
                 });
             }
         });
-        var total_number_of_pages = "<?php echo EbayApiController::get_central_setting(1, 'total_number_of_pages'); ?>";
-        var get_my_eBay_selling = "<?php echo EbayApiController::get_central_setting(1, 'get_my_eBay_selling'); ?>";
+        var total_number_of_pages = "<?php echo AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'total_number_of_pages'); ?>";
+        var get_my_eBay_selling = "<?php echo AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'get_my_eBay_selling'); ?>";
         if (get_my_eBay_selling > total_number_of_pages) {
             $('.my_ebay_selling').removeAttr('href');
             $('.my_ebay_selling').attr("disabled", "disabled");
@@ -274,5 +298,14 @@
     {
         display: inline-block;
         float: left; 
+    }
+    .separate_line
+    {
+        width:100%; 
+        display: inline-block;
+        float:left;
+        border-bottom: 1px solid  #f6ba07;
+        padding-bottom: 2px;
+        margin-bottom: 30px
     }
 </style>

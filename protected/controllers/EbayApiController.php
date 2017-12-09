@@ -44,9 +44,10 @@ class EbayApiController extends Controller {
                     'main',
                     'ajaxOfficialTime',
                     'reStartBaySelling',
-                    'loadAllItems'
+                    'loadAllItems',
+                    'setCompany'
                 ),
-                'users' => array('admin', 'expertpcx'),
+                'users' => array('admin', 'piotr', 'hairacc'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
@@ -75,10 +76,12 @@ class EbayApiController extends Controller {
                 $development = true;
                 return;
         }
-
+        
+        
         $this->render('api_view', array(
             'response' => $response,
-            'development' => $development)
+            'development' => $development
+            )
         );
     }
 
@@ -130,12 +133,11 @@ class EbayApiController extends Controller {
     /**
      * @return type
      */
-    public function actionGeteBayOfficialTime() {
+    public function actionGeteBayOfficialTime($current_company) {
         Yii::import('application.components.Ebay');
 
-//        $ebay = new Ebay_expertpcx();
-        $ebay = new Ebay_hairacc();
-        $apiKey = $ebay->getApiKey();
+        $ebay = new Ebay_api();
+        $apiKey = $ebay->getApiKey($current_company);
 
         $call_name = 'GeteBayOfficialTime';
 
@@ -191,8 +193,7 @@ class EbayApiController extends Controller {
     public function actionGetMyeBaySelling() {
         Yii::import('application.components.Ebay');
 
-        $ebay = new Ebay_hairacc();
-//        $ebay = new Ebay_expertpcx();
+        $ebay = new Ebay_api();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GetMyeBaySelling';
@@ -214,7 +215,7 @@ class EbayApiController extends Controller {
     //                2
     public function getMyeBaySelling($apiKey) {
 
-        $var = EbayApiController::get_central_setting(1, 'get_my_eBay_selling');
+        $var = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'get_my_eBay_selling');
 
         // Generate XML request
         $requestXmlBody = '<?xml version="1.0" encoding="utf-8"?>
@@ -235,7 +236,7 @@ class EbayApiController extends Controller {
                 		</ActiveList>
                         	</GetMyeBaySellingRequest>';
 
-        EbayApiController::set_central_setting(1, 'get_my_eBay_selling', ++$var);
+        AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'get_my_eBay_selling', ++$var);
 
         return $requestXmlBody;
     }
@@ -268,10 +269,10 @@ class EbayApiController extends Controller {
 
         $TotalNumberOfEntries = $dom->getElementsByTagName('TotalNumberOfEntries')->item(0)->nodeValue;
 
-        $get_my_eBay_selling = (int) EbayApiController::get_central_setting(1, 'get_my_eBay_selling');
+        $get_my_eBay_selling = (int) AdminCentralStorage::get_central_setting(1, 'get_my_eBay_selling');
         if ($get_my_eBay_selling < 5) {
-            EbayApiController::set_central_setting(1, 'total_number_of_pages', $TotalNumberOfPages);
-            EbayApiController::set_central_setting(1, 'total_number_of_entries', $TotalNumberOfEntries);
+            AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'total_number_of_pages', $TotalNumberOfPages);
+            AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'total_number_of_entries', $TotalNumberOfEntries);
         }
 
         $elements = $dom->getElementsByTagName('ItemArray');
@@ -897,8 +898,7 @@ class EbayApiController extends Controller {
     public function getStore() {
         Yii::import('application.components.Ebay');
 
-        $ebay = new Ebay_hairacc();
-//        $ebay = new Ebay_expertpcx();
+        $ebay = new Ebay_api();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GetStore';
@@ -977,8 +977,10 @@ class EbayApiController extends Controller {
     }
 
     public function actionAjaxOfficialTime() {
-
-        $eBayOfficialTime = $this->actionGeteBayOfficialTime();
+        
+        $current_company = $_POST['current_company'];
+    
+        $eBayOfficialTime = $this->actionGeteBayOfficialTime($current_company);
 
         $dom = new DOMDocument();
         $dom->loadXML($eBayOfficialTime);
@@ -1003,50 +1005,8 @@ class EbayApiController extends Controller {
         Yii::app()->db->createCommand($sql)->query();
         sleep(1);
 
-        EbayApiController::set_central_setting(1, 'get_my_eBay_selling', 1);
+        AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'get_my_eBay_selling', 1);
         $this->actionMain();
-    }
-
-    public static function get_central_setting($user_id = 1, $key = '') {
-
-        $sql = "
-            SELECT
-            Value
-            FROM admin_central_storage
-            WHERE User_ID = 1
-            AND Name = '" . $key . "'
-            LIMIT 0, 1;
-        ";
-
-        $command = Yii::app()->db->createCommand($sql);
-        $results = $command->queryAll();
-
-        $value = unserialize($results[0]['Value']);
-
-        return $value;
-    }
-
-    public static function set_central_setting($user_id, $key, $value) {
-
-        $sql = "
-            DELETE FROM admin_central_storage
-            WHERE User_ID = " . $user_id . "
-            AND Name = '" . $key . "'
-            LIMIT 1;
-        ";
-        Yii::app()->db->createCommand($sql)->query();
-
-        $sql = "
-            INSERT INTO admin_central_storage
-            (
-                User_ID,
-                Name,
-                Value
-            ) VALUES (
-                " . $user_id . " , '" . $key . "' , '" . serialize($value) . "'
-            )
-        ";
-        Yii::app()->db->createCommand($sql)->query();
     }
 
     //    
@@ -1070,7 +1030,7 @@ class EbayApiController extends Controller {
     private function getAllItemID() {
 
         $increment = 50;
-        $var = EbayApiController::get_central_setting(1, 'item_counter_for_ebay_item');
+        $var = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'item_counter_for_ebay_item');
         if (!$var)
             $var = 1;
 
@@ -1085,7 +1045,7 @@ class EbayApiController extends Controller {
         }
 
         $var += $increment;
-        EbayApiController::set_central_setting(1, 'item_counter_for_ebay_item', $var);
+        AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'item_counter_for_ebay_item', $var);
 
         return $item_id_array;
     }
@@ -1094,8 +1054,7 @@ class EbayApiController extends Controller {
     public function actionGetItem($item_id) {
         Yii::import('application.components.Ebay');
 
-        $ebay = new Ebay_hairacc();
-//        $ebay = new Ebay_expertpcx();
+        $ebay = new Ebay_api();
         $apiKey = $ebay->getApiKey();
 
         $call_name = 'GetItem';
@@ -1112,16 +1071,28 @@ class EbayApiController extends Controller {
     }
 
     public function actionLoadAllItems() {
-
+        
+        $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
+        
         //UPDATE `admin_central_storage` SET `Value` = 'i:0;' where `Name` = 'get_my_eBay_selling';
 
+        $total_number_of_pages = (int) AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'total_number_of_pages');
+        $get_my_eBay_selling = (int) AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'get_my_eBay_selling');
 
-        $total_number_of_pages = (int) EbayApiController::get_central_setting(1, 'total_number_of_pages');
-        $get_my_eBay_selling = (int) EbayApiController::get_central_setting(1, 'get_my_eBay_selling');
-
-        if ($get_my_eBay_selling >= $total_number_of_pages) {
-            $this->actionGetMyeBaySelling();
-        }
+        d::d('$curent_company '.$curent_company);
+        d::d('$total_number_of_pages '.$total_number_of_pages);
+        d::d('$get_my_eBay_selling '.$get_my_eBay_selling);
+        
+//        if ($get_my_eBay_selling >= $total_number_of_pages) {
+//            $this->actionGetMyeBaySelling();
+//        }
+    }
+    
+    public function actionSetCompany()
+    {
+        AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'curent_company_flow', $_GET['attribute']);
+        $current_company= AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
+        $this->render('api_view', array('current_company'=> $current_company));
     }
 
 }

@@ -1,10 +1,11 @@
-<?php /* @var $this Controller */ ?>
+<?php
+$curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
+?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="language" content="en">
-
         <!-- blueprint CSS framework -->
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection">
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/engine_cms.css" media="screen, projection">
@@ -12,54 +13,56 @@
         <!--[if lt IE 8]>
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection">
         <![endif]-->
-
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
-
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     </head>
-
     <body>
-
         <div class="container" id="page">
-
             <div id="header">
-                <div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
-            </div><!-- header -->
-
+                <div id="logo">Welcome to <?php echo $curent_company; ?> CMS</div>
+            </div>
             <div id="mainmenu">
                 <?php
                 $this->widget('zii.widgets.CMenu', array(
                     'items' => array(
-//                        array('label' => 'Home', 'url' => array('/site/index')),
-//                        array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
-//                        array('label' => 'Contact', 'url' => array('/site/contact')),
                         array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
                         array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
                         array('label' => 'eBay', 'url' => array('/ebayApi/main')),
                     ),
                 ));
                 ?>
-            </div><!-- mainmenu -->
+            </div>
             <?php if (isset($this->breadcrumbs)): ?>
                 <?php
                 $this->widget('zii.widgets.CBreadcrumbs', array(
                     'links' => $this->breadcrumbs,
                 ));
-                ?><!-- breadcrumbs -->
-<?php endif ?>
+                ?>
+            <?php endif ?>
 
-<?php echo $content; ?>
+            <?php echo $content; ?>
 
             <div class="clear"></div>
 
             <div id="footer">
-                Copyright &copy; <?php echo date('Y'); ?> by EXPERTPCX LTD.<br/>
+                Copyright &copy; <?php echo date('Y'); ?> by <?php
+                $current_company_full = '';
+
+                switch ($curent_company) {
+                    case 'expertpcx':
+                        $current_company_full = 'EXPERTPCX LTD';
+                        break;
+                    case 'hairacc4you':
+                        $current_company_full = 'IGNITION';
+                        break;
+                }
+
+                echo $current_company_full;
+                ?><br/>
                 All Rights Reserved.<br/>
-<?php // echo Yii::powered();  ?>
-            </div><!-- footer -->
-
-        </div><!-- page -->
-
+                <?php // echo Yii::powered();    ?>
+            </div>
+        </div>
     </body>
 </html>

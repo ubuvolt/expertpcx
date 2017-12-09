@@ -29,7 +29,7 @@ class EbayDataController extends Controller {
                 'actions' => array(
                     'getCategory',
                 ),
-                'users' => array('admin', 'expertpcx'),
+                'users' => array('admin', 'expertpcx','hairacc'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('ebayPriceEmail'),
@@ -37,7 +37,7 @@ class EbayDataController extends Controller {
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
                 'actions' => array('admin', 'delete'),
-                'users' => array('admin', 'expertpcx'),
+                'users' => array('admin', 'expertpcx','hairacc'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
