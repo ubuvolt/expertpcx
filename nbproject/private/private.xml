@@ -4,15 +4,19 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/var/www/engine/protected/controllers/EbayApiController.php</file>
+            <file>file:/var/www/engine/protected/controllers/SiteController.php</file>
             <file>file:/var/www/engine/protected/controllers/EbayController.php</file>
-            <file>file:/var/www/engine/protected/config/main.php</file>
             <file>file:/var/www/engine/protected/views/layouts/main.php</file>
+            <file>file:/var/www/engine/protected/models/LogEbayItem.php</file>
             <file>file:/var/www/engine/protected/components/UserIdentity.php</file>
-            <file>file:/var/www/engine/protected/controllers/UserController.php</file>
-            <file>file:/var/www/engine/protected/models/EbayPriceMonitor.php</file>
+            <file>file:/var/www/engine/protected/sql/log_ebay_item.sql</file>
+            <file>file:/var/www/engine/protected/models/AdminCentralStorage.php</file>
+            <file>file:/var/www/engine/protected/models/MyEbaySelling.php</file>
+            <file>file:/var/www/engine/protected/controllers/EbayDataController.php</file>
             <file>file:/var/www/engine/protected/components/Ebay_api.php</file>
             <file>file:/var/www/engine/protected/modules/ebay/Ebay.php</file>
-            <file>file:/var/www/engine/protected/config/database1.php</file>
+            <file>file:/var/www/engine/protected/views/site/index.php</file>
+            <file>file:/var/www/engine/protected/components/Helper.php</file>
             <file>file:/var/www/engine/protected/views/ebayApi/api_view.php</file>
             <file>file:/var/www/engine/protected/controllers/EbayInsetrsController.php</file>
             <file>file:/var/www/engine/protected/controllers/EbayPriceMonitorController.php</file>

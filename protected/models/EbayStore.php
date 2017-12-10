@@ -5,7 +5,8 @@
  *
  * The followings are the available columns in table 'ebay_store':
  * @property integer $id
- * @property integer $CategoryID
+ * @property string $shopName
+ * @property string $CategoryID
  * @property string $Name
  * @property integer $Order
  */
@@ -28,10 +29,10 @@ class EbayStore extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('Order', 'numerical', 'integerOnly'=>true),
-			array('CategoryID, Name', 'length', 'max'=>128),
+			array('shopName, CategoryID, Name', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, CategoryID, Name, Order', 'safe', 'on'=>'search'),
+			array('id, shopName, CategoryID, Name, Order', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,6 +54,7 @@ class EbayStore extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'shopName' => 'Shop Name',
 			'CategoryID' => 'Category',
 			'Name' => 'Name',
 			'Order' => 'Order',
@@ -78,7 +80,8 @@ class EbayStore extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('CategoryID',$this->CategoryID);
+		$criteria->compare('shopName',$this->shopName,true);
+		$criteria->compare('CategoryID',$this->CategoryID,true);
 		$criteria->compare('Name',$this->Name,true);
 		$criteria->compare('Order',$this->Order);
 

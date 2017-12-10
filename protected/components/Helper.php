@@ -2,6 +2,16 @@
 
 /**
  * Collection of various utility functions that do not fit anywhere else 
+ * 
+  //        $file = "/var/www/engine/processeBaySelling.xhtml";
+  //
+  //        $f = @fopen($file, "r+");
+  //        if ($f !== false) {
+  //            ftruncate($f, 0);
+  //            fclose($f);
+  //        }
+  //        file_put_contents($file, "\n" . $xml, FILE_APPEND);
+ * 
  */
 class Helper extends CComponent {
 
@@ -25,8 +35,9 @@ class Helper extends CComponent {
      * @param type $field_name
      * @param type $old_value
      * @param type $new_value
+     * @param type $curent_company
      */
-    static function LogEbayItem($itemID, $field_name, $old_value, $new_value) {
+    static function LogEbayItem($itemID, $field_name, $old_value, $new_value, $curent_company) {
 
         $log = new LogEbayItem();
 
@@ -36,6 +47,7 @@ class Helper extends CComponent {
         $log->old_value = $old_value;
         $log->new_value = $new_value;
         $log->status = LogEbayItem::Ready_For_Update;
+        $log->shopName = $curent_company;
 
         $log->save();
     }

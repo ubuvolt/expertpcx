@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'log_ebay_item':
  * @property integer $id
  * @property string $itemID
+ * @property string $shopName
  * @property string $data_time
  * @property string $field_name
  * @property string $old_value
@@ -17,7 +18,7 @@ class LogEbayItem extends CActiveRecord {
     const Ready_For_Update = 1;
     const Item_Update = 2;
     const Update_Error = 3;
-    
+
     /**
      * @return string the associated database table name
      */
@@ -33,10 +34,10 @@ class LogEbayItem extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('status', 'numerical', 'integerOnly' => true),
-            array('itemID, data_time, field_name, old_value, new_value', 'length', 'max' => 128),
+            array('itemID, shopName, data_time, field_name, old_value, new_value', 'length', 'max' => 128),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, itemID, data_time, field_name, old_value, new_value, status', 'safe', 'on' => 'search'),
+            array('id, itemID, shopName, data_time, field_name, old_value, new_value, status', 'safe', 'on' => 'search'),
         );
     }
 
@@ -57,6 +58,7 @@ class LogEbayItem extends CActiveRecord {
         return array(
             'id' => 'ID',
             'itemID' => 'Item',
+            'shopName' => 'Shop Name',
             'data_time' => 'Data Time',
             'field_name' => 'Field Name',
             'old_value' => 'Old Value',
@@ -84,6 +86,7 @@ class LogEbayItem extends CActiveRecord {
 
         $criteria->compare('id', $this->id);
         $criteria->compare('itemID', $this->itemID, true);
+        $criteria->compare('shopName', $this->shopName, true);
         $criteria->compare('data_time', $this->data_time, true);
         $criteria->compare('field_name', $this->field_name, true);
         $criteria->compare('old_value', $this->old_value, true);

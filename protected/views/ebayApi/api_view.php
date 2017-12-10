@@ -80,10 +80,15 @@ if ($curent_company == 'expertpcx' || $curent_company == 'hairacc4you') {
             <!--
                 /index.php?r=ebayApi/LoadAllItems
             -->
-            <div class="row buttons" >
+            <div class="row buttons">
                 <button>
                     <a title="ebayApi/LoadAllItems" href="index.php?r=ebayApi/LoadAllItems/">Load All Items</a>
                 </button>
+                <button>
+                    <a title="Empty my_ebay_selling. ebayApi/ReStartBaySelling" href="index.php?r=ebayApi/ReStartBaySelling">Re-Start</a>
+                </button>
+                <span class="description_button">Number of eBay Items <?php echo $number_of_eBay_items; ?></span>
+                <br>
             </div>
             <?php
         }
@@ -93,24 +98,32 @@ if ($curent_company == 'expertpcx' || $curent_company == 'hairacc4you') {
                 <button>
                     <a title="ebayApi/main/&attribute=GetItem" href="index.php?r=ebayApi/main/&attribute=GetItem">eBay GetItem</a>
                 </button>
-                <?php ?>
-            </div> 
-
-            <div class="row buttons" style="border: solid 1px white; width: 90%; margin: 10px 0; padding:0"></div>
-
-            <div class="row buttons" >
-                <button class="my_ebay_selling">
-                    <a title="ebayApi/main/&attribute=MyeBaySelling" href="index.php?r=ebayApi/main/&attribute=MyeBaySelling">eBay Selling</a>
-                </button>
-                <?php ?>
                 <button>
-                    <a title="ebayApi/ReStartBaySelling" href="index.php?r=ebayApi/ReStartBaySelling">Re-Start</a>
+                    <a title="Empty eBay_item. ebayApi/ReStarteBayItem" href="index.php?r=ebayApi/reStarteBayItem">Re-Start</a>
                 </button>
+                <br>
+                <span class="description_button">Item counter for eBay Item <?php echo $item_counter_for_ebay_item; ?></span>
+                <span class="description_button">eBay Item Nos <?php echo $eBay_item_nos; ?></span>
+                <?php ?>
             </div> 
+
+            <!--<div class="row buttons" >-->
+            <!--<button class="my_ebay_selling">-->
+            <!--<a title="ebayApi/main/&attribute=MyeBaySelling" href="index.php?r=ebayApi/main/&attribute=MyeBaySelling">eBay Selling</a>-->
+            <!--</button>-->
+            <!--</div>--> 
 
             <div class="row buttons" >
                 <button>
                     <a title="ebayApi/main/&attribute=GetStore" href="index.php?r=ebayApi/main/&attribute=GetStore">eBay GetStore</a>
+                </button>
+                <button>
+                    <a title="Empty eBay_store. ebayApi/ReStarteBayStore" href="index.php?r=ebayApi/reStarteBayStore">Re-Start</a>
+                </button>
+
+
+                <br>
+                <span class="description_button">Shop Category Nos <?php echo $shop_category_nos; ?></span>
             </div> 
             <?php
         }

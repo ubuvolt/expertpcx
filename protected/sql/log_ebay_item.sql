@@ -4,6 +4,7 @@ CREATE TABLE `log_ebay_item`
 (
     `id`                                            INT NOT NULL AUTO_INCREMENT,
     `itemID`                                        VARCHAR(128),
+    `shopName`                                      VARCHAR(128),
     `data_time`                                     VARCHAR(128),
     `field_name`                                    VARCHAR(128),
     `old_value`                                     VARCHAR(128),
