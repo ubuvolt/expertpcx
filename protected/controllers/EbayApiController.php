@@ -153,6 +153,8 @@ class EbayApiController extends Controller {
     private function get_ebay_item($curent_company) {
         if ($curent_company == 'hairacc4you')
             $seller_userID = 'hairacc4youcom';
+        if ($curent_company == 'expertpcx')
+            $seller_userID = 'expertpcx';
 
         $criteria = new CDbCriteria();
         $criteria->condition = 'seller_userID="' . $seller_userID . '"';
@@ -512,6 +514,7 @@ class EbayApiController extends Controller {
                 $rest = $model->save();
             }
         }
+        $this->actionMain();
     }
 
     //                form actionMain
@@ -984,9 +987,10 @@ class EbayApiController extends Controller {
                 //ItemSpecifics
                 $ebay_item->itemSpecifics = $model->itemSpecifics;
 
-                $ebay_item->save();
+                $var = $ebay_item->save();
             } else {
-                $model->save();
+
+                $var = $model->save();
             }
         }
     }
@@ -1115,6 +1119,8 @@ class EbayApiController extends Controller {
         $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
         if ($curent_company == 'hairacc4you')
             $seller_userID = 'hairacc4youcom';
+        if ($curent_company == 'expertpcx')
+            $seller_userID = 'expertpcx';
 
         $sql = 'DELETE FROM `ebay_item` WHERE `seller_userID` = "' . $seller_userID . '"';
         Yii::app()->db->createCommand($sql)->query();
@@ -1125,7 +1131,13 @@ class EbayApiController extends Controller {
 
     public function actionReStarteBayStore() {
 
-        $sql = 'TRUNCATE ebay_store';
+        $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
+        if ($curent_company == 'hairacc4you')
+            $seller_userID = 'hairacc4youcom';
+        if ($curent_company == 'expertpcx')
+            $seller_userID = 'expertpcx';
+
+        $sql = 'DELETE FROM `ebay_store` WHERE `shopName` = "' . $seller_userID . '"';
         Yii::app()->db->createCommand($sql)->query();
 
         $this->actionMain();
@@ -1150,20 +1162,21 @@ class EbayApiController extends Controller {
     //2
     private function getAllItemID($curent_company) {
 
-        $increment = 50;
+        $increment = 10;
         $var = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'item_counter_for_ebay_item');
         if (!$var)
             $var = 1;
 
         $item_id_array = array();
 
-        $sql = 'SELECT itemID FROM my_ebay_selling WHERE shopName = "' . $curent_company . '" LIMIT ' . $var . ', ' . ($increment + $var);
+        $sql = 'SELECT itemID FROM my_ebay_selling WHERE shopName = "' . $curent_company . '" LIMIT ' . $var . ', ' . $increment;
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
 
         foreach ($results as $item_no) {
             $item_id_array [] = $item_no['itemID'];
         }
+
 
         $var += $increment;
         AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'item_counter_for_ebay_item', $var);
@@ -1174,6 +1187,11 @@ class EbayApiController extends Controller {
 //3
     public function actionGetItem($item_id, $curent_company) {
         Yii::import('application.components.Ebay');
+
+        $user_id = AdminCentralStorage::get_user_id_by_name(Yii::app()->user->name);
+        $sql = 'SELECT * FROM `admin_central_storage` WHERE `User_ID` = ' . $user_id;
+        $command = Yii::app()->db->createCommand($sql);
+        $admin_central_storage = $command->queryAll();
 
         $ebay = new Ebay_api();
         $apiKey = $ebay->getApiKey($curent_company);
@@ -1189,6 +1207,11 @@ class EbayApiController extends Controller {
             $this->processeItem($response, $curent_company);
             $response = array();
         }
+
+        $this->render('get_item', array(
+            'admin_central_storage' => $admin_central_storage,
+                )
+        );
     }
 
     public function actionLoadAllItems() {
