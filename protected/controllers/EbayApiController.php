@@ -83,24 +83,74 @@ class EbayApiController extends Controller {
         $this->render('api_view', array(
             'response' => $response,
             'development' => $development,
-            'number_of_eBay_items' => $this->get_number_of_eBay_items($curent_company),
+            'number_of_eBay_items' => count($this->get_number_my_ebay_selling($curent_company)),
             'item_counter_for_ebay_item' => AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'item_counter_for_ebay_item'),
-            'eBay_item_nos' => $this->get_eBay_item_nos($curent_company),
-            'shop_category_nos' => $this->get_shop_category_nos($curent_company)
+            'eBay_item_nos' => count($this->get_ebay_item($curent_company)),
+            'shop_category_nos' => $this->get_shop_category_nos($curent_company),
+            'compare_items' => $this->compare_item_report($curent_company)
                 )
         );
     }
 
-    private function get_number_of_eBay_items($curent_company) {
+    private function compare_item_report($curent_company) {
+
+        $return_array['my_ebay_selling'] = false;
+        $return_array['ebay_item'] = false;
+        $return_array['flag'] = false;
+
+        $get_ebay_selling = $this->get_number_my_ebay_selling($curent_company);
+        $get_ebay_item = $this->get_eBay_item($curent_company);
+
+        if (!empty($get_ebay_selling) || !empty($get_ebay_item)) {
+
+            foreach ($get_ebay_selling as $ebay_selling)
+                $ebay_selling_array [] = ($ebay_selling->itemID);
+
+            foreach ($get_ebay_item as $ebay_item)
+                $ebay_item_array [] = ($ebay_item->itemID);
+
+            if (!empty($get_ebay_selling)) {
+                $return_array['my_ebay_selling'] = true;
+                $return_array['diff_item'] = $ebay_selling_array;
+            }
+            if (!empty($get_ebay_item)) {
+                $return_array['ebay_item'] = true;
+                $return_array['diff_item'] = $ebay_item_array;
+            }
+            if (!empty($get_ebay_selling) && !empty($get_ebay_item)) {
+
+                $diff_left = array_diff($ebay_selling_array, $ebay_item_array);
+                if (!empty($diff_left))
+                    $return_array['my_ebay_selling'] = true;
+
+                $diff_right = array_diff($ebay_item_array, $ebay_selling_array);
+                if (!empty($diff_right))
+                    $return_array['ebay_item'] = true;
+
+                $return_array['diff_item'] = array_merge($diff_left, $diff_right);
+            }
+
+
+
+            if (!empty($return_array['diff_item']))
+                $return_array['flag'] = true;
+
+            return $return_array;
+        }
+
+        return $return_array;
+    }
+
+    private function get_number_my_ebay_selling($curent_company) {
         $criteria = new CDbCriteria();
         $criteria->condition = 'shopName="' . $curent_company . '"';
 
         $my_ebay_selling = MyEbaySelling::model()->findAll($criteria);
 
-        return count($my_ebay_selling);
+        return $my_ebay_selling;
     }
 
-    private function get_eBay_item_nos($curent_company) {
+    private function get_ebay_item($curent_company) {
         if ($curent_company == 'hairacc4you')
             $seller_userID = 'hairacc4youcom';
 
@@ -109,7 +159,7 @@ class EbayApiController extends Controller {
 
         $ebay_item = EbayItem::model()->findAll($criteria);
 
-        return count($ebay_item);
+        return $ebay_item;
     }
 
     private function get_shop_category_nos($curent_company) {
@@ -229,6 +279,8 @@ class EbayApiController extends Controller {
     public function actionGetMyeBaySelling($curent_company) {
         Yii::import('application.components.Ebay');
 
+//        SELECT count(*) FROM `my_ebay_selling` WHERE `shopName` = 'expertpcx';
+
         $ebay = new Ebay_api();
         $apiKey = $ebay->getApiKey($curent_company);
 
@@ -275,7 +327,7 @@ class EbayApiController extends Controller {
                 		</ActiveList>
                         	</GetMyeBaySellingRequest>';
 
-        AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'get_my_eBay_selling', ++$var);
+        AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'get_my_eBay_selling', ($page_number + $page_number));
 
         return $requestXmlBody;
     }
@@ -469,8 +521,6 @@ class EbayApiController extends Controller {
     public function processeItem($response, $curent_company) {
 
         $report_array = array();
-
-
 
         foreach ($response as $item_id => $xml) {
 //                    file_put_contents("/var/www/engine/newxhtml.xhtml", "\n" . $xml, FILE_APPEND);
@@ -1051,9 +1101,10 @@ class EbayApiController extends Controller {
 
     public function actionReStartBaySelling() {
 
-        $sql = 'TRUNCATE my_ebay_selling';
+        $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
+
+        $sql = 'DELETE FROM `my_ebay_selling` WHERE `shopName` = "' . $curent_company . '"';
         Yii::app()->db->createCommand($sql)->query();
-        sleep(1);
 
         AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'get_my_eBay_selling', 1);
         $this->actionMain();
@@ -1061,13 +1112,17 @@ class EbayApiController extends Controller {
 
     public function actionReStarteBayItem() {
 
-        $sql = 'TRUNCATE ebay_item';
+        $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
+        if ($curent_company == 'hairacc4you')
+            $seller_userID = 'hairacc4youcom';
+
+        $sql = 'DELETE FROM `ebay_item` WHERE `seller_userID` = "' . $seller_userID . '"';
         Yii::app()->db->createCommand($sql)->query();
 
         AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'item_counter_for_ebay_item', 1);
         $this->actionMain();
     }
-    
+
     public function actionReStarteBayStore() {
 
         $sql = 'TRUNCATE ebay_store';
@@ -1145,7 +1200,8 @@ class EbayApiController extends Controller {
         $total_number_of_pages = (int) AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'total_number_of_pages');
         $get_my_eBay_selling = (int) AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'get_my_eBay_selling');
 
-        if ($get_my_eBay_selling >= $total_number_of_pages) {
+        if ($get_my_eBay_selling <= $total_number_of_pages) {
+
             $this->actionGetMyeBaySelling($curent_company);
         }
     }

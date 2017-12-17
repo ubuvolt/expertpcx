@@ -1,6 +1,17 @@
 <?php
 $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
+
+//if ($compare_items['flag']) {
+//    d::d($compare_items['diff_item']);
+//    
 ?>
+
+<!--compare_items-->
+<!--//-->
+<?php
+//}
+?>
+
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -20,7 +31,7 @@ if ($curent_company == 'expertpcx' || $curent_company == 'hairacc4you') {
         <div class="moduleTileRight">
             <div class="row buttons">
                 <div class="description_button">
-                    <?php echo "The view and refresh monitored prices"; ?>
+    <?php echo "The view and refresh monitored prices"; ?>
                 </div>
                 <button style="clear:both">
                     <a title="ebay/getInfo" href="index.php?r=ebay/getInfo">eBay GetItem</a>    
@@ -28,7 +39,7 @@ if ($curent_company == 'expertpcx' || $curent_company == 'hairacc4you') {
             </div> 
             <div class="row buttons">
                 <div class="description_button">
-                    <?php echo "Adding the new URL to monitor price"; ?>
+    <?php echo "Adding the new URL to monitor price"; ?>
                 </div>
                 <button>
                     <a title="ebayPriceMonitor/admin" href="index.php?r=ebayPriceMonitor/create">Add New URL</a>
@@ -36,7 +47,7 @@ if ($curent_company == 'expertpcx' || $curent_company == 'hairacc4you') {
             </div> 
             <div class="row buttons">
                 <div class="description_button">
-                    <?php echo "Modifing the list of the monitored prices"; ?>
+    <?php echo "Modifing the list of the monitored prices"; ?>
                 </div>
                 <button>
                     <a title="ebayPriceMonitor/admin" href="index.php?r=ebayPriceMonitor/admin">Manage Ebay Price</a>
@@ -45,7 +56,7 @@ if ($curent_company == 'expertpcx' || $curent_company == 'hairacc4you') {
 
             <div class="row buttons">
                 <div class="description_button">
-                    <?php echo "Generate  report about changes prices"; ?>
+    <?php echo "Generate  report about changes prices"; ?>
                 </div>
                 <button>
                     <!--///////////////////////////
@@ -68,7 +79,7 @@ if ($curent_company == 'expertpcx' || $curent_company == 'hairacc4you') {
         <img src='/images/API.png'><div class="title">API</div>
     </div>
     <div class="moduleTileRight">
-        <?php if ($curent_company == 'hairacc4you' || $curent_company == 'expertpcx') { ?>
+<?php if ($curent_company == 'hairacc4you' || $curent_company == 'expertpcx') { ?>
             <!--
                 /index.php?r=ebayApi/ajaxOfficialTime"
             -->
@@ -92,41 +103,47 @@ if ($curent_company == 'expertpcx' || $curent_company == 'hairacc4you') {
             </div>
             <?php
         }
-        if ($curent_company == 'hairacc4you') {
-            ?>
-            <div class="row buttons" >
-                <button>
-                    <a title="ebayApi/main/&attribute=GetItem" href="index.php?r=ebayApi/main/&attribute=GetItem">eBay GetItem</a>
-                </button>
-                <button>
-                    <a title="Empty eBay_item. ebayApi/ReStarteBayItem" href="index.php?r=ebayApi/reStarteBayItem">Re-Start</a>
-                </button>
-                <br>
-                <span class="description_button">Item counter for eBay Item <?php echo $item_counter_for_ebay_item; ?></span>
-                <span class="description_button">eBay Item Nos <?php echo $eBay_item_nos; ?></span>
-                <?php ?>
-            </div> 
-
-            <!--<div class="row buttons" >-->
-            <!--<button class="my_ebay_selling">-->
-            <!--<a title="ebayApi/main/&attribute=MyeBaySelling" href="index.php?r=ebayApi/main/&attribute=MyeBaySelling">eBay Selling</a>-->
-            <!--</button>-->
-            <!--</div>--> 
-
-            <div class="row buttons" >
-                <button>
-                    <a title="ebayApi/main/&attribute=GetStore" href="index.php?r=ebayApi/main/&attribute=GetStore">eBay GetStore</a>
-                </button>
-                <button>
-                    <a title="Empty eBay_store. ebayApi/ReStarteBayStore" href="index.php?r=ebayApi/reStarteBayStore">Re-Start</a>
-                </button>
-
-
-                <br>
-                <span class="description_button">Shop Category Nos <?php echo $shop_category_nos; ?></span>
-            </div> 
+//        if ($curent_company == 'hairacc4you') {
+        ?>
+        <div class="row buttons" >
+            <button 
             <?php
-        }
+            if ($item_counter_for_ebay_item >= $eBay_item_nos) {
+                echo 'disabled';
+            }
+            ?>
+                <a title="ebayApi/main/&attribute=GetItem" href="index.php?r=ebayApi/main/&attribute=GetItem">eBay GetItem</a>
+            </button>
+            <button>
+                <a title="Empty eBay_item. ebayApi/ReStarteBayItem" href="index.php?r=ebayApi/reStarteBayItem">Re-Start</a>
+            </button>
+            <br>
+            <span class="description_button">Item counter for eBay Item <?php echo $item_counter_for_ebay_item; ?></span>
+            <span class="description_button">eBay Item Nos <?php echo $eBay_item_nos; ?>
+                <span id="item_report"  class="<?php echo $compare_items['flag'] ? "compair_item" : "compair_item_hide"; ?>">!!!</span></span>
+<?php ?>
+        </div> 
+
+        <!--<div class="row buttons" >-->
+        <!--<button class="my_ebay_selling">-->
+        <!--<a title="ebayApi/main/&attribute=MyeBaySelling" href="index.php?r=ebayApi/main/&attribute=MyeBaySelling">eBay Selling</a>-->
+        <!--</button>-->
+        <!--</div>--> 
+
+        <div class="row buttons" >
+            <button>
+                <a title="ebayApi/main/&attribute=GetStore" href="index.php?r=ebayApi/main/&attribute=GetStore">eBay GetStore</a>
+            </button>
+            <button>
+                <a title="Empty eBay_store. ebayApi/ReStarteBayStore" href="index.php?r=ebayApi/reStarteBayStore">Re-Start</a>
+            </button>
+
+
+            <br>
+            <span class="description_button">Shop Category Nos <?php echo $shop_category_nos; ?></span>
+        </div> 
+        <?php
+//        }
         ?>
     </div>
 
@@ -142,19 +159,19 @@ if ($curent_company == 'hairacc4you') {
             <div  class="row buttons" >
                 <button>
                     <a title="myEbaySelling/index" href="index.php?r=myEbaySelling/index">eBay Selling</a>
-                    <?php // echo CHtml::link('eBay Selling', array('myEbaySelling/index'));        ?>
+    <?php // echo CHtml::link('eBay Selling', array('myEbaySelling/index'));         ?>
                 </button>
             </div> 
             <div  class="row buttons" >
                 <button>
                     <a title="ebayItem/index" href="index.php?r=ebayItem/index">eBay Items</a>
-                    <?php // echo CHtml::link('eBay Items', array('ebayItem/index'));        ?>
+    <?php // echo CHtml::link('eBay Items', array('ebayItem/index'));         ?>
                 </button>
             </div> 
             <div  class="row buttons" >
                 <button>
                     <a title="ebayStore/index" href="index.php?r=ebayStore/index">eBay Store</a>
-                    <?php // echo CHtml::link('eBay Store', array('ebayStore/index'));        ?>
+    <?php // echo CHtml::link('eBay Store', array('ebayStore/index'));         ?>
                 </button>
             </div> 
         </div>
@@ -170,23 +187,23 @@ if ($curent_company == 'hairacc4you') {
         <div class="moduleTileRight">
             <div class="row buttons">
                 <div class="description_button">
-                    <?php echo "Do it once, the system duplicates <br>the product"; ?>
+    <?php echo "Do it once, the system duplicates <br>the product"; ?>
                 </div>
                 <button>
                     <a title="ebayInsetrs/setDataInPresta" href="index.php?r=ebayInsetrs/setDataInPresta">Insert data to ShopPage</a>
-                    <?php // echo CHtml::link('Insert data to ShopPage', array('ebayInsetrs/setDataInPresta'));       ?>
+    <?php // echo CHtml::link('Insert data to ShopPage', array('ebayInsetrs/setDataInPresta'));        ?>
                 </button>
             </div> 
             <div class="row buttons">
                 <button>
                     <a title="ebayInsetrs/generateImages" href="index.php?r=ebayInsetrs/generateImages">Generate Images</a>
-                    <?php // echo CHtml::link('Generate Images', array('ebayInsetrs/generateImages'));        ?>
+    <?php // echo CHtml::link('Generate Images', array('ebayInsetrs/generateImages'));         ?>
                 </button>
             </div> 
             <div class="row buttons">
                 <button>
                     <a title="ebayInsetrs/setHomeCateg" href="index.php?r=ebayInsetrs/setHomeCateg">Set Home Categ</a>
-                    <?php // echo CHtml::link('Set Home Categ', array('ebayInsetrs/setHomeCateg'));        ?>
+    <?php // echo CHtml::link('Set Home Categ', array('ebayInsetrs/setHomeCateg'));         ?>
                 </button>
             </div> 
             <div class="row buttons">
@@ -216,7 +233,9 @@ if ($curent_company == 'hairacc4you') {
     <div id="ebay_version" class="ebay_timestamp"></div>
     <div id="ebay_build" class="ebay_timestamp"></div>
 </div>
-
+<div id="dialog_open" title="">
+    <div id="item_report_" title=""></div>
+</div>
 
 <script>
     $(function () {
@@ -253,6 +272,22 @@ if ($curent_company == 'hairacc4you') {
         }
 
     });
+    $(function () {
+        $("#item_report").click(function () {
+
+            $("#dialog_open").dialog();
+            $('#item_report_').html(
+                    'Incompatible item'
+<?php // foreach ($compare_items["diff_item"] as $item_id){ ?>
+//                        +'<br> itemID: '+
+<?php
+//                         echo $item_id;
+//                        }
+?>
+            );
+        });
+    });
+
 </script>
 
 <style>
@@ -320,5 +355,17 @@ if ($curent_company == 'hairacc4you') {
         border-bottom: 1px solid  #f6ba07;
         padding-bottom: 2px;
         margin-bottom: 30px
+    }
+
+    .compair_item_hide
+    {
+        display: none;
+    }
+    .compair_item{
+        color:white;
+        background:black;
+        padding:0 5px;
+        margin: 0 5px;
+        cursor: pointer;
     }
 </style>
