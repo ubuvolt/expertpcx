@@ -72,7 +72,7 @@ class eBaySession {
 
         //close the connection
         curl_close($connection);
-//        var_dump($response);
+        
         //return the response
         return $response;
     }
@@ -96,8 +96,6 @@ class eBaySession {
             //SiteID Indicates the eBay site to associate the call with
             'X-EBAY-API-SITEID: ' . $this->siteID,
         );
-
-//        var_dump($headers);
 
         return $headers;
     }

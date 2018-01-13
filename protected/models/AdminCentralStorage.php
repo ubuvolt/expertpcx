@@ -4,6 +4,9 @@
  */
 class AdminCentralStorage extends CActiveRecord {
 
+    const HAIR_ACC_4_YOU = 2;
+    const EXPERT_PCX = 4;
+
     /**
      * @return string the associated database table name
      */
@@ -21,14 +24,14 @@ class AdminCentralStorage extends CActiveRecord {
 
         $user_id = AdminCentralStorage::get_user_id_by_name($user_name);
 
-        $sql = "
+        $sql = '
             SELECT
             Value
             FROM admin_central_storage
-            WHERE User_ID = ".$user_id."
-            AND Name = '" . $key . "'
+            WHERE User_ID = ' . $user_id . '
+            AND Name = "' . $key . '"
             LIMIT 0, 1;
-        ";
+        ';
 
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
@@ -90,7 +93,7 @@ class AdminCentralStorage extends CActiveRecord {
                 $user_id = 1;
                 break;
         }
-        
+
         return $user_id;
     }
 

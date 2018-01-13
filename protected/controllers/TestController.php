@@ -157,22 +157,4 @@ class TestController extends Controller {
             Yii::app()->end();
         }
     }
-
-    /**
-     * Lists all models.
-     */
-    public function actionTest() {
-
-        Yii::import('application.components.Ebay');
-
-        $var = new Ebay;
-
-//        $dataProvider = new CActiveDataProvider('Test');
-        $this->render('test', 
-                array( 'var', $var->coco
-//            'dataProvider' => $dataProvider,
-                )
-        );
-    }
-
-    }
+}

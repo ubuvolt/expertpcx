@@ -59,6 +59,11 @@ class EbayApiController extends Controller {
     public function actionMain() {
 
         $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
+        if ($curent_company == 'hairacc4you')
+            $db = 'db_hair';
+
+        if ($curent_company == 'expertpcx')
+            $db = 'db_expert';
 
         switch ($_GET['attribute']) {
 
@@ -80,14 +85,25 @@ class EbayApiController extends Controller {
                 return;
         }
 
+        $eBay_item_nos_gbp = 0;
+        $number_of_eBay_items_gbp = 0;
+
+        $eBay_item_nos_gbp = count($this->get_ebay_item($curent_company, 'GBP'));
+        $number_of_eBay_items_gbp = count($this->get_number_my_ebay_selling($curent_company, 'GBP'));
+
         $this->render('api_view', array(
+            //Ebay Api Controller
             'response' => $response,
             'development' => $development,
             'number_of_eBay_items' => count($this->get_number_my_ebay_selling($curent_company)),
+            'number_of_eBay_items_gbp' => $number_of_eBay_items_gbp,
             'item_counter_for_ebay_item' => AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'item_counter_for_ebay_item'),
             'eBay_item_nos' => count($this->get_ebay_item($curent_company)),
+            'eBay_item_nos_gbp' => $eBay_item_nos_gbp,
             'shop_category_nos' => $this->get_shop_category_nos($curent_company),
-            'compare_items' => $this->compare_item_report($curent_company)
+            'compare_items' => $this->compare_item_report($curent_company),
+            //Ebay Insetrs Controller
+            'ps_product_qty' => $this->get_ps_product_qty($curent_company, $db)
                 )
         );
     }
@@ -130,8 +146,6 @@ class EbayApiController extends Controller {
                 $return_array['diff_item'] = array_merge($diff_left, $diff_right);
             }
 
-
-
             if (!empty($return_array['diff_item']))
                 $return_array['flag'] = true;
 
@@ -141,23 +155,30 @@ class EbayApiController extends Controller {
         return $return_array;
     }
 
-    private function get_number_my_ebay_selling($curent_company) {
+    private function get_number_my_ebay_selling($curent_company, $currency = '') {
         $criteria = new CDbCriteria();
-        $criteria->condition = 'shopName="' . $curent_company . '"';
+
+        if ($currency == '')
+            $criteria->condition = 'shopName="' . $curent_company . '"';
+        else
+            $criteria->condition = 'shopName="' . $curent_company . '" AND shippingProfileName LIKE "%Royal Mail%"';
 
         $my_ebay_selling = MyEbaySelling::model()->findAll($criteria);
 
         return $my_ebay_selling;
     }
 
-    private function get_ebay_item($curent_company) {
+    private function get_ebay_item($curent_company, $currency = '') {
         if ($curent_company == 'hairacc4you')
             $seller_userID = 'hairacc4youcom';
         if ($curent_company == 'expertpcx')
             $seller_userID = 'expertpcx';
 
         $criteria = new CDbCriteria();
-        $criteria->condition = 'seller_userID="' . $seller_userID . '"';
+        if ($currency == '')
+            $criteria->condition = 'seller_userID="' . $seller_userID . '"';
+        else
+            $criteria->condition = 'seller_userID="' . $seller_userID . '" AND currency = "' . $currency . '"';
 
         $ebay_item = EbayItem::model()->findAll($criteria);
 
@@ -171,6 +192,15 @@ class EbayApiController extends Controller {
         $ebay_store = EbayStore::model()->findAll($criteria);
 
         return count($ebay_store);
+    }
+
+    private function get_ps_product_qty($curent_company, $db) {
+
+        $sql = 'SELECT * FROM ps_product  ';
+        $command = Yii::app()->$db->createCommand($sql);
+        $results = $command->queryAll();
+
+        return count($results);
     }
 
     /**
@@ -526,13 +556,14 @@ class EbayApiController extends Controller {
         $report_array = array();
 
         foreach ($response as $item_id => $xml) {
-//                    file_put_contents("/var/www/engine/newxhtml.xhtml", "\n" . $xml, FILE_APPEND);
+                    file_put_contents("/var/www/engine/newxhtmlssss.xhtml", "\n" . $xml, FILE_APPEND);
+                    
             $elements = '';
             $dom = new DOMDocument();
             $dom->loadXML($xml);
-
+            
             $model = new EbayItem();
-
+            
             $model->timestamp = $dom->getElementsByTagName('Timestamp')->item(0)->nodeValue;
             $model->ack = $dom->getElementsByTagName('Ack')->item(0)->nodeValue;
             $model->version = $dom->getElementsByTagName('Version')->item(0)->nodeValue;
@@ -543,7 +574,15 @@ class EbayApiController extends Controller {
             $model->buyIstNowPrice = $dom->getElementsByTagName('BuyItNowPrice')->item(0)->nodeValue;
             $model->country = $dom->getElementsByTagName('Country')->item(0)->nodeValue;
             $model->currency = $dom->getElementsByTagName('Currency')->item(0)->nodeValue;
-            $model->description = $dom->getElementsByTagName('Description')->item(0)->nodeValue;
+            
+            //elminate gallery in description
+            if (strpos($dom->getElementsByTagName('Description')->item(0)->nodeValue, '<!--CSG INDICATOR END-->') !== false) {
+                $description_array = explode('<!--CSG INDICATOR END-->', $dom->getElementsByTagName('Description')->item(0)->nodeValue);
+                $model->description = $description_array[1];
+            }else{
+                $model->description = $dom->getElementsByTagName('Description')->item(0)->nodeValue; 
+            }
+            
             $model->giftIcon = $dom->getElementsByTagName('GiftIcon')->item(0)->nodeValue;
             $model->hitCounter = $dom->getElementsByTagName('HitCounter')->item(0)->nodeValue;
             $model->itemID = $dom->getElementsByTagName('ItemID')->item(0)->nodeValue;
@@ -1032,6 +1071,16 @@ class EbayApiController extends Controller {
 
     public function processeStoreInfo($xml, $curent_company) {
 
+        // delete existing categories //
+        if ($curent_company == 'hairacc4you')
+            $seller_userID = 'hairacc4you';
+        if ($curent_company == 'expertpcx')
+            $seller_userID = 'expertpcx';
+
+        $sql = 'DELETE FROM `ebay_store` WHERE `shopName` = "' . $seller_userID . '"';
+        Yii::app()->db->createCommand($sql)->query();
+        // end //
+
         $report_array = array();
 //                file_put_contents("/var/www/engine/storeInfo.xhtml", "\n" . $xml, FILE_APPEND);
 
@@ -1133,7 +1182,7 @@ class EbayApiController extends Controller {
 
         $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
         if ($curent_company == 'hairacc4you')
-            $seller_userID = 'hairacc4youcom';
+            $seller_userID = 'hairacc4you';
         if ($curent_company == 'expertpcx')
             $seller_userID = 'expertpcx';
 
@@ -1169,7 +1218,19 @@ class EbayApiController extends Controller {
 
         $item_id_array = array();
 
-        $sql = 'SELECT itemID FROM my_ebay_selling WHERE shopName = "' . $curent_company . '" LIMIT ' . $var . ', ' . $increment;
+        $sql = '
+                SELECT 
+                    itemID 
+                    
+                FROM 
+                    my_ebay_selling 
+                    
+                WHERE 
+                    shopName = "' . $curent_company . '"
+                        AND shippingProfileName LIKE "%Royal Mail%"               
+                        
+                LIMIT ' . $var . ', ' . $increment;
+
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
 

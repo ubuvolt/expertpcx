@@ -87,5 +87,13 @@ class Helper extends CComponent {
     public function convertStartTime($time) {
         return date("Y-m-d H:i:s", strtotime($time));
     }
+    
+    /*
+     * Removes all tags from given string
+     */
+    function removeAllTags($string) { 
+        $string = preg_replace('/<[^<]+?>/', ' ', $string);
+        return $string;
+    }
 
 }

@@ -35,7 +35,7 @@ class EbayController extends Controller {
                     'create',
                     'update'
                 ),
-                'users' => array('admin', 'piotr','hairacc'),
+                'users' => array('admin', 'piotr', 'hairacc'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('ebayPriceEmail'),
@@ -43,7 +43,7 @@ class EbayController extends Controller {
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
                 'actions' => array('admin', 'delete'),
-                'users' => array('admin', 'piotr','hairacc'),
+                'users' => array('admin', 'piotr', 'hairacc'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
@@ -56,6 +56,21 @@ class EbayController extends Controller {
     ///////////////////////////
 
     public function actionGetInfo() {
+
+//        // HAIR_ACC_4_YOU
+//        AdminCentralStorage::set_central_setting(
+//                AdminCentralStorage::HAIR_ACC_4_YOU, 'prestashop_img_path_live', '/home/wolscy/public_html/hairacc4you/img/p/');
+//        AdminCentralStorage::set_central_setting(
+//                AdminCentralStorage::HAIR_ACC_4_YOU, 'prestashop_img_path_developer', '/var/www/prestashoppcx/img/p/');
+//
+//        // EXPERT_PCX
+//        AdminCentralStorage::set_central_setting(
+//                AdminCentralStorage::EXPERT_PCX, 'prestashop_img_path_live', '/home/wolscy/public_html/hairacc4you/img/p/');
+//        AdminCentralStorage::set_central_setting(
+//                AdminCentralStorage::EXPERT_PCX, 'prestashop_img_path_developer', '/var/www/prestashoppcx/img/p/');
+
+        $prestashop_img_home_path = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'prestashop_img_path_developer');
+        
         $ebay_price_monitor = EbayPriceMonitor::model()->findAll();
         $this->render('getInfo', array('ebay_price_monitor' => $ebay_price_monitor));
     }
@@ -161,5 +176,5 @@ class EbayController extends Controller {
         mail("expertpc@o2.pl", $subject, $msg, $headers);
 //        mail("peter.dusza@expertpcx.com", $subject, $msg, $headers);
     }
-    
+
 }

@@ -51,7 +51,8 @@ return array(
 
 		// database settings are configured in database.php
 		'db'=>require(dirname(__FILE__).'/database.php'),
-		'db1'=>require(dirname(__FILE__).'/database1.php'),
+		'db_hair'=>require(dirname(__FILE__).'/db_hair.php'),
+		'db_expert'=>require(dirname(__FILE__).'/db_expert.php'),
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
