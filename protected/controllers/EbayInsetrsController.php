@@ -2,6 +2,9 @@
 
 class EbayInsetrsController extends Controller {
 
+    // qty of photons produced by one flow
+    public $jump = 20;
+
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -229,7 +232,13 @@ class EbayInsetrsController extends Controller {
         $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
         $company_image_counter = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'company_image_counter');
 
+//        piotr
+//        d::d($curent_company); 'expertpcx' 
+        d::d($company_image_counter); //1
+
         if (DEVELOPMENT) {
+
+//            d::d(__LINE__);
 
             if ($curent_company == 'hairacc4you')
                 $prestashop_img_home_path = "/var/www/prestashop/img/p/";
@@ -243,11 +252,6 @@ class EbayInsetrsController extends Controller {
                 $prestashop_img_home_path = "/home/wolscy/public_html/__________prestashoppcx_______/img/p/";
         }
 
-        $jump = 10;
-
-        if (empty($company_image_counter))
-            $company_image_counter = 1;
-
         if ($curent_company == 'hairacc4you') {
             $seller_userID = 'hairacc4youcom';
             $db = 'db_hair';
@@ -258,18 +262,29 @@ class EbayInsetrsController extends Controller {
             $db = 'db_expert';
         }
 
-        $sql = 'SELECT ps_id_product, pictureURL FROM ebay_item WHERE `ps_id_product` IS NOT NULL AND `seller_userID` = "' . $seller_userID . '" ORDER BY `id` ASC LIMIT ' . $company_image_counter . ', ' . $jump;
+//        d::d($curent_company); //expertpcx
+//        d::d($seller_userID); //expertpcx
+//        d::d($db); //db_expert
+        d::d('company_image_counter');
+        d::d($company_image_counter);
 
+        $sql = 'SELECT ps_id_product, pictureURL FROM ebay_item WHERE `ps_id_product` IS NOT NULL AND `seller_userID` = "' . $seller_userID . '" ORDER BY `id` ASC LIMIT ' . $company_image_counter . ', ' . $this->jump;
 
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
+        
+        d::d(count($results));
 
-//        AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'company_image_counter', ($company_image_counter + $jump));
-
-
+//          d::d($results);
+//              1 => array
+//            (
+//                'ps_id_product' => '2179'
+//                'pictureURL' => '[]PictureURL##http://i.ebayimg.com/00/s/MTIwMFgxNjAw/$(KGrHqFHJFIE88e5RSipBPdLnSeMyw~~60_1.JPG?set_id=8800005007'
+//            )
+        $company_image_counter = $company_image_counter + $this->jump;
+        AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'company_image_counter', $company_image_counter);
 
         $image_url_array = array();
-
 
         foreach ($results as $ebay_item_details) {
 
@@ -300,9 +315,12 @@ class EbayInsetrsController extends Controller {
             }
         }
 
+        //
+        // createImage
+        //
         foreach ($image_url_array as $image_url_details) {
             foreach ($image_url_details['url'] as $key => $url) {
-                $this->createImage($image_url_details['ps_image_details'][$key], $url, $prestashop_img_home_path);
+                $this->createImage($image_url_details['ps_image_details'][$key], $url, $prestashop_img_home_path, $curent_company, $db);
             }
         }
     }
@@ -312,15 +330,14 @@ class EbayInsetrsController extends Controller {
      * @param type $picture_url
      * @param type $prestashop_img_home_path
      */
-    public function createImage($id_image, $picture_url, $prestashop_img_home_path) {
+    public function createImage($id_image, $picture_url, $prestashop_img_home_path, $curent_company, $db) {
 
-        $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
-
-        if ($curent_company == 'hairacc4you')
-            $db = 'db_hair';
-
-        if ($curent_company == 'expertpcx')
-            $db = 'db_expert';
+        d::d('id_image');
+        d::d($id_image);
+        d::d('picture_url');
+        d::d($picture_url);
+        d::d('prestashop_img_home_path');
+        d::d($prestashop_img_home_path);
 
         $path_chunks = str_split($id_image);
 
@@ -328,7 +345,7 @@ class EbayInsetrsController extends Controller {
             $path_sufix .= $chunks . '/';
 
         $path = $prestashop_img_home_path . $path_sufix;
-        
+
         if (!file_exists($path)) {
             mkdir($path, 0775, true);
         }
@@ -336,7 +353,7 @@ class EbayInsetrsController extends Controller {
         $sql = 'SELECT name, width, height FROM ps_image_type';
         $command = Yii::app()->$db->createCommand($sql);
         $image_value = $command->queryAll();
-        
+
         //size of images        
         foreach ($image_value as $k => $image) {
             $img_path = $path . $id_image . '-' . $image['name'] . '.jpg';
@@ -412,8 +429,9 @@ class EbayInsetrsController extends Controller {
         $command = Yii::app()->db1->createCommand($sql);
         $ps_product = $command->queryAll();
 
-        foreach ($ps_product as $key => $item)
+        foreach ($ps_product as $key => $item) {
             $values .= '(2, ' . $item['id_product'] . ', ' . $key . '),';
+        }
 
         $values = substr($values, 0, -1);
 
@@ -430,9 +448,8 @@ class EbayInsetrsController extends Controller {
         //INSERT INTO `ps_category_shop` (`id_category`, `id_shop`, `position`) VALUES ('12', '1', '0'), ('13', '1', '0');
 
         $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
-        
-        if ($curent_company == 'hairacc4you')
-        {
+
+        if ($curent_company == 'hairacc4you') {
             $db = 'db_hair';
             $store_category_array = array(
                 22171978012 => 'Hair Bands',
@@ -440,143 +457,158 @@ class EbayInsetrsController extends Controller {
                 22172000012 => 'Hair Claws',
                 22172055012 => 'Hair Clips'
             );
-            
-            $ps_category_array = array(
-            'Hair Bands' => 12,
-            'Hair Pins' => 13,
-            'Hair Claws' => 14,
-            'Hair Clips' => 15
-            );
 
-            
+            $ps_category_array = array(
+                'Hair Bands' => 12,
+                'Hair Pins' => 13,
+                'Hair Claws' => 14,
+                'Hair Clips' => 15
+            );
         }
-        
-        if ($curent_company == 'expertpcx')
-        {
+
+        if ($curent_company == 'expertpcx') {
             $db = 'db_expert';
             $store_category_array = array(
-                 2545040013 => 'Laptops',
-                 2545041013 => "PC's",
-                 2545042013 => 'Keyboards',
-                 2545043013 => "HDD's",
-                 2545044013 => "CPU's",
-                 2545045013 => 'Memories',
-                 2545046013 => 'Toners',
-                 2545047013 => 'Optical Drives',
-                 2545048013 => 'Cables',
-                 2545049013 => 'Graphic Cards',
-                 2545050013 => 'Sound Cards',
-                 2545051013 => 'LCD Screens',
-                 2545053013 => 'Power Adapters',
-                 2545052013 => 'Inverters',
-                 2545054013 => 'Docking Stations',
-                 2545055013 => 'Lids / Top Covers',
-                 2545056013 => 'Palmrests',
-                 2545057013 => 'Bezels / Trims',
-                 2545058013 => 'Connectors',
-                 2545085013 => 'Plastic Bases / Covers',
-                 2545215013 => 'Heatsinks / Fans',
-                 2545216013 => 'Speakers',
-                 2545218013 => "Cameras / WebCam's",
-                 2545217013 => 'Remote Controls',
-                 2545219013 => 'Drums',
-                 2545529013 => 'Power Boards',
-                 2545530013 => 'Hinge Covers',
-                 2545531013 => 'Screen Brackets',
-                 2545532013 => 'Hinge / Power Button Covers',
-                 2547080013 => 'Mouses',
-                 2547081013 => 'Hinges',
-                 2547082013 => 'Doughter Boards',
-                 2547083013 => 'Front / Facsia Panels',
-                 2547084013 => 'Ribbons',
-                 2547519013 => 'Server Parts',
-                 2547518013 => 'LED / CCFL LCD Screens',
-                 2547520013 => 'Networking',
-                 2547521013 => 'Monitors',
-                 2549898013 => 'Rubbers / Bumpers',
-                 2549899013 => 'Bluetooths',
-                 2549900013 => 'Wi-Fi Cards',
-                 2558238013 => 'Batteries',
-                 2591359013 => 'Power Supplies',
-                 2579441013 => 'Rails / LCD Brackets',
-                 3033087013 => 'TV Tuners / DVB',
-                 3668323013 => 'Sofware / Driver Disc',
-                 3593981013 => 'Screws',
-                 3960350013 => 'LEGO',
-                 4056792013 => "Caddy's",
-                 2545219013 => 'Motherboards'
+                2545040013 => 'Laptops',
+                2545041013 => "PC's",
+                2545042013 => 'Keyboards',
+                2545043013 => "HDD's",
+                2545044013 => "CPU's",
+                2545045013 => 'Memories',
+                2545046013 => 'Toners',
+                2545047013 => 'Optical Drives',
+                2545048013 => 'Cables',
+                2545049013 => 'Graphic Cards',
+                2545050013 => 'Sound Cards',
+                2545051013 => 'LCD Screens',
+                2545053013 => 'Power Adapters',
+                2545052013 => 'Inverters',
+                2545054013 => 'Docking Stations',
+                2545055013 => 'Lids / Top Covers',
+                2545056013 => 'Palmrests',
+                2545057013 => 'Bezels / Trims',
+                2545058013 => 'Connectors',
+                2545085013 => 'Plastic Bases / Covers',
+                2545215013 => 'Heatsinks / Fans',
+                2545216013 => 'Speakers',
+                2545218013 => "Cameras / WebCam's",
+                2545217013 => 'Remote Controls',
+                2545219013 => 'Drums',
+                2545529013 => 'Power Boards',
+                2545530013 => 'Hinge Covers',
+                2545531013 => 'Screen Brackets',
+                2545532013 => 'Hinge / Power Button Covers',
+                2547080013 => 'Mouses',
+                2547081013 => 'Hinges',
+                2547082013 => 'Doughter Boards',
+                2547083013 => 'Front / Facsia Panels',
+                2547084013 => 'Ribbons',
+                2547519013 => 'Server Parts',
+                2547518013 => 'LED / CCFL LCD Screens',
+                2547520013 => 'Networking',
+                2547521013 => 'Monitors',
+                2549898013 => 'Rubbers / Bumpers',
+                2549899013 => 'Bluetooths',
+                2549900013 => 'Wi-Fi Cards',
+                2558238013 => 'Batteries',
+                2591359013 => 'Power Supplies',
+                2579441013 => 'Rails / LCD Brackets',
+                3033087013 => 'TV Tuners / DVB',
+                3668323013 => 'Sofware / Driver Disc',
+                3593981013 => 'Screws',
+                3960350013 => 'LEGO',
+                4056792013 => "Caddy's",
+                2545219013 => 'Motherboards'
             );
-            
+
             $ps_category_array = array(
-                'Laptops'                   => 13,
-                "PC's"                      => 14,
-                "Keyboards"                 => 15,
-                "HDD's"                     => 16,
-                "CPU's"                     => 17,
-                "Memories"                  => 18,
-                "Toners"                    => 19,
-                "Optical Drives"            => 20,
-                "Cables"                    => 21,
-                "Graphic Cards"             => 22,
-                "Sound Cards"               => 23,
-                "LCD Screens"               => 24,
-                "Power Adapters"            => 25,
-                "Inverters"                 => 26,
-                "Docking Stations"          => 27,
-                "Lids / Top Covers"         => 28,
-                'Palmrests'                 => 29,
-                'Bezels / Trims'            => 30,
-                'Connectors'                => 31,
-                'Plastic Bases / Covers'    => 32,
-                'Heatsinks / Fans'          => 33,
-                'Speakers'                  => 34,
-                "Cameras / WebCam's"        => 35,
-                "Remote Controls"           => 36,
-                "Drums"                     => 37,
-                "Power Boards"              => 38,
-                "Hinge Covers"              => 39,
-                "Screen Brackets"           => 40,
-                "Hinge / Power Button Covers"=> 41,
-                "Mouses"                    => 42,
-                "Hinges"                    => 43,
-                "Doughter Boards"           => 44,
-                "Front / Facsia Panels"     => 45,
-                'Ribbons'                   => 46,
-                'Server Parts'              => 47,
-                'LED / CCFL LCD Screens'    => 48,
-                'Networking'                => 49,
-                'Monitors'                  => 50,
-                'Rubbers / Bumpers'         => 51,
-                'Bluetooths'                => 52,
-                'Wi-Fi Cards'               => 53,
-                'Batteries'                 => 54,
-                'Power Supplies'            => 55,
-                'Rails / LCD Brackets'      => 56,
-                'TV Tuners / DVB'           => 57,
-                'Sofware / Driver Disc'     => 58,
-                'Screws'                    => 59,
-                'LEGO'                      => 60,
-                "Caddy's"                   => 61,
-                "Motherboards"              => 62
-                );
-        
+                'Laptops' => 13,
+                "PC's" => 14,
+                "Keyboards" => 15,
+                "HDD's" => 16,
+                "CPU's" => 17,
+                "Memories" => 18,
+                "Toners" => 19,
+                "Optical Drives" => 20,
+                "Cables" => 21,
+                "Graphic Cards" => 22,
+                "Sound Cards" => 23,
+                "LCD Screens" => 24,
+                "Power Adapters" => 25,
+                "Inverters" => 26,
+                "Docking Stations" => 27,
+                "Lids / Top Covers" => 28,
+                'Palmrests' => 29,
+                'Bezels / Trims' => 30,
+                'Connectors' => 31,
+                'Plastic Bases / Covers' => 32,
+                'Heatsinks / Fans' => 33,
+                'Speakers' => 34,
+                "Cameras / WebCam's" => 35,
+                "Remote Controls" => 36,
+                "Drums" => 37,
+                "Power Boards" => 38,
+                "Hinge Covers" => 39,
+                "Screen Brackets" => 40,
+                "Hinge / Power Button Covers" => 41,
+                "Mouses" => 42,
+                "Hinges" => 43,
+                "Doughter Boards" => 44,
+                "Front / Facsia Panels" => 45,
+                'Ribbons' => 46,
+                'Server Parts' => 47,
+                'LED / CCFL LCD Screens' => 48,
+                'Networking' => 49,
+                'Monitors' => 50,
+                'Rubbers / Bumpers' => 51,
+                'Bluetooths' => 52,
+                'Wi-Fi Cards' => 53,
+                'Batteries' => 54,
+                'Power Supplies' => 55,
+                'Rails / LCD Brackets' => 56,
+                'TV Tuners / DVB' => 57,
+                'Sofware / Driver Disc' => 58,
+                'Screws' => 59,
+                'LEGO' => 60,
+                "Caddy's" => 61,
+                "Motherboards" => 62
+            );
         }
-        
-        
+
         $sql = 'SELECT * FROM `ebay_item`';
         $command = Yii::app()->db->createCommand($sql);
         $ebay_item = $command->queryAll();
 
         foreach ($ebay_item as $item) {
+            
             if ($store_category_array[$item['storeCategoryID']] == NULL)
                 continue;
 
             $values = '(' . $ps_category_array[$store_category_array[$item['storeCategoryID']]] . ' ,' . $item['ps_id_product'] . ', 1)';
 
+            d::d( $values);
+
+// ID - 2389 ZWRACA NULL
+
+            if($item['ps_id_product']!= NULL){
             $ps_product = Yii::app()->$db->createCommand('
                 INSERT INTO `ps_category_product` (`id_category`, `id_product`, `position`) VALUES ' . $values)->execute();
-            
             }
+            d::d($ps_product);
+        }
+    }
+
+    public function actionReStartGenerateImages() {
+
+        $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
+        if ($curent_company == 'hairacc4you')
+            $seller_userID = 'hairacc4youcom';
+        if ($curent_company == 'expertpcx')
+            $seller_userID = 'expertpcx';
+
+        AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'company_image_counter', 1);
+
+        header("Location: http://www.engine.dev/");
     }
 
 }

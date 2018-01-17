@@ -103,7 +103,8 @@ class EbayApiController extends Controller {
             'shop_category_nos' => $this->get_shop_category_nos($curent_company),
             'compare_items' => $this->compare_item_report($curent_company),
             //Ebay Insetrs Controller
-            'ps_product_qty' => $this->get_ps_product_qty($curent_company, $db)
+            'ps_product_qty' => $this->get_ps_product_qty($curent_company, $db),
+            'image_counter_value' => AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'company_image_counter'),
                 )
         );
     }

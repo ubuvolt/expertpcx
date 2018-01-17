@@ -191,6 +191,8 @@ if ($curent_company == 'hairacc4you' || $curent_company == 'expertpcx') {
                 <button>
                     <a title="" href="index.php?r=ebayInsetrs/ReStartGenerateImages">Re-Start</a>
                 </button>
+                <br>
+                <span class="description_button">Image counter <?php echo $image_counter_value; ?></span>
             </div> 
             <div class="row buttons">
                 <button>
