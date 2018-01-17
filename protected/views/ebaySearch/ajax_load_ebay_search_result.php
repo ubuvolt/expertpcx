@@ -25,16 +25,16 @@
                     <button><a target="_blank" href="<?php echo $details['viewItemURL']; ?>">eBay</a></button>
                 </div>
             </td>
-            <td>
+            <td style="width:60px;">
                 <button 
-                    style="float: left;"
+                    style="float: left; cursor: pointer;"
                     id="my_<?php echo $eBayId; ?>"
                     class="button_my" 
                     eBayId="<?php echo $eBayId; ?>">
                     My 
                 </button>
                 <button 
-                    style="float: left; margin-top: 10px;"
+                    style="float: left; margin-top: 10px; cursor: pointer;"
                     id="track_<?php echo $eBayId; ?>"
                     class="button_track" 
                     eBayId="<?php echo $eBayId; ?>">
@@ -48,7 +48,7 @@
 </table>
 
 <div style="background: lightgreen; position: fixed; bottom: 600px; right: 400px;">
-    <button style="padding: 5px; padding: 6px; border: solid 1px #09f; display: none;" id="submit_button">
+    <button style="padding: 5px; padding: 6px; border: solid 1px #09f; display: none; cursor: pointer;" id="submit_button">
         Apply
     </button>
 </div>
