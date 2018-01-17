@@ -29,6 +29,7 @@ $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->nam
                         array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
                         array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
                         array('label' => 'eBay', 'url' => array('/ebayApi/main')),
+                        array('label' => 'eBaySearch', 'url' => array('/ebaySearch/ebaySearch')),
                     ),
                 ));
                 ?>
