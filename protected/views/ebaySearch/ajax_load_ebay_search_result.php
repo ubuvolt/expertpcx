@@ -1,4 +1,4 @@
-<table >
+<table style="width: 115%">
     <?php
     foreach ($search_result as $eBayId => $details) {
         ?>
@@ -34,9 +34,8 @@
                     My 
                 </button>
                 <button 
-                    style="float: left;"
+                    style="float: left; margin-top: 10px;"
                     id="track_<?php echo $eBayId; ?>"
-                    style="margin-top: 10px;" 
                     class="button_track" 
                     eBayId="<?php echo $eBayId; ?>">
                     Track
@@ -48,9 +47,16 @@
     ?>
 </table>
 
+<div style="background: lightgreen; position: fixed; bottom: 600px; right: 400px;">
+    <button style="padding: 5px; padding: 6px; border: solid 1px #09f; display: none;" id="submit_button">
+        Apply
+    </button>
+</div>
 
 <script>
     $(function () {
+
+        $.post("/index.php?r=ebaySearch/ajaxClearEbayPriceTracking", {});
 
         $('.button_my').click(function () {
 
@@ -63,9 +69,22 @@
             var eBayId = $(this).attr('eBayId');
             update_ebay_price_tracking(eBayId, 'track');
         });
+
+        $(document).on("click", "#submit_button", function () {
+
+            $.post("/index.php?r=ebaySearch/ajaxApplyEbayPriceTracking", {});
+
+            stay(function () {
+                window.location.href = 'index.php?r=ebayApi/main';
+            }, 500); //1 second in milliseconds
+
+        });
+
+
     });
 
-
+    var track = false;
+    var my = false;
     function update_ebay_price_tracking(eBayId, flow) {
 
         $.post("/index.php?r=ebaySearch/ajaxUpdateEbayPriceTracking", {
@@ -79,6 +98,8 @@
                 if (flow === 'track') {
                     $("#" + parsed.flow + "_" + parsed.ebay_id).prop('disabled', true);
                     $("#" + parsed.flow + "_" + parsed.ebay_id).css('border', 'solid 3px #3d3d29');
+
+                    track = true;
                 }
                 // disabled all my buttons when first my 
                 // is selected
@@ -86,11 +107,24 @@
                     $("#my_" + parsed.ebay_id).css('border', 'solid 3px #00ff00');
                     $(".button_my").prop('disabled', true);
                     $("#track_" + parsed.ebay_id).prop('disabled', true);
+
+                    my = true;
                 }
+
+                if (track && my) {
+                    $('#submit_button').show();
+                }
+
             }
         });
 
     }
 
-
+    var stay = (function () {
+        var time = 0;
+        return function (call_back, ms) {
+            clearTimeout(time);
+            time = setTimeout(call_back, ms);
+        };
+    })();
 </script>

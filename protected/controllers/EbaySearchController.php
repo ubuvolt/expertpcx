@@ -35,6 +35,8 @@ class EbaySearchController extends Controller {
                 'actions' => array(
                     'ajaxLoadEbaySearchResult',
                     'ajaxUpdateEbayPriceTracking',
+                    'ajaxApplyEbayPriceTracking',
+                    'ajaxClearEbayPriceTracking',
                 ),
                 'users' => array('*'),
             ),
@@ -66,9 +68,10 @@ class EbaySearchController extends Controller {
         $globalid = 'EBAY-GB';  // Global ID of the eBay site you want to search (e.g., EBAY-DE)
         $query = $phrase;  // You may want to supply your own query
         $safequery = urlencode($query);  // Make the query URL-friendly
+        //
         // Construct the findItemsByKeywords HTTP GET call
         $apicall = "$endpoint?";
-        $apicall .= "OPERATION-NAME=findItemsByKeywords";
+        $apicall .= "OPERATION-NAME=findItemsAdvanced";
         $apicall .= "&SERVICE-VERSION=$version";
         $apicall .= "&SECURITY-APPNAME=$appid";
         $apicall .= "&GLOBAL-ID=$globalid";
@@ -83,7 +86,7 @@ class EbaySearchController extends Controller {
             $result_array = array();
             // If the response was loaded, parse it and build links
             foreach ($resp->searchResult->item as $item) {
-
+                
                 $ebayID = (string) $item->itemId;
                 $result_array[$ebayID]['title'] = (string) $item->title;
                 $result_array[$ebayID]['galleryURL'] = (string) $item->galleryURL;
@@ -126,11 +129,25 @@ class EbaySearchController extends Controller {
         $ebay_id = $_POST['ebay_id'];
         $flow = $_POST['flow'];
 
+        $_SESSION['ebay_price_tracking'][$ebay_id] = $flow;
+
         echo CJSON::encode(array(
             'status' => 'success',
             'ebay_id' => $ebay_id,
             'flow' => $flow,
         ));
+    }
+    
+    public function actionAjaxClearEbayPriceTracking(){
+        
+        $_SESSION['ebay_price_tracking'] = array();
+        
+    }
+    
+    public function actionAjaxApplyEbayPriceTracking() {
+
+        d::d($_SESSION['ebay_price_tracking']);
+
     }
 
 }
