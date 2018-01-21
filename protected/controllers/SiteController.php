@@ -86,8 +86,8 @@ class SiteController extends Controller {
 
                 if (Yii::app()->user->name == 'piotr')
                     AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'curent_company_flow', 'expertpcx');
-                if (Yii::app()->user->name == 'hairacc')
-                    AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'curent_company_flow', 'hairacc4you');
+                if (Yii::app()->user->name == 'bartek')
+                    AdminCentralStorage::set_central_setting(Yii::app()->user->name, 'curent_company_flow', 'expertpcx');
 
                 $this->redirect(Yii::app()->user->returnUrl);
             }

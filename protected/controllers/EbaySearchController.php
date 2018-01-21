@@ -29,7 +29,7 @@ class EbaySearchController extends Controller {
                 'actions' => array(
                     'ebaySearch'
                 ),
-                'users' => array('admin', 'piotr', 'hairacc'),
+                'users' => array('bartek', 'piotr'),
             ),
             array('allow',
                 'actions' => array(

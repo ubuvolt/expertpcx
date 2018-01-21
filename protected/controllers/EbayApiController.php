@@ -48,7 +48,7 @@ class EbayApiController extends Controller {
                     'loadAllItems',
                     'setCompany'
                 ),
-                'users' => array('admin', 'piotr', 'hairacc'),
+                'users' => array('piotr', 'bartek'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
@@ -58,12 +58,13 @@ class EbayApiController extends Controller {
 
     public function actionMain() {
 
-        $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
-        if ($curent_company == 'hairacc4you')
-            $db = 'db_hair';
+//        $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
+//        if ($curent_company == 'hairacc4you')
+//            $db = 'db_hair';
+//
+        $curent_company = 'expertpcx';
+//            $db = 'db_expert';
 
-        if ($curent_company == 'expertpcx')
-            $db = 'db_expert';
 
         switch ($_GET['attribute']) {
 
@@ -87,24 +88,32 @@ class EbayApiController extends Controller {
 
         $eBay_item_nos_gbp = 0;
         $number_of_eBay_items_gbp = 0;
+        $number_of_eBay_items = 0;
+        $item_counter_for_ebay_item = 0;
+        $image_counter_value = 0;
+
+
 
         $eBay_item_nos_gbp = count($this->get_ebay_item($curent_company, 'GBP'));
         $number_of_eBay_items_gbp = count($this->get_number_my_ebay_selling($curent_company, 'GBP'));
+        $number_of_eBay_items = count($this->get_number_my_ebay_selling($curent_company));
+        $item_counter_for_ebay_item = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'item_counter_for_ebay_item');
+        $image_counter_value = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'company_image_counter');
 
         $this->render('api_view', array(
             //Ebay Api Controller
             'response' => $response,
             'development' => $development,
-            'number_of_eBay_items' => count($this->get_number_my_ebay_selling($curent_company)),
+            'number_of_eBay_items' => $number_of_eBay_items,
             'number_of_eBay_items_gbp' => $number_of_eBay_items_gbp,
-            'item_counter_for_ebay_item' => AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'item_counter_for_ebay_item'),
+            'item_counter_for_ebay_item' => $item_counter_for_ebay_item,
             'eBay_item_nos' => count($this->get_ebay_item($curent_company)),
             'eBay_item_nos_gbp' => $eBay_item_nos_gbp,
             'shop_category_nos' => $this->get_shop_category_nos($curent_company),
             'compare_items' => $this->compare_item_report($curent_company),
             //Ebay Insetrs Controller
-            'ps_product_qty' => $this->get_ps_product_qty($curent_company, $db),
-            'image_counter_value' => AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'company_image_counter'),
+            'ps_product_qty' => $this->get_ps_product_qty($curent_company),
+            'image_counter_value' => $image_counter_value,
                 )
         );
     }
@@ -170,10 +179,10 @@ class EbayApiController extends Controller {
     }
 
     private function get_ebay_item($curent_company, $currency = '') {
-        if ($curent_company == 'hairacc4you')
-            $seller_userID = 'hairacc4youcom';
-        if ($curent_company == 'expertpcx')
-            $seller_userID = 'expertpcx';
+//        if ($curent_company == 'hairacc4you')
+//            $seller_userID = 'hairacc4youcom';
+        $curent_company = 'expertpcx';
+        $seller_userID = 'expertpcx';
 
         $criteria = new CDbCriteria();
         if ($currency == '')
@@ -195,10 +204,10 @@ class EbayApiController extends Controller {
         return count($ebay_store);
     }
 
-    private function get_ps_product_qty($curent_company, $db) {
+    private function get_ps_product_qty($curent_company) {
 
         $sql = 'SELECT * FROM ps_product  ';
-        $command = Yii::app()->$db->createCommand($sql);
+        $command = Yii::app()->db_expert->createCommand($sql);
         $results = $command->queryAll();
 
         return count($results);
@@ -557,14 +566,14 @@ class EbayApiController extends Controller {
         $report_array = array();
 
         foreach ($response as $item_id => $xml) {
-                    file_put_contents("/var/www/engine/newxhtmlssss.xhtml", "\n" . $xml, FILE_APPEND);
-                    
+            file_put_contents("/var/www/engine/newxhtmlssss.xhtml", "\n" . $xml, FILE_APPEND);
+
             $elements = '';
             $dom = new DOMDocument();
             $dom->loadXML($xml);
-            
+
             $model = new EbayItem();
-            
+
             $model->timestamp = $dom->getElementsByTagName('Timestamp')->item(0)->nodeValue;
             $model->ack = $dom->getElementsByTagName('Ack')->item(0)->nodeValue;
             $model->version = $dom->getElementsByTagName('Version')->item(0)->nodeValue;
@@ -575,15 +584,15 @@ class EbayApiController extends Controller {
             $model->buyIstNowPrice = $dom->getElementsByTagName('BuyItNowPrice')->item(0)->nodeValue;
             $model->country = $dom->getElementsByTagName('Country')->item(0)->nodeValue;
             $model->currency = $dom->getElementsByTagName('Currency')->item(0)->nodeValue;
-            
+
             //elminate gallery in description
             if (strpos($dom->getElementsByTagName('Description')->item(0)->nodeValue, '<!--CSG INDICATOR END-->') !== false) {
                 $description_array = explode('<!--CSG INDICATOR END-->', $dom->getElementsByTagName('Description')->item(0)->nodeValue);
                 $model->description = $description_array[1];
-            }else{
-                $model->description = $dom->getElementsByTagName('Description')->item(0)->nodeValue; 
+            } else {
+                $model->description = $dom->getElementsByTagName('Description')->item(0)->nodeValue;
             }
-            
+
             $model->giftIcon = $dom->getElementsByTagName('GiftIcon')->item(0)->nodeValue;
             $model->hitCounter = $dom->getElementsByTagName('HitCounter')->item(0)->nodeValue;
             $model->itemID = $dom->getElementsByTagName('ItemID')->item(0)->nodeValue;

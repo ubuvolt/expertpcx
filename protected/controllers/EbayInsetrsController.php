@@ -38,7 +38,7 @@ class EbayInsetrsController extends Controller {
                     'createImage',
                     'reStartGenerateImages'
                 ),
-                'users' => array('admin', 'piotr', 'hairacc'),
+                'users' => array('bartek', 'piotr'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
@@ -232,14 +232,7 @@ class EbayInsetrsController extends Controller {
         $curent_company = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'curent_company_flow');
         $company_image_counter = AdminCentralStorage::get_central_setting(Yii::app()->user->name, 'company_image_counter');
 
-//        piotr
-//        d::d($curent_company); 'expertpcx' 
-        d::d($company_image_counter); //1
-
         if (DEVELOPMENT) {
-
-//            d::d(__LINE__);
-
             if ($curent_company == 'hairacc4you')
                 $prestashop_img_home_path = "/var/www/prestashop/img/p/";
             if ($curent_company == 'expertpcx')
@@ -262,20 +255,11 @@ class EbayInsetrsController extends Controller {
             $db = 'db_expert';
         }
 
-//        d::d($curent_company); //expertpcx
-//        d::d($seller_userID); //expertpcx
-//        d::d($db); //db_expert
-        d::d('company_image_counter');
-        d::d($company_image_counter);
-
         $sql = 'SELECT ps_id_product, pictureURL FROM ebay_item WHERE `ps_id_product` IS NOT NULL AND `seller_userID` = "' . $seller_userID . '" ORDER BY `id` ASC LIMIT ' . $company_image_counter . ', ' . $this->jump;
 
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
         
-        d::d(count($results));
-
-//          d::d($results);
 //              1 => array
 //            (
 //                'ps_id_product' => '2179'
@@ -331,13 +315,6 @@ class EbayInsetrsController extends Controller {
      * @param type $prestashop_img_home_path
      */
     public function createImage($id_image, $picture_url, $prestashop_img_home_path, $curent_company, $db) {
-
-        d::d('id_image');
-        d::d($id_image);
-        d::d('picture_url');
-        d::d($picture_url);
-        d::d('prestashop_img_home_path');
-        d::d($prestashop_img_home_path);
 
         $path_chunks = str_split($id_image);
 
