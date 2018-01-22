@@ -9,14 +9,16 @@
  */
 
 
-DROP TABLE IF EXISTS `ebay_price_monitor`;
+DROP TABLE IF EXISTS `ebay_price_tracking`;
 
-CREATE TABLE `ebay_price_monitor` 
+CREATE TABLE `ebay_price_tracking` 
 (
-    `id`            INT NOT NULL AUTO_INCREMENT,
-    `product`       VARCHAR(600),
-    `seller`        VARCHAR(128),
-    `url`           VARCHAR(2048) NOT NULL,
-    `price`         FLOAT(7,2),
+    `id`                    INT NOT NULL AUTO_INCREMENT,
+    `ebay_item_id`          VARCHAR(64),
+    `modified`              TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `flow`                  TINYINT(1),
+    `referral_ebay_item_id` VARCHAR(64),
+    `price`                 FLOAT(7,2),
+    `log`                   TEXT,
     primary key (`id`)
 ) engine=InnoDB DEFAULT CHARSET=utf8;

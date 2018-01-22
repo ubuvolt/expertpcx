@@ -30,14 +30,16 @@
                     style="float: left; cursor: pointer;"
                     id="my_<?php echo $eBayId; ?>"
                     class="button_my" 
-                    eBayId="<?php echo $eBayId; ?>">
+                    eBayId="<?php echo $eBayId; ?>"
+                    eBayPrice="<?php echo $details['currentPrice']; ?>">
                     My 
                 </button>
                 <button 
                     style="float: left; margin-top: 10px; cursor: pointer;"
                     id="track_<?php echo $eBayId; ?>"
                     class="button_track" 
-                    eBayId="<?php echo $eBayId; ?>">
+                    eBayId="<?php echo $eBayId; ?>"
+                    eBayPrice="<?php echo $details['currentPrice']; ?>">
                     Track
                 </button>
             </td>
@@ -61,34 +63,26 @@
         $('.button_my').click(function () {
 
             var eBayId = $(this).attr('eBayId');
-            update_ebay_price_tracking(eBayId, 'my');
+            var eBayPrice = $(this).attr('eBayPrice');
+            update_ebay_price_tracking(eBayId, eBayPrice, 'my');
 
         });
         $('.button_track').click(function () {
 
             var eBayId = $(this).attr('eBayId');
-            update_ebay_price_tracking(eBayId, 'track');
+            var eBayPrice = $(this).attr('eBayPrice');
+            update_ebay_price_tracking(eBayId, eBayPrice, 'track');
         });
-
-        $(document).on("click", "#submit_button", function () {
-
-            $.post("/index.php?r=ebaySearch/ajaxApplyEbayPriceTracking", {});
-
-            stay(function () {
-                window.location.href = 'index.php?r=ebayApi/main';
-            }, 500); //1 second in milliseconds
-
-        });
-
 
     });
 
     var track = false;
     var my = false;
-    function update_ebay_price_tracking(eBayId, flow) {
+    function update_ebay_price_tracking(eBayId, eBayPrice, flow) {
 
         $.post("/index.php?r=ebaySearch/ajaxUpdateEbayPriceTracking", {
             ebay_id: eBayId,
+            ebay_price: eBayPrice,
             flow: flow
         }, function (response) {
 

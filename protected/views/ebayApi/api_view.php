@@ -57,12 +57,21 @@ if ($price_control) {
                 <div class="description_button">
                     <?php echo "Generate  report about changes prices"; ?>
                 </div>
-                <button>
-                    <!--///////////////////////////
-                    // 3 - raport aboute prices - (ebayPriceEmail button) API CALL
-                    ///////////////////////////-->
-                    <a title="ebay/ebayPriceEmail" href="index.php?r=ebay/ebayPriceEmail">Ebay Price Email</a>
-                </button>
+                <!--///////////////////////////
+                // 3 - raport aboute prices - (ebayPriceEmail button) API CALL
+                ///////////////////////////-->
+                <?php
+                if (PRODUCTION) {
+                    ?>    
+                    <a href="index.php?r=ebay/ebayPriceEmail" class="button">Ebay Price Email</a>
+                    <?php
+                } else {
+                    ?>
+                    <span style="float: left;"><?php echo 'Ebay Price Email Live';?></span>
+                    <?php
+                }
+                ?>
+
             </div> 
         </div>
     </div>
@@ -285,7 +294,7 @@ if ($mailing) {
             $("#dialog_open").dialog();
             $('#item_report_').html(
                     'Incompatible item'
-<?php // foreach ($compare_items["diff_item"] as $item_id){                 ?>
+<?php // foreach ($compare_items["diff_item"] as $item_id){                     ?>
 //                        +'<br> itemID: '+
 <?php
 //                         echo $item_id;
@@ -374,5 +383,15 @@ if ($mailing) {
         padding:0 5px;
         margin: 0 5px;
         cursor: pointer;
+    }
+
+    a.button {
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        float: left;
+        text-decoration: none;
+        color: initial;
+        padding: 1px 5px 1px 5px;
     }
 </style>

@@ -10,6 +10,12 @@
     x
 </button>
 
+<div style="margin-left: 30px; float: left;" >
+    <button>
+        <a  href="index.php?r=ebayApi/main">Back</a>
+    </button>
+</div> 
+
 <div style="clear: both"></div>
 <br>
 <br>
@@ -33,6 +39,18 @@
             $('#users_search').val('');
             load_search_list('');
         });
+
+        //
+        $(document).on("click", "#submit_button", function () {
+
+            $.post("/index.php?r=ebaySearch/ajaxApplyEbayPriceTracking", {});
+
+            stay(function () {
+                window.location.href = 'index.php?r=ebayApi/main';
+            }, 500); //1 second in milliseconds
+
+        });
+
     });
 
     function load_search_list(search_value) {

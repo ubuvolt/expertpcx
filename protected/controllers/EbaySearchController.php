@@ -82,32 +82,34 @@ class EbaySearchController extends Controller {
         $resp = simplexml_load_file($apicall);
 
         // Check to see if the request was successful, else print an error
+        $result_array = array();
         if ($resp->ack == "Success") {
-            $result_array = array();
-            // If the response was loaded, parse it and build links
-            foreach ($resp->searchResult->item as $item) {
-                
-                $ebayID = (string) $item->itemId;
-                $result_array[$ebayID]['title'] = (string) $item->title;
-                $result_array[$ebayID]['galleryURL'] = (string) $item->galleryURL;
-                $result_array[$ebayID]['viewItemURL'] = (string) $item->viewItemURL;
-                $result_array[$ebayID]['paymentMethod'] = (string) $item->paymentMethod;
-                $result_array[$ebayID]['postalCode'] = (string) $item->postalCode;
-                $result_array[$ebayID]['location'] = (string) $item->location;
-                $result_array[$ebayID]['country'] = (string) $item->country;
+            if (!empty($resp->searchResult->item)) {
+                // If the response was loaded, parse it and build links
+                foreach ($resp->searchResult->item as $item) {
 
-                $result_array[$ebayID]['shippingServiceCost'] = (string) $item->shippingInfo->shippingServiceCost;
-                $result_array[$ebayID]['shippingType'] = (string) $item->shippingInfo->shippingType;
-                $result_array[$ebayID]['shipToLocations'] = (string) $item->shippingInfo->shipToLocations;
+                    $ebayID = (string) $item->itemId;
+                    $result_array[$ebayID]['title'] = (string) $item->title;
+                    $result_array[$ebayID]['galleryURL'] = (string) $item->galleryURL;
+                    $result_array[$ebayID]['viewItemURL'] = (string) $item->viewItemURL;
+                    $result_array[$ebayID]['paymentMethod'] = (string) $item->paymentMethod;
+                    $result_array[$ebayID]['postalCode'] = (string) $item->postalCode;
+                    $result_array[$ebayID]['location'] = (string) $item->location;
+                    $result_array[$ebayID]['country'] = (string) $item->country;
 
-                $result_array[$ebayID]['currentPrice'] = (string) $item->sellingStatus->currentPrice;
-                $result_array[$ebayID]['convertedCurrentPrice'] = (string) $item->sellingStatus->convertedCurrentPrice;
-                $result_array[$ebayID]['sellingState'] = (string) $item->sellingStatus->sellingState;
+                    $result_array[$ebayID]['shippingServiceCost'] = (string) $item->shippingInfo->shippingServiceCost;
+                    $result_array[$ebayID]['shippingType'] = (string) $item->shippingInfo->shippingType;
+                    $result_array[$ebayID]['shipToLocations'] = (string) $item->shippingInfo->shipToLocations;
 
-                $result_array[$ebayID]['conditionDisplayName'] = (string) $item->condition->conditionDisplayName;
+                    $result_array[$ebayID]['currentPrice'] = (string) $item->sellingStatus->currentPrice;
+                    $result_array[$ebayID]['convertedCurrentPrice'] = (string) $item->sellingStatus->convertedCurrentPrice;
+                    $result_array[$ebayID]['sellingState'] = (string) $item->sellingStatus->sellingState;
 
-                $result_array[$ebayID]['listingType'] = (string) $item->listingInfo->listingType;
-                $result_array[$ebayID]['watchCount'] = (string) $item->listingInfo->watchCount;
+                    $result_array[$ebayID]['conditionDisplayName'] = (string) $item->condition->conditionDisplayName;
+
+                    $result_array[$ebayID]['listingType'] = (string) $item->listingInfo->listingType;
+                    $result_array[$ebayID]['watchCount'] = (string) $item->listingInfo->watchCount;
+                }
             }
         }
 
@@ -127,9 +129,11 @@ class EbaySearchController extends Controller {
     public function actionAjaxUpdateEbayPriceTracking() {
 
         $ebay_id = $_POST['ebay_id'];
+        $ebay_price = $_POST['ebay_price'];
         $flow = $_POST['flow'];
 
-        $_SESSION['ebay_price_tracking'][$ebay_id] = $flow;
+        $_SESSION['ebay_price_tracking'][$ebay_id]['flow'] = $flow;
+        $_SESSION['ebay_price_tracking'][$ebay_id]['price'] = $ebay_price;
 
         echo CJSON::encode(array(
             'status' => 'success',
@@ -137,17 +141,48 @@ class EbaySearchController extends Controller {
             'flow' => $flow,
         ));
     }
-    
-    public function actionAjaxClearEbayPriceTracking(){
-        
+
+    public function actionAjaxClearEbayPriceTracking() {
+
         $_SESSION['ebay_price_tracking'] = array();
-        
     }
-    
+
     public function actionAjaxApplyEbayPriceTracking() {
 
         d::d($_SESSION['ebay_price_tracking']);
 
+        if (!empty($_SESSION['ebay_price_tracking'])) {
+
+            $referral_ebay_item_id = '';
+
+            foreach ($_SESSION['ebay_price_tracking'] as $ebai_item_id => $details) {
+                if ($details['flow'] == 'my')
+                    $referral_ebay_item_id = $ebai_item_id;
+            }
+            foreach ($_SESSION['ebay_price_tracking'] as $ebai_item_id => $details) {
+
+                $ebayPriceTracking = new EbayPriceTracking();
+
+                $ebayPriceTracking->ebay_item_id = $ebai_item_id;
+                $ebayPriceTracking->modified = date('Ymd');
+                $ebayPriceTracking->flow = EbayPriceTracking::setFlow($details['flow']);
+                $ebayPriceTracking->referral_ebay_item_id = $referral_ebay_item_id;
+                $ebayPriceTracking->price = $details['price'];
+                $ebayPriceTracking->log = 'log - log';
+
+                try {
+                    // try to save
+                    $ret = $ebayPriceTracking->save();
+                } catch (CDbException $e) {
+                    // catch database exception
+                    $message = $e->getMessage() . ' ' . CVarDumper::dumpAsString($e->errorInfo);
+                }
+                if ($ret !== true) {
+                    // catch model validation errors
+                    $message = CVarDumper::dumpAsString($ebayPriceTracking->getErrors());
+                }
+            }
+        }
     }
 
 }
