@@ -95,5 +95,5 @@ class Helper extends CComponent {
         $string = preg_replace('/<[^<]+?>/', ' ', $string);
         return $string;
     }
-
+    
 }

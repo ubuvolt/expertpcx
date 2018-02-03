@@ -10,9 +10,27 @@
     x
 </button>
 
-<div style="margin-left: 30px; float: left;" >
+<div style="margin-left: 20px; float: left;" >
     <button>
-        <a  href="index.php?r=ebayApi/main">Back</a>
+        <a title="ebayApi/main" href="index.php?r=ebayApi/main">Back</a>
+    </button>
+</div> 
+
+<div style="margin-left: 10px; float: left;" >
+    <button>
+        <a title="ebayPriceTracking/admin" href="index.php?r=ebayPriceTracking/admin">Trackings Admin</a>
+    </button>
+</div> 
+
+<div style="margin-left: 10px; float: left;" >
+    <button>
+        <a title="ebayPriceMonitor/performeItemTracking" href="index.php?r=ebayPriceMonitor/performeItemTracking">Test</a>
+    </button>
+</div> 
+
+<div style="margin-left: 10px; float: left;" >
+    <button>
+        <a title="ebayPriceTracking/ebayTrackingView" href="index.php?r=EbayPriceTracking/ebayTrackingView">Tracking View</a>
     </button>
 </div> 
 

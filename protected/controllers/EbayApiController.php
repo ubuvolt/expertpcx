@@ -566,7 +566,7 @@ class EbayApiController extends Controller {
         $report_array = array();
 
         foreach ($response as $item_id => $xml) {
-            file_put_contents("/var/www/engine/newxhtmlssss.xhtml", "\n" . $xml, FILE_APPEND);
+//            file_put_contents("/var/www/engine/newxhtmlssss.xhtml", "\n" . $xml, FILE_APPEND);
 
             $elements = '';
             $dom = new DOMDocument();

@@ -14,6 +14,9 @@
  */
 class EbayPriceTracking extends CActiveRecord {
 
+    const OUR_ITEM = 1;
+    const COMPETITOR_ITEM = 2;
+    
     /**
      * @return string the associated database table name
      */
