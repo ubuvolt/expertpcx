@@ -60,8 +60,8 @@ class EbayPriceMonitorController extends Controller {
     public function actionCreate() {
         $model = new EbayPriceMonitor;
 
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
 
         if (isset($_POST['EbayPriceMonitor'])) {
             $model->attributes = $_POST['EbayPriceMonitor'];
@@ -82,8 +82,8 @@ class EbayPriceMonitorController extends Controller {
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
 
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
 
         if (isset($_POST['EbayPriceMonitor'])) {
             $model->attributes = $_POST['EbayPriceMonitor'];
@@ -104,7 +104,7 @@ class EbayPriceMonitorController extends Controller {
     public function actionDelete($id) {
         $this->loadModel($id)->delete();
 
-        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
     }
@@ -158,67 +158,53 @@ class EbayPriceMonitorController extends Controller {
         }
     }
 
-    ///
-    ///
-    ///
-    ///
-    ///
-    ///
-    ///
-    ///
-    ///
-    ///
-    ///
-    ///
+///
+///
+///
     public function actionPerformeItemTracking() {
+        $ebay_price_tracking_array = $this->getEbayPriceTracking(0);
 
-        $ebay_price_tracking_array = $this->getEbayTrackingItem(1);
+        $ebay_api = new Ebay_api();
+        $apiKey = $ebay_api->getApiKey();
 
-        $this->processEbayTrackingItem($ebay_price_tracking_array);
+        $api_call = new Api_call();
+        $headers = $api_call->apiHeaders($apiKey, 'GetItem');
 
-//        d::d($ebay_price_tracking_array);
-//        
-        // our 172778662589
-//        182987807629
-//        332376836311
-//        132479590238
-//
-//        $ebay_api = new Ebay_api();
-//        $apiKey = $ebay_api->getApiKey();
-//
-//        $api_call = new Api_call();
-//        $headers = $api_call->apiHeaders($apiKey, 'GetItem');
-//
-//        //
-//        //
-//        //
-//        
-////        $item_id = 172778662589;
-//        $item_id = 112557634433;
-//
-//        $xml_request = $api_call->getItem($apiKey['appToken'], $item_id);
-//        $response = $api_call->ebayApiCall($headers, $xml_request, $apiKey['serverUrl']);
-////        d::d($response);        
-////
-//////        bazujemu na flow z EbayApiController processeItem
-////
-////        //
-////        //
-////        //
-////        
-//        $dom = new DOMDocument();
-//        $dom->loadXML($response);
-////
-//////        d::d($response);
-////
-//        d::d($dom->getElementsByTagName('ConvertedStartPrice')->item(0)->nodeValue);
-//        d::d($dom->getElementsByTagName('CurrentPrice')->item(0)->nodeValue);
-//        d::d($dom->getElementsByTagName('ConvertedCurrentPrice')->item(0)->nodeValue);
-//        d::d($dom->getElementsByTagName('MinimumToBid')->item(0)->nodeValue);
-//        d::d($dom->getElementsByTagName('Quantity')->item(0)->nodeValue);
+        foreach ($ebay_price_tracking_array as $ebay_product_id => $product_details) {
+
+            sleep(0.5);
+
+            $xml_request = $api_call->getItem($apiKey['appToken'], $ebay_product_id);
+            $response = $api_call->ebayApiCall($headers, $xml_request, $apiKey['serverUrl']);
+
+            $dom = new DOMDocument();
+            $dom->loadXML($response);
+
+            $ebay_item_price = (float) $this->ebayItemPrice($dom);
+            $ebay_item_qty = (int) $dom->getElementsByTagName('Quantity')->item(0)->nodeValue;
+
+            //
+            // save data
+            $this->saveEbayTrackingPrice($ebay_product_id, $ebay_item_price);
+            $this->processEbayTrackingStore($ebay_product_id, $ebay_item_qty);
+        }
     }
 
-    private function getEbayTrackingItem($limit = 0) {
+    private function ebayItemPrice($dom) {
+        $converted_start_price = $dom->getElementsByTagName('ConvertedStartPrice')->item(0)->nodeValue;
+        if ($converted_start_price)
+            return $converted_start_price;
+
+        $current_price = $dom->getElementsByTagName('CurrentPrice')->item(0)->nodeValue;
+        if ($current_price)
+            return $current_price;
+
+        $converted_current_price = $dom->getElementsByTagName('ConvertedCurrentPrice')->item(0)->nodeValue;
+        if ($converted_current_price)
+            return;
+    }
+
+    private function getEbayPriceTracking($limit = 0) {
         /*
          * TO DO:
          * 
@@ -227,7 +213,7 @@ class EbayPriceMonitorController extends Controller {
          * 
          */
 
-        // get all our items referral_ebay_item_id = 1
+// get all our items referral_ebay_item_id = 1
         $criteria = new CDbCriteria();
         $criteria->condition = 'flow = ' . EbayPriceTracking::OUR_ITEM;
         if ($limit > 0)
@@ -235,59 +221,61 @@ class EbayPriceMonitorController extends Controller {
 
         $our_EbayPriceTracking = EbayPriceTracking::model()->findAll($criteria);
 
-        // create php for our_item array to use 
+// create php for our_item array to use 
         $our_item_array = array();
         foreach ($our_EbayPriceTracking as $our_item) {
             $our_item_array[$our_item->ebay_item_id]['level'] = 'parent';
-            $our_item_array[$our_item->ebay_item_id]['price'] = $our_item->price;
+            $our_item_array[$our_item->ebay_item_id]['id'] = $our_item->id;
+            $our_item_array[$our_item->ebay_item_id]['ebay_item_id'] = $our_item->ebay_item_id;
             $our_item_array[$our_item->ebay_item_id]['modified'] = $our_item->modified;
             $our_item_array[$our_item->ebay_item_id]['flow'] = $our_item->flow;
+            $our_item_array[$our_item->ebay_item_id]['referral_ebay_item_id'] = $our_item->referral_ebay_item_id;
+            $our_item_array[$our_item->ebay_item_id]['price'] = $our_item->price;
             $our_item_array[$our_item->ebay_item_id]['log'] = $our_item->log;
         }
 
-        // based on ours items we collect corresponding items our competition
+// based on ours items we collect corresponding items our competition
         $ebay_price_tracking_array = array();
         foreach ($our_item_array as $our_ebay_item_id => $details) {
-            // get all our items referral_ebay_item_id = 1
+
+// get all our items referral_ebay_item_id = 1
             $criteria = new CDbCriteria();
             $criteria->condition = 'flow = ' . EbayPriceTracking::COMPETITOR_ITEM . ' AND referral_ebay_item_id = ' . $our_ebay_item_id;
             $competitor_EbayPriceTracking = EbayPriceTracking::model()->findAll($criteria);
+//
+            $ebay_price_tracking_array[$our_ebay_item_id] = $our_item_array[$our_ebay_item_id];
 
-            $ebay_price_tracking_array[$our_ebay_item_id]['details'] = $our_item_array[$our_ebay_item_id];
-
-            // create php for competitor_item array to use 
+// create php for competitor_item array to use 
             foreach ($competitor_EbayPriceTracking as $competitor_item) {
-                $ebay_price_tracking_array[$our_ebay_item_id][$competitor_item->ebay_item_id]['details']['level'] = 'child';
-                $ebay_price_tracking_array[$our_ebay_item_id][$competitor_item->ebay_item_id]['details']['price'] = $our_item->price;
-                $ebay_price_tracking_array[$our_ebay_item_id][$competitor_item->ebay_item_id]['details']['modified'] = $our_item->modified;
-                $ebay_price_tracking_array[$our_ebay_item_id][$competitor_item->ebay_item_id]['details']['flow'] = $our_item->flow;
-                $ebay_price_tracking_array[$our_ebay_item_id][$competitor_item->ebay_item_id]['details']['log'] = $our_item->log;
+                $ebay_price_tracking_array[$competitor_item->ebay_item_id]['level'] = 'child';
+                $ebay_price_tracking_array[$competitor_item->ebay_item_id]['id'] = $competitor_item->id;
+                $ebay_price_tracking_array[$competitor_item->ebay_item_id]['ebay_item_id'] = $competitor_item->ebay_item_id;
+                $ebay_price_tracking_array[$competitor_item->ebay_item_id]['modified'] = $competitor_item->modified;
+                $ebay_price_tracking_array[$competitor_item->ebay_item_id]['flow'] = $competitor_item->flow;
+                $ebay_price_tracking_array[$competitor_item->ebay_item_id]['referral_ebay_item_id'] = $competitor_item->referral_ebay_item_id;
+                $ebay_price_tracking_array[$competitor_item->ebay_item_id]['price'] = $competitor_item->price;
+                $ebay_price_tracking_array[$competitor_item->ebay_item_id]['log'] = $competitor_item->log;
             }
         }
-
         return $ebay_price_tracking_array;
     }
 
-    public function processEbayTrackingItem($ebay_item_array) {
+    public function saveEbayTrackingPrice($ebay_item_id, $ebay_item_price) {
 
-        foreach ($ebay_item_array as $parent_ebay_item_id => $ebay_item_details) {
+        $ebayTrakingPrice = new EbayTrakingPrice();
+        $ebayTrakingPrice->ebayItemID = $ebay_item_id;
+        $ebayTrakingPrice->price = $ebay_item_price;
+        $ebayTrakingPrice->modified = date('Y-m-d H:i:s');
+        $ebayTrakingPrice->save();
+    }
 
-//            d::d($parent_ebay_item_id);
-//            d::d($ebay_item_details['details']);
+    public function processEbayTrackingStore($ebay_item_id, $ebay_item_qty) {
 
-            foreach ($ebay_item_details as $child_ebay_item_id => $child_item) {
-                if ($child_item['level'] != 'parent') {
-                    foreach ($child_item as $child_details) {
-                        $ebayTrakingPrice = new EbayTrakingPrice();
-                        $ebayTrakingPrice->ebayItemID = $child_ebay_item_id;
-                        $ebayTrakingPrice->price = $child_details['price'];
-                        $ebayTrakingPrice->modified = date('Ymd');
-                        $ebayTrakingPrice->save();
-                    }
-//                    
-                }
-            }
-        }
+        $ebayTrakingPrice = new EbayTrakingStore();
+        $ebayTrakingPrice->ebayItemID = $ebay_item_id;
+        $ebayTrakingPrice->store = $ebay_item_qty;
+        $ebayTrakingPrice->modified = date('Y-m-d H:i:s');
+        $ebayTrakingPrice->save();
     }
 
 }

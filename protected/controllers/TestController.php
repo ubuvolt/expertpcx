@@ -157,4 +157,9 @@ class TestController extends Controller {
             Yii::app()->end();
         }
     }
+    
+    public function actionTest() {
+        d::d(date('Y-m-d H:i:s'));
+    }
+            
 }

@@ -160,15 +160,20 @@ class EbayPriceTrackingController extends Controller {
 
     public function actionEbayTrackingView() {
 
+        $ebay_traking_price = $this->getTrackingViewEbayTrakingPrice();
+        $ebay_traking_store = $this->getTrackingViewEbayTrakingStore();
+        
+        $this->render('trackingView', array(
+            'ebay_traking_price' => $ebay_traking_price,
+            'ebay_traking_store' => $ebay_traking_store
+        ));
+    }
+
+    public function getTrackingViewEbayTrakingPrice() {
         $sql = 'SELECT * FROM ebay_traking_price ORDER BY id, modified';
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
 
-//        'id' => '2'
-//        'ebayItemID' => '332376836311'
-//        'price' => '21.99'
-//        'modified' => '2018-01-27 00:00:00'
-//        
         // grouping by ebayItemID
         $ebay_item_id_array = array();
         foreach ($results as $ebayItem)
@@ -177,16 +182,37 @@ class EbayPriceTrackingController extends Controller {
 
         foreach ($ebay_item_id_array as $ebay_item_id) {
             foreach ($results as $ebayItem) {
-                
-                if($ebay_item_id == $ebayItem['ebayItemID']){
-                  $ebay_traking_price[$ebayItem['ebayItemID']][] = $ebayItem; 
+
+                if ($ebay_item_id == $ebayItem['ebayItemID']) {
+                    $ebay_traking_price[$ebayItem['ebayItemID']][] = $ebayItem;
                 }
             }
         }
+        
+        return $ebay_traking_price;
+    }
+    
+    public function getTrackingViewEbayTrakingStore() {
+        $sql = 'SELECT * FROM ebay_traking_store ORDER BY id, modified';
+        $command = Yii::app()->db->createCommand($sql);
+        $results = $command->queryAll();
 
-        $this->render('trackingView', array(
-            'ebay_traking_price' => $ebay_traking_price
-        ));
+        // grouping by ebayItemID
+        $ebay_item_id_array = array();
+        foreach ($results as $ebayItem)
+            $ebay_item_id_array[$ebayItem['ebayItemID']] = $ebayItem['ebayItemID'];
+
+
+        foreach ($ebay_item_id_array as $ebay_item_id) {
+            foreach ($results as $ebayItem) {
+
+                if ($ebay_item_id == $ebayItem['ebayItemID']) {
+                    $ebay_traking_store[$ebayItem['ebayItemID']][] = $ebayItem;
+                }
+            }
+        }
+        
+        return $ebay_traking_store;
     }
 
 }
