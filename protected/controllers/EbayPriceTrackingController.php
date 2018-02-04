@@ -162,7 +162,7 @@ class EbayPriceTrackingController extends Controller {
 
         $ebay_traking_price = $this->getTrackingViewEbayTrakingPrice();
         $ebay_traking_store = $this->getTrackingViewEbayTrakingStore();
-        
+
         $this->render('trackingView', array(
             'ebay_traking_price' => $ebay_traking_price,
             'ebay_traking_store' => $ebay_traking_store
@@ -170,7 +170,22 @@ class EbayPriceTrackingController extends Controller {
     }
 
     public function getTrackingViewEbayTrakingPrice() {
-        $sql = 'SELECT * FROM ebay_traking_price ORDER BY id, modified';
+        $sql = "
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified";
+
+
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
 
@@ -188,12 +203,25 @@ class EbayPriceTrackingController extends Controller {
                 }
             }
         }
-        
+
         return $ebay_traking_price;
     }
-    
+
     public function getTrackingViewEbayTrakingStore() {
-        $sql = 'SELECT * FROM ebay_traking_store ORDER BY id, modified';
+        $sql = "
+            SELECT
+                    store.id,
+                    store.ebayItemID,
+                    store.store,
+                    store.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_store AS store
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = store.ebayItemID
+
+            ORDER BY id, modified";
         $command = Yii::app()->db->createCommand($sql);
         $results = $command->queryAll();
 
@@ -211,7 +239,7 @@ class EbayPriceTrackingController extends Controller {
                 }
             }
         }
-        
+
         return $ebay_traking_store;
     }
 

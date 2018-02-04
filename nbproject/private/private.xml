@@ -3,16 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php</file>
-            <file>file:/var/www/engine.expertpcx/protected/models/EbayPriceTracking.php</file>
             <file>file:/var/www/engine.expertpcx/protected/controllers/EbayPriceMonitorController.php</file>
-            <file>file:/var/www/engine.expertpcx/protected/views/ebayPriceTracking/trackingView.php</file>
-            <file>file:/var/www/engine.expertpcx/protected/components/Api_call.php</file>
-            <file>file:/var/www/engine.expertpcx/protected/components/Helper.php</file>
-            <file>file:/var/www/engine.expertpcx/protected/components/Ebay_api.php</file>
-            <file>file:/var/www/engine.expertpcx/protected/controllers/EbayApiController.php</file>
-            <file>file:/var/www/engine.expertpcx/protected/views/ebaySearch/api_search_view.php</file>
-            <file>file:/var/www/engine.expertpcx/protected/models/EbayTrakingPrice.php</file>
         </group>
     </open-files>
 </project-private>

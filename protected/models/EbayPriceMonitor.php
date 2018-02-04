@@ -1,6 +1,9 @@
 <?php
 
 /**
+ * 
+ *          URL
+ * 
  * This is the model class for table "ebay_price_monitor".
  *
  * The followings are the available columns in table 'ebay_price_monitor':

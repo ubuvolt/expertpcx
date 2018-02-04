@@ -4,7 +4,7 @@
 if (!empty($ebay_traking_price)) {
     foreach ($ebay_traking_price as $ebay_item_id => $ebay_item) {
         ?>
-        <div class="item_id">
+        <div class="item_id" style="<?php echo ($ebay_item[0]['flow'] == '1' ? 'font-weight: bold;' : '' ); ?>" >
             <?php echo $ebay_item_id; ?>
         </div>
         <?php
@@ -43,7 +43,7 @@ if (!empty($ebay_traking_price)) {
 if (!empty($ebay_traking_store)) {
     foreach ($ebay_traking_store as $ebay_item_id => $ebay_item) {
         ?>
-        <div class="item_id">
+        <div class="item_id" style="<?php echo ($ebay_item[0]['flow'] == '1' ? 'font-weight: bold;' : '' ); ?>" >
             <?php echo $ebay_item_id; ?>
         </div>
         <?php
