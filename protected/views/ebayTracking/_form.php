@@ -1,13 +1,13 @@
 <?php
-/* @var $this EbayPriceTrackingController */
-/* @var $model EbayPriceTracking */
+/* @var $this EbayTrackingController */
+/* @var $model EbayTracking */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'ebay-price-tracking-form',
+	'id'=>'ebay-tracking-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.

@@ -1,10 +1,17 @@
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
 <div style="float: left; clear: both;">Price</div>
 <div style="clear: both;"></div>
 <?php
 if (!empty($ebay_traking_price)) {
     foreach ($ebay_traking_price as $ebay_item_id => $ebay_item) {
         ?>
-        <div class="item_id" style="<?php echo ($ebay_item[0]['flow'] == '1' ? 'font-weight: bold;' : '' ); ?>" >
+        <div class="eBayItemId item_id" eBayItemId ="<?php echo $ebay_item_id; ?>" style="<?php echo ($ebay_item[0]['flow'] == '1' ? 'font-weight: bold;' : '' ); ?>" >
             <?php echo $ebay_item_id; ?>
         </div>
         <?php
@@ -43,7 +50,7 @@ if (!empty($ebay_traking_price)) {
 if (!empty($ebay_traking_store)) {
     foreach ($ebay_traking_store as $ebay_item_id => $ebay_item) {
         ?>
-        <div class="item_id" style="<?php echo ($ebay_item[0]['flow'] == '1' ? 'font-weight: bold;' : '' ); ?>" >
+        <div class="eBayItemId item_id" eBayItemId ="<?php echo $ebay_item_id; ?>" style="<?php echo ($ebay_item[0]['flow'] == '1' ? 'font-weight: bold;' : '' ); ?>" >
             <?php echo $ebay_item_id; ?>
         </div>
         <?php
@@ -76,6 +83,30 @@ if (!empty($ebay_traking_store)) {
     <?php
 }
 ?>
+
+<div id="dialog_open" style="position:relative">
+    <div id="dialog_open_content"></div>
+</div>   
+        
+<script>
+  $(function () {       
+        $('.eBayItemId').click(function () {
+            var eBayItemId =  $(this).attr('eBayItemId');
+            
+            $("#dialog_open").dialog({width: 600, height: 400, autoOpen: true, resizable: false, hide: "slideUp", modal: true});
+            $("#dialog_open").dialog('option', 'title', "Product details: "+eBayItemId);
+            $("#dialog_open_content").load("index.php?r=ebayTracking/dialogBoxTraking", {
+                eBayItemId: eBayItemId
+            });
+            $("#dialog_close").dialog('close');
+
+            
+
+           
+        });
+    });
+
+</script>
 
 
 <style>
@@ -110,4 +141,5 @@ if (!empty($ebay_traking_store)) {
         padding: 1px;
         float: left;
     }
+    .eBayItemId{display:block}
 </style>

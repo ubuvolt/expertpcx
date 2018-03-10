@@ -10,27 +10,27 @@
     x
 </button>
 
-<div style="margin-left: 20px; float: left;" >
+<div class="description_button">
     <button>
         <a title="ebayApi/main" href="index.php?r=ebayApi/main">Back</a>
     </button>
 </div> 
 
-<div style="margin-left: 10px; float: left;" >
+<div class="description_button">
     <button>
-        <a title="ebayPriceTracking/admin" href="index.php?r=ebayPriceTracking/admin">Trackings Admin</a>
+        <a title="ebayTracking/admin" href="index.php?r=ebayTracking/admin">Trackings Admin</a>
     </button>
 </div> 
 
-<div style="margin-left: 10px; float: left;" >
+<div class="description_button" >
     <button>
         <a title="ebayPriceMonitor/performeItemTracking" href="index.php?r=ebayPriceMonitor/performeItemTracking">Test</a>
     </button>
 </div> 
 
-<div style="margin-left: 10px; float: left;" >
+<div class="description_button">
     <button>
-        <a title="ebayPriceTracking/ebayTrackingView" href="index.php?r=EbayPriceTracking/ebayTrackingView">Tracking View</a>
+        <a title="ebayTracking/ebayTrackingView" href="index.php?r=EbayTracking/ebayTrackingView">Tracking View</a>
     </button>
 </div> 
 
@@ -44,12 +44,19 @@
     $(function () {
 
         $('#users_search').keyup(function (e) {
+
             var search_value = $(this).val();
+
+            $('#users_search').css("background-color","#ebd9a3");
 
             stay(function () {
                 load_search_list(search_value);
             }, 800); //1 second in milliseconds
         });
+        
+        $('#users_search').keydown(function(e){
+            $('#users_search').css("background-color","#c9e0ed");
+        })
 
         // clear search box
         //
@@ -61,7 +68,7 @@
         //
         $(document).on("click", "#submit_button", function () {
 
-            $.post("/index.php?r=ebaySearch/ajaxApplyEbayPriceTracking", {});
+            $.post("/index.php?r=ebaySearch/ajaxApplyEbayTracking", {});
 
             stay(function () {
                 window.location.href = 'index.php?r=ebayApi/main';
@@ -86,3 +93,25 @@
         };
     })();
 </script>
+
+<style>
+    .description_button
+    {
+        display: block;
+        float: left;
+        background-color: #f3f3e5;
+        border:2px solid white;
+        line-height: 13px;
+        width: auto;
+        font-size: 10px;
+        
+        margin-bottom: 3px;
+        margin-top: 3px;
+        margin-left: 10px;
+    }
+    .description_button a
+    {
+        text-decoration: none;
+        color:black;
+    }
+</style>

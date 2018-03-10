@@ -1,6 +1,6 @@
 <?php
-/* @var $this EbayPriceTrackingController */
-/* @var $data EbayPriceTracking */
+/* @var $this EbayTrackingController */
+/* @var $data EbayTracking */
 ?>
 
 <div class="view">

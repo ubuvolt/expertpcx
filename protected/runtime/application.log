@@ -5197,3 +5197,2011 @@ Stack trace:
 REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
 HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=ebaySearch/ebaySearch
 ---
+2018/02/21 12:01:13 [error] [php] Invalid argument supplied for foreach() (/var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php:3)
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(872): EbaySearchController->renderFile()
+#1 /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php(126): EbaySearchController->renderPartial()
+#2 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbaySearchController->actionAjaxLoadEbaySearchResult()
+#3 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbaySearchController->runAction()
+#5 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#7 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbaySearchController->filterAccessControl()
+#8 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#9 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/yii/framework/web/CController.php(265): EbaySearchController->runActionWithFilters()
+#11 /var/www/yii/framework/web/CWebApplication.php(282): EbaySearchController->run()
+#12 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/engine.expertpcx/index.php(21): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebaySearch/ajaxLoadEbaySearchResult
+in /var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php (3)
+in /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php (126)
+in /var/www/engine.expertpcx/index.php (21)
+2018/02/21 12:02:56 [error] [php] Invalid argument supplied for foreach() (/var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php:3)
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(872): EbaySearchController->renderFile()
+#1 /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php(126): EbaySearchController->renderPartial()
+#2 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbaySearchController->actionAjaxLoadEbaySearchResult()
+#3 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbaySearchController->runAction()
+#5 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#7 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbaySearchController->filterAccessControl()
+#8 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#9 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/yii/framework/web/CController.php(265): EbaySearchController->runActionWithFilters()
+#11 /var/www/yii/framework/web/CWebApplication.php(282): EbaySearchController->run()
+#12 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/engine.expertpcx/index.php(21): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebaySearch/ajaxLoadEbaySearchResult
+in /var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php (3)
+in /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php (126)
+in /var/www/engine.expertpcx/index.php (21)
+2018/02/21 12:03:16 [error] [php] Invalid argument supplied for foreach() (/var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php:3)
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(872): EbaySearchController->renderFile()
+#1 /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php(126): EbaySearchController->renderPartial()
+#2 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbaySearchController->actionAjaxLoadEbaySearchResult()
+#3 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbaySearchController->runAction()
+#5 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#7 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbaySearchController->filterAccessControl()
+#8 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#9 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/yii/framework/web/CController.php(265): EbaySearchController->runActionWithFilters()
+#11 /var/www/yii/framework/web/CWebApplication.php(282): EbaySearchController->run()
+#12 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/engine.expertpcx/index.php(21): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebaySearch/ajaxLoadEbaySearchResult
+in /var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php (3)
+in /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php (126)
+in /var/www/engine.expertpcx/index.php (21)
+2018/02/21 12:03:54 [error] [php] Invalid argument supplied for foreach() (/var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php:3)
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(872): EbaySearchController->renderFile()
+#1 /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php(126): EbaySearchController->renderPartial()
+#2 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbaySearchController->actionAjaxLoadEbaySearchResult()
+#3 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbaySearchController->runAction()
+#5 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#7 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbaySearchController->filterAccessControl()
+#8 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#9 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/yii/framework/web/CController.php(265): EbaySearchController->runActionWithFilters()
+#11 /var/www/yii/framework/web/CWebApplication.php(282): EbaySearchController->run()
+#12 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/engine.expertpcx/index.php(21): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebaySearch/ajaxLoadEbaySearchResult
+in /var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php (3)
+in /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php (126)
+in /var/www/engine.expertpcx/index.php (21)
+2018/02/21 12:03:56 [error] [php] Invalid argument supplied for foreach() (/var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php:3)
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(872): EbaySearchController->renderFile()
+#1 /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php(126): EbaySearchController->renderPartial()
+#2 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbaySearchController->actionAjaxLoadEbaySearchResult()
+#3 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbaySearchController->runAction()
+#5 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#7 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbaySearchController->filterAccessControl()
+#8 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#9 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/yii/framework/web/CController.php(265): EbaySearchController->runActionWithFilters()
+#11 /var/www/yii/framework/web/CWebApplication.php(282): EbaySearchController->run()
+#12 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/engine.expertpcx/index.php(21): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebaySearch/ajaxLoadEbaySearchResult
+in /var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php (3)
+in /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php (126)
+in /var/www/engine.expertpcx/index.php (21)
+2018/02/21 12:19:27 [error] [php] Invalid argument supplied for foreach() (/var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php:3)
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(872): EbaySearchController->renderFile()
+#1 /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php(126): EbaySearchController->renderPartial()
+#2 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbaySearchController->actionAjaxLoadEbaySearchResult()
+#3 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbaySearchController->runAction()
+#5 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#7 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbaySearchController->filterAccessControl()
+#8 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#9 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/yii/framework/web/CController.php(265): EbaySearchController->runActionWithFilters()
+#11 /var/www/yii/framework/web/CWebApplication.php(282): EbaySearchController->run()
+#12 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/engine.expertpcx/index.php(21): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebaySearch/ajaxLoadEbaySearchResult
+in /var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php (3)
+in /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php (126)
+in /var/www/engine.expertpcx/index.php (21)
+2018/02/21 12:19:51 [error] [php] Invalid argument supplied for foreach() (/var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php:3)
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(872): EbaySearchController->renderFile()
+#1 /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php(126): EbaySearchController->renderPartial()
+#2 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbaySearchController->actionAjaxLoadEbaySearchResult()
+#3 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbaySearchController->runAction()
+#5 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#7 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbaySearchController->filterAccessControl()
+#8 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#9 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/yii/framework/web/CController.php(265): EbaySearchController->runActionWithFilters()
+#11 /var/www/yii/framework/web/CWebApplication.php(282): EbaySearchController->run()
+#12 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/engine.expertpcx/index.php(21): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebaySearch/ajaxLoadEbaySearchResult
+in /var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php (3)
+in /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php (126)
+in /var/www/engine.expertpcx/index.php (21)
+2018/02/21 16:53:09 [error] [php] include(DialogBoxWidget.php): failed to open stream: No such file or directory (/var/www/yii/framework/YiiBase.php:432)
+Stack trace:
+#0 unknown(0): spl_autoload_call()
+#1 /var/www/yii/framework/YiiBase.php(303): class_exists()
+#2 /var/www/yii/framework/web/CWidgetFactory.php(146): import()
+#3 /var/www/yii/framework/web/CBaseController.php(146): CWidgetFactory->createWidget()
+#4 /var/www/yii/framework/web/CBaseController.php(181): EbayPriceTrackingController->createWidget()
+#5 /var/www/engine.expertpcx/protected/views/ebayPriceTracking/trackingView.php(93): EbayPriceTrackingController->widget()
+#6 /var/www/yii/framework/web/CBaseController.php(126): require()
+#7 /var/www/yii/framework/web/CBaseController.php(95): EbayPriceTrackingController->renderInternal()
+#8 /var/www/yii/framework/web/CController.php(872): EbayPriceTrackingController->renderFile()
+#9 /var/www/yii/framework/web/CController.php(785): EbayPriceTrackingController->renderPartial()
+#10 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(168): EbayPriceTrackingController->render()
+#11 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#12 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#13 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbayPriceTrackingController->runAction()
+#14 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#15 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#16 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbayPriceTrackingController->filterAccessControl()
+#17 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#18 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#19 /var/www/yii/framework/web/CController.php(265): EbayPriceTrackingController->runActionWithFilters()
+#20 /var/www/yii/framework/web/CWebApplication.php(282): EbayPriceTrackingController->run()
+#21 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#22 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#23 /var/www/engine.expertpcx/index.php(21): CWebApplication->run()
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+in /var/www/engine.expertpcx/protected/views/ebayPriceTracking/trackingView.php (93)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (168)
+in /var/www/engine.expertpcx/index.php (21)
+2018/02/22 14:49:46 [error] [php] Invalid argument supplied for foreach() (/var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php:3)
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(872): EbaySearchController->renderFile()
+#1 /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php(126): EbaySearchController->renderPartial()
+#2 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbaySearchController->actionAjaxLoadEbaySearchResult()
+#3 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbaySearchController->runAction()
+#5 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#7 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbaySearchController->filterAccessControl()
+#8 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#9 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/yii/framework/web/CController.php(265): EbaySearchController->runActionWithFilters()
+#11 /var/www/yii/framework/web/CWebApplication.php(282): EbaySearchController->run()
+#12 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/engine.expertpcx/index.php(21): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebaySearch/ajaxLoadEbaySearchResult
+in /var/www/engine.expertpcx/protected/views/ebaySearch/ajax_load_ebay_search_result.php (3)
+in /var/www/engine.expertpcx/protected/controllers/EbaySearchController.php (126)
+in /var/www/engine.expertpcx/index.php (21)
+2018/02/27 11:41:48 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "test". in /var/www/yii/framework/web/CController.php:486
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(270): CController->missingAction('test')
+#1 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('test')
+#2 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayApi/test')
+#3 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#4 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=ebayApi/test
+---
+2018/02/27 11:42:01 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'engine_expertpcx.test' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `test`.
+in /var/www/engine.expertpcx/protected/views/test/index.php (19)
+in /var/www/engine.expertpcx/protected/controllers/TestController.php (118)
+in /var/www/engine.expertpcx/index.php (21)
+2018/02/27 11:42:01 [error] [exception.CDbException] CDbException: The table "test" for active record class "Test" cannot be found in the database. in /var/www/yii/framework/db/ar/CActiveRecord.php:2390
+Stack trace:
+#0 /var/www/yii/framework/db/ar/CActiveRecord.php(413): CActiveRecordMetaData->__construct(Object(Test))
+#1 /var/www/yii/framework/db/ar/CActiveRecord.php(663): CActiveRecord->getMetaData()
+#2 /var/www/yii/framework/db/ar/CActiveRecord.php(1609): CActiveRecord->getTableSchema()
+#3 /var/www/yii/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#4 /var/www/yii/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#5 /var/www/yii/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#6 /var/www/yii/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#7 /var/www/yii/framework/zii/widgets/CBaseListView.php(125): CDataProvider->getData()
+#8 /var/www/yii/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#9 /var/www/yii/framework/web/CBaseController.php(147): CListView->init()
+#10 /var/www/yii/framework/web/CBaseController.php(181): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#11 /var/www/engine.expertpcx/protected/views/test/index.php(19): CBaseController->widget('zii.widgets.CLi...', Array)
+#12 /var/www/yii/framework/web/CBaseController.php(126): require('/var/www/engine...')
+#13 /var/www/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/engine...', Array, true)
+#14 /var/www/yii/framework/web/CController.php(872): CBaseController->renderFile('/var/www/engine...', Array, true)
+#15 /var/www/yii/framework/web/CController.php(785): CController->renderPartial('index', Array, true)
+#16 /var/www/engine.expertpcx/protected/controllers/TestController.php(118): CController->render('index', Array)
+#17 /var/www/yii/framework/web/actions/CInlineAction.php(49): TestController->actionIndex()
+#18 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#19 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#20 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#21 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#22 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#23 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#24 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#25 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#26 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('')
+#27 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('test')
+#28 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#29 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#30 {main}
+REQUEST_URI=/index.php?r=test
+---
+2018/03/10 08:29:09 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'engine_expertpcx.ebay_traking_price' doesn't exist. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (190)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 08:29:09 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'engine_expertpcx.ebay_traking_price' doesn't exist. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(190): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:01:54 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY DATE_FORMAT(modified, '%Y%m%d')
+
+            LIMIT 10' at line 15. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY DATE_FORMAT(modified, '%Y%m%d')
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (194)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:01:54 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY DATE_FORMAT(modified, '%Y%m%d')
+
+            LIMIT 10' at line 15. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY DATE_FORMAT(modified, '%Y%m%d')
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(194): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:02:28 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY DATE_FORMAT(modified, '%Y%m%d')
+
+            LIMIT 10' at line 15. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY DATE_FORMAT(modified, '%Y%m%d')
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (194)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:02:28 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY DATE_FORMAT(modified, '%Y%m%d')
+
+            LIMIT 10' at line 15. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY DATE_FORMAT(modified, '%Y%m%d')
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(194): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:03:30 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY DATE_FORMAT(modified, '%Y%m')
+
+            LIMIT 10' at line 15. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY DATE_FORMAT(modified, '%Y%m')
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (194)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:03:30 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY DATE_FORMAT(modified, '%Y%m')
+
+            LIMIT 10' at line 15. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY DATE_FORMAT(modified, '%Y%m')
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(194): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:03:31 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY DATE_FORMAT(modified, '%Y%m')
+
+            LIMIT 10' at line 15. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY DATE_FORMAT(modified, '%Y%m')
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (194)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:03:31 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY DATE_FORMAT(modified, '%Y%m')
+
+            LIMIT 10' at line 15. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY DATE_FORMAT(modified, '%Y%m')
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(194): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:05:02 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY DATE_FORMAT(modified, '%Y-%m-%d')
+
+            LIMIT 10' at line 15. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY DATE_FORMAT(modified, '%Y-%m-%d')
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (194)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:05:02 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY DATE_FORMAT(modified, '%Y-%m-%d')
+
+            LIMIT 10' at line 15. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY DATE_FORMAT(modified, '%Y-%m-%d')
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(194): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:19:32 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY price_mod
+
+            LIMIT 10' at line 16. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d') AS price_mod
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY price_mod
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (195)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:19:32 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY price_mod
+
+            LIMIT 10' at line 16. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d') AS price_mod
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY price_mod
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(195): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:21:52 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY price_mod
+
+            LIMIT 10' at line 16. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified AS modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(modified, '%Y-%m-%d') AS price_mod
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY price_mod
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (195)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:21:52 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY price_mod
+
+            LIMIT 10' at line 16. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified AS modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(modified, '%Y-%m-%d') AS price_mod
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY price_mod
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(195): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:21:53 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY price_mod
+
+            LIMIT 10' at line 16. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified AS modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(modified, '%Y-%m-%d') AS price_mod
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY price_mod
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (195)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:21:53 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY price_mod
+
+            LIMIT 10' at line 16. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified AS modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(modified, '%Y-%m-%d') AS price_mod
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified
+
+            GROUP BY price_mod
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(195): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:22:10 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'modified' in field list is ambiguous. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified AS modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(modified, '%Y-%m-%d') AS price_mod
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            GROUP BY price_mod
+
+            ORDER BY id, modified
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (195)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:22:10 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'modified' in field list is ambiguous. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified AS modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(modified, '%Y-%m-%d') AS price_mod
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            GROUP BY price_mod
+
+            ORDER BY id, modified
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(195): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:22:34 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'modified' in field list is ambiguous. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(modified, '%Y-%m-%d') AS price_mod
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            GROUP BY price_mod
+
+            ORDER BY id, price.modified
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (195)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:22:34 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'modified' in field list is ambiguous. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(modified, '%Y-%m-%d') AS price_mod
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            GROUP BY price_mod
+
+            ORDER BY id, price.modified
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(195): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:22:43 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d') AS price_mod
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            GROUP BY price_mod
+
+            ORDER BY id, price.modified
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (195)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:22:43 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d') AS price_mod
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            GROUP BY price_mod
+
+            ORDER BY id, price.modified
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(195): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:23:33 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            GROUP BY price.modified
+
+            ORDER BY price.id, price.modified
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (195)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:23:33 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            GROUP BY price.modified
+
+            ORDER BY price.id, price.modified
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(195): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:24:24 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            GROUP BY price.modified
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (193)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:24:24 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            GROUP BY price.modified
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(193): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:24:41 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY price.modified
+
+            LIMIT 10' at line 16. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY price.id, price.modified
+
+            GROUP BY price.modified
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (195)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:24:41 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY price.modified
+
+            LIMIT 10' at line 16. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY price.id, price.modified
+
+            GROUP BY price.modified
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(195): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:38:57 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price.modified
+            
+            ORDER BY price.id, price.modified
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (195)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:38:57 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price.modified
+            
+            ORDER BY price.id, price.modified
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(195): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 11:42:50 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY price.modified
+            
+            ORDER BY price.id, price.modifi' at line 14. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            --GROUP BY price.modified
+            
+            ORDER BY price.id, price.modified
+
+            LIMIT 10;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (195)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 11:42:50 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GROUP BY price.modified
+            
+            ORDER BY price.id, price.modifi' at line 14. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            --GROUP BY price.modified
+            
+            ORDER BY price.id, price.modified
+
+            LIMIT 10; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(195): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 12:09:26 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price.modifie' in 'group statement'. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d') AS price_modified
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price.modifie
+
+            ORDER BY price.id, price.modified
+
+            LIMIT 100;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (197)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 12:09:26 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'price.modifie' in 'group statement'. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d') AS price_modified
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price.modifie
+
+            ORDER BY price.id, price.modified
+
+            LIMIT 100; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(197): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 12:10:29 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d') AS price_modified
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price_modified
+
+            ORDER BY price.id, price.modified
+
+            LIMIT 100;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (197)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 12:10:29 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d') AS price_modified
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price_modified
+
+            ORDER BY price.id, price.modified
+
+            LIMIT 100; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(197): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 12:12:33 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d') AS price_modified
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price.modified
+
+            ORDER BY price.id, price.modified
+
+            LIMIT 100;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (197)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 12:12:33 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d') AS price_modified
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price.modified
+
+            ORDER BY price.id, price.modified
+
+            LIMIT 100; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(197): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 12:13:46 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price
+
+            ORDER BY price.id, price.modified
+
+            LIMIT 100;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (197)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 12:13:46 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price
+
+            ORDER BY price.id, price.modified
+
+            LIMIT 100; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(197): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 12:16:47 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price.modified
+
+            ORDER BY price.modified
+
+            LIMIT 100;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (197)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 12:16:47 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price.modified
+
+            ORDER BY price.modified
+
+            LIMIT 100; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(197): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 12:17:01 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price.modified
+
+            ORDER BY price.modified
+
+            LIMIT 100;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (197)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 12:17:01 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price.modified
+
+            ORDER BY price.modified
+
+            LIMIT 100; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(197): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 12:17:51 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.ebayItemID' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price.modified
+
+            ORDER BY price.modified
+
+            LIMIT 100;.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (196)
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (163)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 12:17:51 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'engine_expertpcx.price.ebayItemID' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: 
+            SELECT
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log,
+                    DATE_FORMAT(price.modified, '%Y-%m-%d')
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+            
+            GROUP BY price.modified
+
+            ORDER BY price.modified
+
+            LIMIT 100; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(196): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(163): EbayPriceTrackingController->getTrackingViewEbayTrakingPrice()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=site/login
+---
+2018/03/10 15:30:32 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'engine_expertpcx.ebay_price_tracking' doesn't exist. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified.
+in /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php (216)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 15:30:32 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'engine_expertpcx.ebay_price_tracking' doesn't exist. The SQL statement executed was: 
+            SELECT
+                    price.id,
+                    price.ebayItemID,
+                    price.price,
+                    price.modified,
+                    tracking.flow,
+                    tracking.log
+
+            FROM ebay_traking_price AS price
+            
+            JOIN ebay_price_tracking AS tracking ON tracking.ebay_item_id = price.ebayItemID
+
+            ORDER BY id, modified in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayPriceTrackingController.php(216): CDbCommand->queryAll()
+#2 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayPriceTrackingController->actionGetEbayTrackingDetails()
+#3 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#7 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('getEbayTracking...')
+#12 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayPriceTracki...')
+#13 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#15 {main}
+REQUEST_URI=/index.php?r=ebayPriceTracking/getEbayTrackingDetails&ebay_item_id=172778662589
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=EbayPriceTracking/ebayTrackingView
+---
+2018/03/10 15:43:27 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "ebayPriceTracking/getEbayTrackingDetails". in /var/www/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayPriceTracki...')
+#1 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=ebayPriceTracking/getEbayTrackingDetails&ebay_item_id=172778662589
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=EbayPriceTracking/ebayTrackingView
+---
+2018/03/10 15:43:36 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "ebayTracking/getEbayTrackingDetails". in /var/www/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayTracking/ge...')
+#1 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=ebayTracking/getEbayTrackingDetails&ebay_item_id=172778662589
+---
+2018/03/10 17:47:13 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "ebayTracking/". in /var/www/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayTracking/')
+#1 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=ebayTracking/
+---
+2018/03/10 17:47:44 [error] [php] include(EbayTracking.php): failed to open stream: No such file or directory (/var/www/yii/framework/YiiBase.php:432)
+Stack trace:
+#0 /var/www/yii/framework/db/ar/CActiveRecord.php(397): spl_autoload_call()
+#1 /var/www/yii/framework/web/CActiveDataProvider.php(165): model()
+#2 /var/www/yii/framework/web/CActiveDataProvider.php(87): CActiveDataProvider->getModel()
+#3 /var/www/engine.expertpcx/protected/controllers/EbayTrackingController.php(121): CActiveDataProvider->__construct()
+#4 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayTrackingController->actionIndex()
+#5 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbayTrackingController->runAction()
+#7 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#9 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbayTrackingController->filterAccessControl()
+#10 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#11 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#12 /var/www/yii/framework/web/CController.php(265): EbayTrackingController->runActionWithFilters()
+#13 /var/www/yii/framework/web/CWebApplication.php(282): EbayTrackingController->run()
+#14 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#15 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#16 /var/www/engine.expertpcx/index.php(21): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebayTracking/
+in /var/www/engine.expertpcx/protected/controllers/EbayTrackingController.php (121)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 17:49:11 [error] [exception.CException] CException: EbayTrackingController cannot find the requested view "index". in /var/www/yii/framework/web/CController.php:881
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(785): CController->renderPartial('index', Array, true)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayTrackingController.php(123): CController->render('index', Array)
+#2 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayTrackingController->actionIndex()
+#3 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#5 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#7 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('')
+#12 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayTracking/')
+#13 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#14 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#15 {main}
+REQUEST_URI=/index.php?r=ebayTracking/
+---
+2018/03/10 17:49:29 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'engine_expertpcx.ebay_price_tracking' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `ebay_price_tracking`.
+in /var/www/engine.expertpcx/protected/views/ebayTracking/index.php (19)
+in /var/www/engine.expertpcx/protected/controllers/EbayTrackingController.php (123)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 17:49:29 [error] [exception.CDbException] CDbException: The table "ebay_price_tracking" for active record class "EbayTracking" cannot be found in the database. in /var/www/yii/framework/db/ar/CActiveRecord.php:2390
+Stack trace:
+#0 /var/www/yii/framework/db/ar/CActiveRecord.php(413): CActiveRecordMetaData->__construct(Object(EbayTracking))
+#1 /var/www/yii/framework/db/ar/CActiveRecord.php(663): CActiveRecord->getMetaData()
+#2 /var/www/yii/framework/db/ar/CActiveRecord.php(1609): CActiveRecord->getTableSchema()
+#3 /var/www/yii/framework/web/CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#4 /var/www/yii/framework/web/CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#5 /var/www/yii/framework/web/CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#6 /var/www/yii/framework/web/CDataProvider.php(168): CActiveDataProvider->fetchData()
+#7 /var/www/yii/framework/zii/widgets/CBaseListView.php(125): CDataProvider->getData()
+#8 /var/www/yii/framework/zii/widgets/CListView.php(211): CBaseListView->init()
+#9 /var/www/yii/framework/web/CBaseController.php(147): CListView->init()
+#10 /var/www/yii/framework/web/CBaseController.php(181): CBaseController->createWidget('zii.widgets.CLi...', Array)
+#11 /var/www/engine.expertpcx/protected/views/ebayTracking/index.php(19): CBaseController->widget('zii.widgets.CLi...', Array)
+#12 /var/www/yii/framework/web/CBaseController.php(126): require('/var/www/engine...')
+#13 /var/www/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/engine...', Array, true)
+#14 /var/www/yii/framework/web/CController.php(872): CBaseController->renderFile('/var/www/engine...', Array, true)
+#15 /var/www/yii/framework/web/CController.php(785): CController->renderPartial('index', Array, true)
+#16 /var/www/engine.expertpcx/protected/controllers/EbayTrackingController.php(123): CController->render('index', Array)
+#17 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayTrackingController->actionIndex()
+#18 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#19 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#20 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#21 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#22 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#23 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#24 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#25 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#26 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('')
+#27 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ebayTracking/')
+#28 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#29 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#30 {main}
+REQUEST_URI=/index.php?r=ebayTracking/
+---
+2018/03/10 17:50:37 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "EbayPriceTracking/ebayTrackingView". in /var/www/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#1 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=ebaySearch/ebaySearch
+---
+2018/03/10 18:03:53 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "EbayPriceTracking/ebayTrackingView". in /var/www/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#1 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=ebaySearch/ebaySearch
+---
+2018/03/10 18:03:54 [error] [exception.CHttpException.404] CHttpException: Unable to resolve the request "EbayPriceTracking/ebayTrackingView". in /var/www/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayPriceTracki...')
+#1 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=EbayPriceTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=ebaySearch/ebaySearch
+---
+2018/03/10 18:04:39 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'engine_expertpcx.ebay_price_tracking' doesn't exist. The SQL statement executed was: 
+            SELECT
+                id,
+                ebay_item_id,
+                modified,
+                flow,
+                referral_ebay_item_id,
+                price,
+                log
+            
+            FROM 
+                ebay_price_tracking
+                
+            WHERE 
+                flow = 1;.
+in /var/www/engine.expertpcx/protected/controllers/EbayTrackingController.php (191)
+in /var/www/engine.expertpcx/protected/controllers/EbayTrackingController.php (169)
+in /var/www/engine.expertpcx/index.php (21)
+2018/03/10 18:04:39 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'engine_expertpcx.ebay_price_tracking' doesn't exist. The SQL statement executed was: 
+            SELECT
+                id,
+                ebay_item_id,
+                modified,
+                flow,
+                referral_ebay_item_id,
+                price,
+                log
+            
+            FROM 
+                ebay_price_tracking
+                
+            WHERE 
+                flow = 1; in /var/www/yii/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/yii/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/engine.expertpcx/protected/controllers/EbayTrackingController.php(191): CDbCommand->queryAll()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayTrackingController.php(169): EbayTrackingController->getEbayTracking()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CFilter->filter(Object(CFilterChain))
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/yii/framework/web/CWebApplication.php(282): CController->run('ebayTrackingVie...')
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('EbayTracking/eb...')
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CApplication->run()
+#16 {main}
+REQUEST_URI=/index.php?r=EbayTracking/ebayTrackingView
+HTTP_REFERER=http://www.engine.expertpcx.dev/index.php?r=ebaySearch/ebaySearch
+---
+2018/03/10 18:11:59 [error] [php] Invalid argument supplied for foreach() (/var/www/engine.expertpcx/protected/views/ebayTracking/trackingView.php:17)
+Stack trace:
+#0 /var/www/yii/framework/web/CController.php(872): EbayTrackingController->renderFile()
+#1 /var/www/yii/framework/web/CController.php(785): EbayTrackingController->renderPartial()
+#2 /var/www/engine.expertpcx/protected/controllers/EbayTrackingController.php(174): EbayTrackingController->render()
+#3 /var/www/yii/framework/web/actions/CInlineAction.php(49): EbayTrackingController->actionEbayTrackingView()
+#4 /var/www/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/yii/framework/web/filters/CFilterChain.php(134): EbayTrackingController->runAction()
+#6 /var/www/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#7 /var/www/yii/framework/web/CController.php(1148): CAccessControlFilter->filter()
+#8 /var/www/yii/framework/web/filters/CInlineFilter.php(58): EbayTrackingController->filterAccessControl()
+#9 /var/www/yii/framework/web/filters/CFilterChain.php(131): CInlineFilter->filter()
+#10 /var/www/yii/framework/web/CController.php(291): CFilterChain->run()
+#11 /var/www/yii/framework/web/CController.php(265): EbayTrackingController->runActionWithFilters()
+#12 /var/www/yii/framework/web/CWebApplication.php(282): EbayTrackingController->run()
+#13 /var/www/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#14 /var/www/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#15 /var/www/engine.expertpcx/index.php(21): CWebApplication->run()
+REQUEST_URI=/index.php?r=ebayTracking/ebayTrackingView
+in /var/www/engine.expertpcx/protected/views/ebayTracking/trackingView.php (17)
+in /var/www/engine.expertpcx/protected/controllers/EbayTrackingController.php (174)
+in /var/www/engine.expertpcx/index.php (21)

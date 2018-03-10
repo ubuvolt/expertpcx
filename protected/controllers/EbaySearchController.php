@@ -34,9 +34,9 @@ class EbaySearchController extends Controller {
             array('allow',
                 'actions' => array(
                     'ajaxLoadEbaySearchResult',
-                    'ajaxUpdateEbayPriceTracking',
-                    'ajaxApplyEbayPriceTracking',
-                    'ajaxClearEbayPriceTracking',
+                    'ajaxUpdateEbayTracking',
+                    'ajaxApplyEbayTracking',
+                    'ajaxClearEbayTracking',
                 ),
                 'users' => array('*'),
             ),
@@ -126,14 +126,14 @@ class EbaySearchController extends Controller {
         $this->renderPartial('ajax_load_ebay_search_result', array('search_result' => $eBay_API_search_result));
     }
 
-    public function actionAjaxUpdateEbayPriceTracking() {
+    public function actionAjaxUpdateEbayTracking() {
 
         $ebay_id = $_POST['ebay_id'];
         $ebay_price = $_POST['ebay_price'];
         $flow = $_POST['flow'];
 
-        $_SESSION['ebay_price_tracking'][$ebay_id]['flow'] = $flow;
-        $_SESSION['ebay_price_tracking'][$ebay_id]['price'] = $ebay_price;
+        $_SESSION['ebay_tracking'][$ebay_id]['flow'] = $flow;
+        $_SESSION['ebay_tracking'][$ebay_id]['price'] = $ebay_price;
 
         echo CJSON::encode(array(
             'status' => 'success',
@@ -142,44 +142,44 @@ class EbaySearchController extends Controller {
         ));
     }
 
-    public function actionAjaxClearEbayPriceTracking() {
+    public function actionAjaxClearEbayTracking() {
 
-        $_SESSION['ebay_price_tracking'] = array();
+        $_SESSION['ebay_tracking'] = array();
     }
 
-    public function actionAjaxApplyEbayPriceTracking() {
+    public function actionAjaxApplyEbayTracking() {
 
-        d::d($_SESSION['ebay_price_tracking']);
+        d::d($_SESSION['ebay_tracking']);
 
-        if (!empty($_SESSION['ebay_price_tracking'])) {
+        if (!empty($_SESSION['ebay_tracking'])) {
 
             $referral_ebay_item_id = '';
 
-            foreach ($_SESSION['ebay_price_tracking'] as $ebai_item_id => $details) {
+            foreach ($_SESSION['ebay_tracking'] as $ebai_item_id => $details) {
                 if ($details['flow'] == 'my')
                     $referral_ebay_item_id = $ebai_item_id;
             }
-            foreach ($_SESSION['ebay_price_tracking'] as $ebai_item_id => $details) {
+            foreach ($_SESSION['ebay_tracking'] as $ebai_item_id => $details) {
 
-                $ebayPriceTracking = new EbayPriceTracking();
+                $ebayTracking = new EbayTracking();
 
-                $ebayPriceTracking->ebay_item_id = $ebai_item_id;
-                $ebayPriceTracking->modified = date('Ymd');
-                $ebayPriceTracking->flow = EbayPriceTracking::setFlow($details['flow']);
-                $ebayPriceTracking->referral_ebay_item_id = $referral_ebay_item_id;
-                $ebayPriceTracking->price = $details['price'];
-                $ebayPriceTracking->log = 'log - log';
+                $ebayTracking->ebay_item_id = $ebai_item_id;
+                $ebayTracking->modified = date('Ymd');
+                $ebayTracking->flow = EbayTracking::setFlow($details['flow']);
+                $ebayTracking->referral_ebay_item_id = $referral_ebay_item_id;
+                $ebayTracking->price = $details['price'];
+                $ebayTracking->log = 'log - log';
 
                 try {
                     // try to save
-                    $ret = $ebayPriceTracking->save();
+                    $ret = $ebayTracking->save();
                 } catch (CDbException $e) {
                     // catch database exception
                     $message = $e->getMessage() . ' ' . CVarDumper::dumpAsString($e->errorInfo);
                 }
                 if ($ret !== true) {
                     // catch model validation errors
-                    $message = CVarDumper::dumpAsString($ebayPriceTracking->getErrors());
+                    $message = CVarDumper::dumpAsString($ebayTracking->getErrors());
                 }
             }
         }

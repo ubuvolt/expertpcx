@@ -1,15 +1,15 @@
 <?php
-/* @var $this EbayPriceTrackingController */
-/* @var $model EbayPriceTracking */
+/* @var $this EbayTrackingController */
+/* @var $model EbayTracking */
 
 $this->breadcrumbs=array(
-	'Ebay Price Trackings'=>array('index'),
+	'Ebay Trackings'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List EbayPriceTracking', 'url'=>array('index')),
-	array('label'=>'Create EbayPriceTracking', 'url'=>array('create')),
+	array('label'=>'List EbayTracking', 'url'=>array('index')),
+	array('label'=>'Create EbayTracking', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#ebay-price-tracking-grid').yiiGridView('update', {
+	$('#ebay-tracking-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Ebay Price Trackings</h1>
+<h1>Manage Ebay Trackings</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -41,7 +41,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'ebay-price-tracking-grid',
+	'id'=>'ebay-tracking-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(

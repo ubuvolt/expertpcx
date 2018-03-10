@@ -12,7 +12,7 @@ ebaySearch/ebaySearch
 ebayPriceMonitor/performeItemTracking
 
 6.Tracking View
-/var/www/engine.expertpcx/protected/views/ebayPriceTracking/trackingView.php
+/var/www/engine.expertpcx/protected/views/ebayTracking/trackingView.php
 
 
 

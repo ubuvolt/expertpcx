@@ -58,7 +58,7 @@
 <script>
     $(function () {
 
-        $.post("/index.php?r=ebaySearch/ajaxClearEbayPriceTracking", {});
+        $.post("/index.php?r=ebaySearch/ajaxClearEbayTracking", {});
 
         $('.button_my').click(function () {
 
@@ -80,7 +80,7 @@
     var my = false;
     function update_ebay_price_tracking(eBayId, eBayPrice, flow) {
 
-        $.post("/index.php?r=ebaySearch/ajaxUpdateEbayPriceTracking", {
+        $.post("/index.php?r=ebaySearch/ajaxUpdatePriceTracking", {
             ebay_id: eBayId,
             ebay_price: eBayPrice,
             flow: flow

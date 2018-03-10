@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "ebay_price_tracking".
+ * This is the model class for table "ebay_tracking".
  *
- * The followings are the available columns in table 'ebay_price_tracking':
+ * The followings are the available columns in table 'ebay_tracking':
  * @property integer $id
  * @property string $ebay_item_id
  * @property string $modified
@@ -12,7 +12,7 @@
  * @property double $price
  * @property string $log
  */
-class EbayPriceTracking extends CActiveRecord {
+class EbayTracking extends CActiveRecord {
 
     const OUR_ITEM = 1;
     const COMPETITOR_ITEM = 2;
@@ -21,7 +21,7 @@ class EbayPriceTracking extends CActiveRecord {
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'ebay_price_tracking';
+        return 'ebay_tracking';
     }
 
     /**
@@ -101,7 +101,7 @@ class EbayPriceTracking extends CActiveRecord {
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
      * @param string $className active record class name.
-     * @return EbayPriceTracking the static model class
+     * @return EbayTracking the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);

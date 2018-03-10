@@ -1,6 +1,6 @@
 <?php
-/* @var $this EbayPriceTrackingController */
-/* @var $model EbayPriceTracking */
+/* @var $this EbayTrackingController */
+/* @var $model EbayTracking */
 /* @var $form CActiveForm */
 ?>
 
